@@ -1,0 +1,9 @@
+{
+  "extensionId": {
+    "name": "iOS_IAPs",
+    "path": "extensions/iOS_IAPs/iOS_IAPs.yy"
+  },
+  "resourceVersion": "1.0",
+  "resourceType": "GMExtensionConfigSet",
+  "configurables": null
+}
