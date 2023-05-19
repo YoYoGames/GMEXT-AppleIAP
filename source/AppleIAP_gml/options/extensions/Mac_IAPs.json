@@ -1,9 +1,5 @@
 {
-  "extensionId": {
-    "name": "Mac_IAPs",
-    "path": "extensions/Mac_IAPs/Mac_IAPs.yy"
-  },
-  "resourceVersion": "1.0",
   "resourceType": "GMExtensionConfigSet",
-  "configurables": null
+  "configurables": null,
+  "resourceVersion": "1.0"
 }
