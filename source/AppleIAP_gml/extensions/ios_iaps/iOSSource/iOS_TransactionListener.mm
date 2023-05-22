@@ -9,6 +9,13 @@
 #import "iOS_InAppPurchase.h"
 #include "iOS_IAPEnums.h"
 
+#if TARGET_OS_OSX
+#import "Extension_Interface.h"
+#include "YYRValue.h"
+#include <sstream>
+#endif
+
+#if !TARGET_OS_OSX
 extern "C" void dsMapClear(int _dsMap );
 extern "C" int dsMapCreate();
 extern "C" void dsMapAddInt(int _dsMap, char* _key, int _value);
@@ -22,9 +29,47 @@ extern "C" double dsListGetValueDouble(int _dsList, int _listIdx);
 extern "C" int dsListGetSize(int _dsList);
 
 extern "C" void CreateAsyncEventOfTypeWithDSMap(int dsmapindex, int event_index);
+#endif
+
 const int EVENT_OTHER_WEB_IAP = 66;
 
 @implementation iOS_TransactionListener
+    
+    int CreateDsMap_comaptibility__()
+    {
+        #if TARGET_OS_OSX
+        return CreateDsMap(0,0);
+        #else
+        return CreateDsMap(0,0);
+        #endif
+    }
+    
+    void DsMapAddString_comaptibility__(int dsMapIndex, const char* _key, const char* _value)
+    {
+        #if TARGET_OS_OSX
+        DsMapAddString(dsMapIndex, _key, _value);
+        #else
+        dsMapAddString(dsMapIndex, _key, _value);
+        #endif
+    }
+    
+    void DsMapAddDouble_comaptibility__(int dsMapIndex, const char* _key, double _value)
+    {
+        #if TARGET_OS_OSX
+        DsMapAddDouble(dsMapIndex, _key, _value);
+        #else
+        dsMapAddDouble(dsMapIndex, _key, _value);
+        #endif
+    }
+    
+    void CreateAsyncEventWithDSMap_comaptibility__(int dsMapIndex)
+    {
+        #if TARGET_OS_OSX
+        CreateAsyncEventWithDSMap(dsMapIndex,EVENT_OTHER_WEB_IAP);
+        #else
+        CreateAsynEventWithDSMap(dsMapIndex,EVENT_OTHER_WEB_IAP);
+        #endif
+    }
 
 @synthesize m_activeTransactions;
 
@@ -65,10 +110,10 @@ const int EVENT_OTHER_WEB_IAP = 66;
     char jResponse[20];
     sprintf(jResponse, "response_json");
 
-    int dsMapIndex = dsMapCreate();
-    dsMapAddInt(dsMapIndex, jId, payment_queue_update);
-    dsMapAddString(dsMapIndex, jResponse, const_cast<char*>([jsonResponse UTF8String]));
-    CreateAsyncEventOfTypeWithDSMap(dsMapIndex, EVENT_OTHER_WEB_IAP);
+    int dsMapIndex = CreateDsMap_comaptibility__();
+    DsMapAddDouble_comaptibility__(dsMapIndex, jId, payment_queue_update);
+    DsMapAddString_comaptibility__(dsMapIndex, jResponse, const_cast<char*>([jsonResponse UTF8String]));
+    CreateAsyncEventWithDSMap_comaptibility__(dsMapIndex);
 }
 
 - (NSString*) parsePaymentTransactionsIntoJson:(nonnull NSArray<SKPaymentTransaction*>*)transactions
@@ -166,16 +211,16 @@ const int EVENT_OTHER_WEB_IAP = 66;
 			sprintf(jId, "id");
 			char jResponse[20];
 			sprintf(jResponse, "response_json");
-			int dsMapIndex = dsMapCreate();
-			dsMapAddInt(dsMapIndex, jId, payment_queue_update);
+			int dsMapIndex = CreateDsMap_comaptibility__();
+            DsMapAddDouble_comaptibility__(dsMapIndex, jId, payment_queue_update);
 			NSLog([[NSString alloc] initWithCString:product encoding:NSUTF8StringEncoding]);
 			
 			char* json = (char*)alloca(strlen(product) + 256);
 			sprintf(json, "{\"cancelled\":\"true\", \"product\":\"%s\"}", product);
 			
-			dsMapAddString(dsMapIndex, jResponse, const_cast<char*>(json));
-			CreateAsyncEventOfTypeWithDSMap(dsMapIndex, EVENT_OTHER_WEB_IAP);
-	   
+            DsMapAddString_comaptibility__(dsMapIndex, jResponse, const_cast<char*>(json));
+            CreateAsyncEventWithDSMap_comaptibility__(dsMapIndex);
+            
 			return nil;
 		}
 	}
@@ -224,6 +269,7 @@ const int EVENT_OTHER_WEB_IAP = 66;
 // Turn receipt data received in an SKPaymentTransaction into an easier form to communicate
 - (NSString*)getReceiptData:(SKPaymentTransaction *)transaction
 {
+#if !TARGET_OS_OSX
     static char table[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
     
     int length = transaction.transactionReceipt.length;
@@ -248,6 +294,9 @@ const int EVENT_OTHER_WEB_IAP = 66;
         output[index + 3] = (i + 2) < length ? table[(value >> 0)  & 0x3F] : '=';
     }
     return [[[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding] autorelease];
+#else
+    return @"";
+#endif
 }
 
 @end

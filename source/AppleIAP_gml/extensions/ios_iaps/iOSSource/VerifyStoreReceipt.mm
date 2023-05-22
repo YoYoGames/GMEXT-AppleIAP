@@ -33,7 +33,10 @@
 // link with Foundation.framework, Security.framework, libssl and libCrypto (via -lssl -lcrypto in Other Linker Flags)
 
 #import <Security/Security.h>
+
+#if __has_include(<UIKit/UIKit.h>)
 #import <UIKit/UIKit.h>
+#endif
 
 #include "pkcs7.h"
 #include "objects.h"
@@ -326,7 +329,7 @@ NSDictionary *dictionaryWithAppStoreReceipt(NSURL *receiptURL) {
     X509_STORE_add_cert(store, appleRootX509);
 
     // Be sure to load the digests before the verification
-    OpenSSL_add_all_digests();
+    //OpenSSL_add_all_digests();//TODO jzavala: commented for the while, dont forget!!!!!!!!!!!!!!!!!
     
     // Check the signature
     int result = PKCS7_verify(receiptPKCS7, NULL, store, NULL, NULL, 0);
@@ -492,6 +495,7 @@ extern NSString * global_bundleIdentifier;
 // const NSString * global_bundleIdentifier = @"com.example.SampleApp";
 
 BOOL verifyReceiptUsingURL(NSURL *receiptURL) {
+#if !TARGET_OS_OSX
 	// it turns out, it's a bad idea, to use these two NSBundle methods in your app:
 	//
 	// bundleVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"];
@@ -534,4 +538,7 @@ BOOL verifyReceiptUsingURL(NSURL *receiptURL) {
 	}
     
 	return NO;
+#else
+    return NO;
+#endif
 }

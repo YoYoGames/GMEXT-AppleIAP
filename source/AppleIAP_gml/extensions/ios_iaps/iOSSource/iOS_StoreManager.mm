@@ -9,6 +9,14 @@
 #include "iOS_InAppPurchase.h"
 #include "iOS_IAPEnums.h"
 
+#if TARGET_OS_OSX
+#import "Extension_Interface.h"
+#include "YYRValue.h"
+#include <sstream>
+#endif
+
+
+#if !TARGET_OS_OSX
 extern "C" void dsMapClear(int _dsMap );
 extern "C" int dsMapCreate();
 extern "C" void dsMapAddInt(int _dsMap, char* _key, int _value);
@@ -22,6 +30,8 @@ extern "C" double dsListGetValueDouble(int _dsList, int _listIdx);
 extern "C" int dsListGetSize(int _dsList);
 
 extern "C" void CreateAsyncEventOfTypeWithDSMap(int dsmapindex, int event_index);
+#endif
+
 const int EVENT_OTHER_WEB_IAP = 66;
 
 @interface iOS_StoreManager()<SKRequestDelegate, SKProductsRequestDelegate>
@@ -31,6 +41,42 @@ const int EVENT_OTHER_WEB_IAP = 66;
 @end
 
 @implementation iOS_StoreManager
+
+int CreateDsMap_comaptibility_()
+{
+    #if TARGET_OS_OSX
+    return CreateDsMap(0,0);
+    #else
+    return CreateDsMap(0,0);
+    #endif
+}
+
+void DsMapAddString_comaptibility_(int dsMapIndex, const char* _key, const char* _value)
+{
+    #if TARGET_OS_OSX
+    DsMapAddString(dsMapIndex, _key, _value);
+    #else
+    dsMapAddString(dsMapIndex, _key, _value);
+    #endif
+}
+
+void DsMapAddDouble_comaptibility_(int dsMapIndex, const char* _key, double _value)
+{
+    #if TARGET_OS_OSX
+    DsMapAddDouble(dsMapIndex, _key, _value);
+    #else
+    dsMapAddDouble(dsMapIndex, _key, _value);
+    #endif
+}
+
+void CreateAsyncEventWithDSMap_comaptibility_(int dsMapIndex)
+{
+    #if TARGET_OS_OSX
+    CreateAsyncEventWithDSMap(dsMapIndex,EVENT_OTHER_WEB_IAP);
+    #else
+    CreateAsynEventWithDSMap(dsMapIndex,EVENT_OTHER_WEB_IAP);
+    #endif
+}
 
 @synthesize m_validIaps;
 @synthesize m_invalidIaps;
@@ -223,10 +269,10 @@ const int EVENT_OTHER_WEB_IAP = 66;
     char jResponse[20];
     sprintf(jResponse, "response_json");
     
-    int dsMapIndex = dsMapCreate();
-    dsMapAddInt(dsMapIndex, jId, product_update);
-    dsMapAddString(dsMapIndex, jResponse, const_cast<char*>([jsonStr UTF8String]));
-    CreateAsyncEventOfTypeWithDSMap(dsMapIndex, EVENT_OTHER_WEB_IAP);
+    int dsMapIndex = CreateDsMap_comaptibility_();
+    DsMapAddDouble_comaptibility_(dsMapIndex, jId, product_update);
+    DsMapAddString_comaptibility_(dsMapIndex, jResponse, const_cast<char*>([jsonStr UTF8String]));
+    CreateAsyncEventWithDSMap_comaptibility_(dsMapIndex);
     
     [number release];
     [results release];
@@ -279,32 +325,32 @@ const int EVENT_OTHER_WEB_IAP = 66;
 {
     if ([request isKindOfClass:[SKReceiptRefreshRequest class]])
     {
-        int dsMapIndex = dsMapCreate();
+        int dsMapIndex = CreateDsMap_comaptibility_();
         char jId[3];
         sprintf(jId, "id");
         char jResponse[20];
         sprintf(jResponse, "status");
-        dsMapAddInt(dsMapIndex, jId, receipt_refresh);
+        DsMapAddDouble_comaptibility_(dsMapIndex, jId, receipt_refresh);
         
-        dsMapAddInt(dsMapIndex, jResponse, receipt_refresh_success);
+        DsMapAddDouble_comaptibility_(dsMapIndex, jResponse, receipt_refresh_success);
         
-        CreateAsyncEventOfTypeWithDSMap(dsMapIndex, EVENT_OTHER_WEB_IAP);
+        CreateAsyncEventWithDSMap_comaptibility_(dsMapIndex);
     }
 }
 - (void)request:(SKRequest *)request didFailWithError:(NSError *)error
 {
     if ([request isKindOfClass:[SKReceiptRefreshRequest class]])
     {
-        int dsMapIndex = dsMapCreate();
+        int dsMapIndex = CreateDsMap_comaptibility_();
         char jId[3];
         sprintf(jId, "id");
         char jResponse[20];
         sprintf(jResponse, "status");
-        dsMapAddInt(dsMapIndex, jId, receipt_refresh);
+        DsMapAddDouble_comaptibility_(dsMapIndex, jId, receipt_refresh);
         
-        dsMapAddInt(dsMapIndex, jResponse, receipt_refresh_failure);
+        DsMapAddDouble_comaptibility_(dsMapIndex, jResponse, receipt_refresh_failure);
         
-        CreateAsyncEventOfTypeWithDSMap(dsMapIndex, EVENT_OTHER_WEB_IAP);
+        CreateAsyncEventWithDSMap_comaptibility_(dsMapIndex);
     }
 }
 
