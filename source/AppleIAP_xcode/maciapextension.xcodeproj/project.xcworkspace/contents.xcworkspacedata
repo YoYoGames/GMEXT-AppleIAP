@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:maciapextension.xcodeproj">
+      location = "self:/Users/yykaguvagames/Documents/GitHub/YoYoExtensions/Bluetooth/Xcode/MacIapExtension.xcodeproj">
    </FileRef>
 </Workspace>

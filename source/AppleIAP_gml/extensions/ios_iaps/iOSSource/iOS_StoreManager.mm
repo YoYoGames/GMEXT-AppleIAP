@@ -16,7 +16,10 @@
 #endif
 
 
-#if !TARGET_OS_OSX
+#if TARGET_OS_OSX
+YYRunnerInterface gs_runnerInterface;
+YYRunnerInterface* g_pYYRunnerInterface;
+#else
 extern "C" void dsMapClear(int _dsMap );
 extern "C" int dsMapCreate();
 extern "C" void dsMapAddInt(int _dsMap, char* _key, int _value);
@@ -30,6 +33,26 @@ extern "C" double dsListGetValueDouble(int _dsList, int _listIdx);
 extern "C" int dsListGetSize(int _dsList);
 
 extern "C" void CreateAsyncEventOfTypeWithDSMap(int dsmapindex, int event_index);
+#endif
+
+#if TARGET_OS_OSX
+extern "C" void PreGraphicsInitialisation(char* arg1)//Mac
+{
+
+}
+
+YYEXPORT void YYExtensionInitialise(const struct YYRunnerInterface* _pFunctions, size_t _functions_size)
+{
+    //copy out all the functions
+    memcpy(&gs_runnerInterface, _pFunctions, sizeof(YYRunnerInterface));
+    g_pYYRunnerInterface = &gs_runnerInterface;
+
+    if (_functions_size < sizeof(YYRunnerInterface)) {
+        DebugConsoleOutput("ERROR : runner interface mismatch in extension DLL\n ");
+    } // end if
+
+    DebugConsoleOutput("YYExtensionInitialise CONFIGURED \n ");
+}
 #endif
 
 const int EVENT_OTHER_WEB_IAP = 66;
