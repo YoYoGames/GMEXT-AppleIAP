@@ -15,7 +15,6 @@
 		2B5A6E7D2A1BFBE20015F35D /* iOS_IAPEnums.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2B5A6E732A1BFBE20015F35D /* iOS_IAPEnums.mm */; };
 		2B5A6E7E2A1BFBE20015F35D /* iOS_StoreManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 2B5A6E742A1BFBE20015F35D /* iOS_StoreManager.h */; };
 		2B5A6E7F2A1BFBE20015F35D /* iOS_InAppPurchase.h in Headers */ = {isa = PBXBuildFile; fileRef = 2B5A6E752A1BFBE20015F35D /* iOS_InAppPurchase.h */; };
-		2B5A6E802A1BFBE20015F35D /* iOS_TransactionListener.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2B5A6E762A1BFBE20015F35D /* iOS_TransactionListener.mm */; };
 		2B5A6E812A1BFBE20015F35D /* VerifyStoreReceipt.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2B5A6E772A1BFBE20015F35D /* VerifyStoreReceipt.mm */; };
 		2B5A6ED42A1BFC150015F35D /* ossl_typ.h in Headers */ = {isa = PBXBuildFile; fileRef = 2B5A6E842A1BFC140015F35D /* ossl_typ.h */; };
 		2B5A6ED52A1BFC150015F35D /* rand.h in Headers */ = {isa = PBXBuildFile; fileRef = 2B5A6E852A1BFC140015F35D /* rand.h */; };
@@ -102,6 +101,7 @@
 		2B5A6F2F2A1C031E0015F35D /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B5A6F2B2A1C012E0015F35D /* libcrypto.a */; };
 		2B5A6F312A1C038B0015F35D /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B5A6F302A1C038B0015F35D /* IOKit.framework */; };
 		2B5A6F332A1C03BD0015F35D /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B5A6F322A1C03BD0015F35D /* libz.tbd */; };
+		2B5A6F352A1C2C0B0015F35D /* iOS_TransactionListener.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2B5A6F342A1C2C0A0015F35D /* iOS_TransactionListener.mm */; };
 		2B9F11222A0F36CE0059D11A /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B9F11212A0F36CE0059D11A /* CoreBluetooth.framework */; };
 		2B9F112A2A1081410059D11A /* Ref.h in Headers */ = {isa = PBXBuildFile; fileRef = 2B9F11272A1081410059D11A /* Ref.h */; };
 		2B9F112B2A1081410059D11A /* Extension_Interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 2B9F11282A1081410059D11A /* Extension_Interface.h */; };
@@ -117,7 +117,6 @@
 		2B5A6E732A1BFBE20015F35D /* iOS_IAPEnums.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = iOS_IAPEnums.mm; path = "../../../../GMEXT-AppleIAP/source/AppleIAP_gml/extensions/ios_iaps/iOSSource/iOS_IAPEnums.mm"; sourceTree = "<group>"; };
 		2B5A6E742A1BFBE20015F35D /* iOS_StoreManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iOS_StoreManager.h; path = "../../../../GMEXT-AppleIAP/source/AppleIAP_gml/extensions/ios_iaps/iOSSource/iOS_StoreManager.h"; sourceTree = "<group>"; };
 		2B5A6E752A1BFBE20015F35D /* iOS_InAppPurchase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iOS_InAppPurchase.h; path = "../../../../GMEXT-AppleIAP/source/AppleIAP_gml/extensions/ios_iaps/iOSSource/iOS_InAppPurchase.h"; sourceTree = "<group>"; };
-		2B5A6E762A1BFBE20015F35D /* iOS_TransactionListener.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = iOS_TransactionListener.mm; path = "../../../../GMEXT-AppleIAP/source/AppleIAP_gml/extensions/ios_iaps/iOSSource/iOS_TransactionListener.mm"; sourceTree = "<group>"; };
 		2B5A6E772A1BFBE20015F35D /* VerifyStoreReceipt.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = VerifyStoreReceipt.mm; path = "../../../../GMEXT-AppleIAP/source/AppleIAP_gml/extensions/ios_iaps/iOSSource/VerifyStoreReceipt.mm"; sourceTree = "<group>"; };
 		2B5A6E842A1BFC140015F35D /* ossl_typ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ossl_typ.h; path = "../../../../../../GMEXT-AppleIAP/source/AppleIAP_gml/extensions/ios_iaps/iOSSource/include/openssl/ossl_typ.h"; sourceTree = "<group>"; };
 		2B5A6E852A1BFC140015F35D /* rand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = rand.h; path = "../../../../../../GMEXT-AppleIAP/source/AppleIAP_gml/extensions/ios_iaps/iOSSource/include/openssl/rand.h"; sourceTree = "<group>"; };
@@ -206,6 +205,7 @@
 		2B5A6F2C2A1C012E0015F35D /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = "../../../../../GMEXT-AppleIAP/source/AppleIAP_xcode/maciapextension/lib/libssl.a"; sourceTree = "<group>"; };
 		2B5A6F302A1C038B0015F35D /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		2B5A6F322A1C03BD0015F35D /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		2B5A6F342A1C2C0A0015F35D /* iOS_TransactionListener.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = iOS_TransactionListener.mm; path = ../../AppleIAP_gml/extensions/ios_iaps/iOSSource/iOS_TransactionListener.mm; sourceTree = "<group>"; };
 		2B7821DA278CE36400EE6530 /* libMacIapExtension.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libMacIapExtension.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B9F11212A0F36CE0059D11A /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		2B9F11272A1081410059D11A /* Ref.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ref.h; sourceTree = "<group>"; };
@@ -363,7 +363,7 @@
 				2B5A6E742A1BFBE20015F35D /* iOS_StoreManager.h */,
 				2B5A6E702A1BFBE10015F35D /* iOS_StoreManager.mm */,
 				2B5A6E712A1BFBE10015F35D /* iOS_TransactionListener.h */,
-				2B5A6E762A1BFBE20015F35D /* iOS_TransactionListener.mm */,
+				2B5A6F342A1C2C0A0015F35D /* iOS_TransactionListener.mm */,
 				2B5A6E6F2A1BFBE10015F35D /* VerifyStoreReceipt.h */,
 				2B5A6E772A1BFBE20015F35D /* VerifyStoreReceipt.mm */,
 				2B9F11282A1081410059D11A /* Extension_Interface.h */,
@@ -542,7 +542,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2B5A6E7C2A1BFBE20015F35D /* iOS_InAppPurchase.mm in Sources */,
-				2B5A6E802A1BFBE20015F35D /* iOS_TransactionListener.mm in Sources */,
+				2B5A6F352A1C2C0B0015F35D /* iOS_TransactionListener.mm in Sources */,
 				2B5A6E7A2A1BFBE20015F35D /* iOS_StoreManager.mm in Sources */,
 				2B5A6E7D2A1BFBE20015F35D /* iOS_IAPEnums.mm in Sources */,
 				2B5A6E812A1BFBE20015F35D /* VerifyStoreReceipt.mm in Sources */,

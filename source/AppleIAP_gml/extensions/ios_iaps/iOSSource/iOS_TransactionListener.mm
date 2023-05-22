@@ -34,42 +34,6 @@ extern "C" void CreateAsyncEventOfTypeWithDSMap(int dsmapindex, int event_index)
 const int EVENT_OTHER_WEB_IAP = 66;
 
 @implementation iOS_TransactionListener
-    
-    int CreateDsMap_comaptibility__()
-    {
-        #if TARGET_OS_OSX
-        return CreateDsMap(0,0);
-        #else
-        return CreateDsMap(0,0);
-        #endif
-    }
-    
-    void DsMapAddString_comaptibility__(int dsMapIndex, const char* _key, const char* _value)
-    {
-        #if TARGET_OS_OSX
-        DsMapAddString(dsMapIndex, _key, _value);
-        #else
-        dsMapAddString(dsMapIndex, _key, _value);
-        #endif
-    }
-    
-    void DsMapAddDouble_comaptibility__(int dsMapIndex, const char* _key, double _value)
-    {
-        #if TARGET_OS_OSX
-        DsMapAddDouble(dsMapIndex, _key, _value);
-        #else
-        dsMapAddDouble(dsMapIndex, _key, _value);
-        #endif
-    }
-    
-    void CreateAsyncEventWithDSMap_comaptibility__(int dsMapIndex)
-    {
-        #if TARGET_OS_OSX
-        CreateAsyncEventWithDSMap(dsMapIndex,EVENT_OTHER_WEB_IAP);
-        #else
-        CreateAsynEventWithDSMap(dsMapIndex,EVENT_OTHER_WEB_IAP);
-        #endif
-    }
 
 @synthesize m_activeTransactions;
 
@@ -110,10 +74,10 @@ const int EVENT_OTHER_WEB_IAP = 66;
     char jResponse[20];
     sprintf(jResponse, "response_json");
 
-    int dsMapIndex = CreateDsMap_comaptibility__();
-    DsMapAddDouble_comaptibility__(dsMapIndex, jId, payment_queue_update);
-    DsMapAddString_comaptibility__(dsMapIndex, jResponse, const_cast<char*>([jsonResponse UTF8String]));
-    CreateAsyncEventWithDSMap_comaptibility__(dsMapIndex);
+    int dsMapIndex = CreateDsMap_comaptibility_();
+    DsMapAddDouble_comaptibility_(dsMapIndex, jId, payment_queue_update);
+    DsMapAddString_comaptibility_(dsMapIndex, jResponse, const_cast<char*>([jsonResponse UTF8String]));
+    CreateAsyncEventWithDSMap_comaptibility_(dsMapIndex);
 }
 
 - (NSString*) parsePaymentTransactionsIntoJson:(nonnull NSArray<SKPaymentTransaction*>*)transactions
@@ -211,15 +175,15 @@ const int EVENT_OTHER_WEB_IAP = 66;
 			sprintf(jId, "id");
 			char jResponse[20];
 			sprintf(jResponse, "response_json");
-			int dsMapIndex = CreateDsMap_comaptibility__();
-            DsMapAddDouble_comaptibility__(dsMapIndex, jId, payment_queue_update);
+			int dsMapIndex = CreateDsMap_comaptibility_();
+            DsMapAddDouble_comaptibility_(dsMapIndex, jId, payment_queue_update);
 			NSLog([[NSString alloc] initWithCString:product encoding:NSUTF8StringEncoding]);
 			
 			char* json = (char*)alloca(strlen(product) + 256);
 			sprintf(json, "{\"cancelled\":\"true\", \"product\":\"%s\"}", product);
 			
-            DsMapAddString_comaptibility__(dsMapIndex, jResponse, const_cast<char*>(json));
-            CreateAsyncEventWithDSMap_comaptibility__(dsMapIndex);
+            DsMapAddString_comaptibility_(dsMapIndex, jResponse, const_cast<char*>(json));
+            CreateAsyncEventWithDSMap_comaptibility_(dsMapIndex);
             
 			return nil;
 		}
