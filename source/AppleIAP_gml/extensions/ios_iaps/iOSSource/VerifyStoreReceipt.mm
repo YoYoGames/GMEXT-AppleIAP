@@ -329,7 +329,7 @@ NSDictionary *dictionaryWithAppStoreReceipt(NSURL *receiptURL) {
     X509_STORE_add_cert(store, appleRootX509);
 
     // Be sure to load the digests before the verification
-    //OpenSSL_add_all_digests();//TODO jzavala: commented for the while, dont forget!!!!!!!!!!!!!!!!!
+    OpenSSL_add_all_digests();
     
     // Check the signature
     int result = PKCS7_verify(receiptPKCS7, NULL, store, NULL, NULL, 0);
