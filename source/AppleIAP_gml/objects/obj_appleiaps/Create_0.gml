@@ -4,6 +4,8 @@
 #macro iap_renewablesub "yyg_iap_monthlysub"
 #macro iap_nonrenewablesub "yyg_iap_yearpromosub"
 
+iap_Init()
+
 waitingRefreh = false;
 validationRequests = {};
 

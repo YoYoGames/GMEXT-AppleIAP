@@ -23,7 +23,8 @@ YYRunnerInterface* g_pYYRunnerInterface;
 extern "C" void dsMapClear(int _dsMap );
 extern "C" int dsMapCreate();
 extern "C" void dsMapAddInt(int _dsMap, char* _key, int _value);
-extern "C" void dsMapAddString(int _dsMap, char* _key, char* _value);
+//extern "C" void dsMapAddDouble(int _dsMap, char* _key, double _value);
+//extern "C" void DsMapAddString(int _dsMap, char* _key, char* _value);
 
 extern "C" int dsListCreate();
 extern "C" void dsListAddInt(int _dsList, int _value);
@@ -32,7 +33,10 @@ extern "C" const char* dsListGetValueString(int _dsList, int _listIdx);
 extern "C" double dsListGetValueDouble(int _dsList, int _listIdx);
 extern "C" int dsListGetSize(int _dsList);
 
-extern "C" void CreateAsyncEventOfTypeWithDSMap(int dsmapindex, int event_index);
+extern int CreateDsMap( int _num, ... );
+extern void CreateAsynEventWithDSMap(int dsmapindex, int event_index);
+extern "C" void dsMapAddDouble(int _dsMap, const char* _key, double _value);
+extern "C" void dsMapAddString(int _dsMap, const char* _key, const char* _value);
 #endif
 
 const int EVENT_OTHER_WEB_IAP = 66;
@@ -252,6 +256,8 @@ void CreateAsyncEventWithDSMap_comaptibility_(int dsMapIndex)
     [[SKPaymentQueue defaultQueue] removeTransactionObserver: [iOS_TransactionListener sharedInstance]];
 }
 
+#if TARGET_OS_OSX
+
 iOS_InAppPurchase *mac;
 
 YYEXPORT void /*(double)*/ iap_Init_C(RValue& Result, CInstance* selfinst, CInstance* otherinst, int argc, RValue* arg)
@@ -326,5 +332,7 @@ YYEXPORT void /*- (double)*/ iap_ValidateReceipt_C(RValue& Result, CInstance* se
     Result.kind = VALUE_REAL;
     Result.val = [mac iap_ValidateReceipt];
 }
+
+#endif
 
 @end

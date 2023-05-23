@@ -47,7 +47,6 @@
     {"id":{"name":"Obj_YoYo_text","path":"objects/Obj_YoYo_text/Obj_YoYo_text.yy",},},
     {"id":{"name":"HandleProducts","path":"scripts/HandleProducts/HandleProducts.yy",},},
     {"id":{"name":"Obj_AppleIAPs","path":"objects/Obj_AppleIAPs/Obj_AppleIAPs.yy",},},
-    {"id":{"name":"IAPs_Crossplatform_Functions","path":"scripts/IAPs_Crossplatform_Functions/IAPs_Crossplatform_Functions.yy",},},
     {"id":{"name":"Obj_AppleIAPs_Purchase","path":"objects/Obj_AppleIAPs_Purchase/Obj_AppleIAPs_Purchase.yy",},},
     {"id":{"name":"Room_YoYo","path":"rooms/Room_YoYo/Room_YoYo.yy",},},
     {"id":{"name":"Obj_AppleIAPs_Restore","path":"objects/Obj_AppleIAPs_Restore/Obj_AppleIAPs_Restore.yy",},},
@@ -58,7 +57,6 @@
     {"id":{"name":"Obj_AppleIAPs_RefreshReceipt","path":"objects/Obj_AppleIAPs_RefreshReceipt/Obj_AppleIAPs_RefreshReceipt.yy",},},
     {"id":{"name":"Room_AppleIAPs","path":"rooms/Room_AppleIAPs/Room_AppleIAPs.yy",},},
     {"id":{"name":"iOS_IAPs","path":"extensions/iOS_IAPs/iOS_IAPs.yy",},},
-    {"id":{"name":"Mac_IAPs","path":"extensions/Mac_IAPs/Mac_IAPs.yy",},},
   ],
   "RoomOrderNodes": [
     {"roomId":{"name":"Room_AppleIAPs","path":"rooms/Room_AppleIAPs/Room_AppleIAPs.yy",},},
