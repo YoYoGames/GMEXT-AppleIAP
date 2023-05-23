@@ -104,7 +104,7 @@ void CreateAsyncEventWithDSMap_comaptibility_(int dsMapIndex)
     [super dealloc];
 }
 
-- (double) ios_iap_Init
+- (double) iap_Init
 {
     // it turns out, it's a bad idea, to use these two NSBundle methods in your app:
 	//
@@ -122,14 +122,14 @@ void CreateAsyncEventWithDSMap_comaptibility_(int dsMapIndex)
     return no_error;
 }
 
-- (double) ios_iap_IsAuthorisedForPayment
+- (double) iap_IsAuthorisedForPayment
 {
     // Boolean return;
     BOOL authorised = [SKPaymentQueue canMakePayments];
     return authorised ? 1.0 : 0.0;
 }
 
-- (double) ios_iap_AddProduct:(NSString*)_productName
+- (double) iap_AddProduct:(NSString*)_productName
 {
     if (self.m_products == nil)
     {
@@ -152,18 +152,18 @@ void CreateAsyncEventWithDSMap_comaptibility_(int dsMapIndex)
     return no_error;
 }
 
-- (double) ios_iap_QueryProducts
+- (double) iap_QueryProducts
 {
     [[iOS_StoreManager sharedInstance] startProductRequestWithIdentifiers:self.m_products];
     return no_error;
 }
 
-- (NSString*) ios_iap_QueryPurchases
+- (NSString*) iap_QueryPurchases
 {
     return [[iOS_TransactionListener sharedInstance] queryPurchases];
 }
 
-- (double) ios_iap_PurchaseProduct:(NSString*)_productName
+- (double) iap_PurchaseProduct:(NSString*)_productName
 {
     if (self.m_products == nil)
     {
@@ -195,12 +195,12 @@ void CreateAsyncEventWithDSMap_comaptibility_(int dsMapIndex)
     return no_error;
 }
 
-- (double) ios_iap_FinishTransaction:(NSString*)_transactionId
+- (double) iap_FinishTransaction:(NSString*)_transactionId
 {
     return [[iOS_TransactionListener sharedInstance] finishTransaction:_transactionId];
 }
 
-- (NSString*) ios_iap_GetReceipt
+- (NSString*) iap_GetReceipt
 {
     NSURL* url = [[NSBundle mainBundle] appStoreReceiptURL];
     NSData* receiptData = [NSData dataWithContentsOfURL:url];
@@ -214,7 +214,7 @@ void CreateAsyncEventWithDSMap_comaptibility_(int dsMapIndex)
     return receiptStr;
 }
 
-- (double) ios_iap_RefreshReceipt
+- (double) iap_RefreshReceipt
 {
     if (self.m_products == nil)
     {
@@ -231,7 +231,7 @@ void CreateAsyncEventWithDSMap_comaptibility_(int dsMapIndex)
     return no_error;
 }
 
-- (double) ios_iap_ValidateReceipt
+- (double) iap_ValidateReceipt
 {
     BOOL valid = verifyReceiptUsingURL( [[NSBundle mainBundle] appStoreReceiptURL] );
     
@@ -250,6 +250,81 @@ void CreateAsyncEventWithDSMap_comaptibility_(int dsMapIndex)
     NSLog(@"IAPs applicationWillTerminate without delegate :)");
     // Remove the observer.
     [[SKPaymentQueue defaultQueue] removeTransactionObserver: [iOS_TransactionListener sharedInstance]];
+}
+
+iOS_InAppPurchase *mac;
+
+YYEXPORT void /*(double)*/ iap_Init_C(RValue& Result, CInstance* selfinst, CInstance* otherinst, int argc, RValue* arg)
+{
+    mac = [iOS_InAppPurchase new];
+    
+    Result.kind = VALUE_REAL;
+    Result.val = [mac iap_Init];
+}
+
+YYEXPORT void /*- (double)*/ iap_IsAuthorisedForPayment_C(RValue& Result, CInstance* selfinst, CInstance* otherinst, int argc, RValue* arg)//
+{
+    Result.kind = VALUE_REAL;
+    Result.val = [mac iap_IsAuthorisedForPayment];
+}
+
+YYEXPORT void /*- (double)*/ iap_AddProduct_C(RValue& Result, CInstance* selfinst, CInstance* otherinst, int argc, RValue* arg)//:(NSString*)_productName
+{
+    const char* _productName = YYGetString(arg, 0);
+    
+    Result.kind = VALUE_REAL;
+    Result.val = [mac iap_AddProduct:@(_productName)];
+}
+
+YYEXPORT void /*- (double)*/ iap_QueryProducts_C(RValue& Result, CInstance* selfinst, CInstance* otherinst, int argc, RValue* arg)//
+{
+    Result.kind = VALUE_REAL;
+    Result.val = [mac iap_QueryProducts];
+}
+
+YYEXPORT void /*- (NSString*)*/ iap_QueryPurchases_C(RValue& Result, CInstance* selfinst, CInstance* otherinst, int argc, RValue* arg)//
+{
+    YYCreateString(&Result, (const char*)[[mac iap_QueryPurchases] UTF8String]);
+}
+
+YYEXPORT void /*- (double)*/ iap_PurchaseProduct_C(RValue& Result, CInstance* selfinst, CInstance* otherinst, int argc, RValue* arg)//(NSString*)_productName;
+{
+    const char* _productName = YYGetString(arg, 0);
+
+    Result.kind = VALUE_REAL;
+    Result.val = [mac iap_PurchaseProduct:@(_productName)];
+}
+
+YYEXPORT void /*- (double)*/ ios_iap_RestorePurchases_C(RValue& Result, CInstance* selfinst, CInstance* otherinst, int argc, RValue* arg)//
+{
+    Result.kind = VALUE_REAL;
+    Result.val = [mac ios_iap_RestorePurchases];
+}
+
+YYEXPORT void /*- (double)*/ iap_FinishTransaction_C(RValue& Result, CInstance* selfinst, CInstance* otherinst, int argc, RValue* arg)//(NSString*)_transactionId
+{
+    const char* _transactionId = YYGetString(arg, 0);
+
+    
+    Result.kind = VALUE_REAL;
+    Result.val = [mac iap_FinishTransaction:@(_transactionId)];
+}
+
+YYEXPORT void /*- (NSString*)*/ iap_GetReceipt_C(RValue& Result, CInstance* selfinst, CInstance* otherinst, int argc, RValue* arg)//
+{
+    YYCreateString(&Result, (const char*)[[mac iap_GetReceipt] UTF8String]);
+}
+
+YYEXPORT void /*- (double)*/ iap_RefreshReceipt_C(RValue& Result, CInstance* selfinst, CInstance* otherinst, int argc, RValue* arg)//
+{
+    Result.kind = VALUE_REAL;
+    Result.val = [mac iap_RefreshReceipt];
+}
+
+YYEXPORT void /*- (double)*/ iap_ValidateReceipt_C(RValue& Result, CInstance* selfinst, CInstance* otherinst, int argc, RValue* arg)//
+{
+    Result.kind = VALUE_REAL;
+    Result.val = [mac iap_ValidateReceipt];
 }
 
 @end
