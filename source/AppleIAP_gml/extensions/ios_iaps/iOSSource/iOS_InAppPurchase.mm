@@ -333,6 +333,11 @@ YYEXPORT void /*- (double)*/ iap_ValidateReceipt_C(RValue& Result, CInstance* se
     Result.val = [mac iap_ValidateReceipt];
 }
 
+YYEXPORT void /*- (NSString*)*/ ext_test_str(RValue& Result, CInstance* selfinst, CInstance* otherinst, int argc, RValue* arg)//
+{
+    YYCreateString(&Result, "Hello IAPs");
+}
+
 #endif
 
 @end
