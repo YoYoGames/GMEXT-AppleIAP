@@ -494,8 +494,8 @@ extern NSString * global_bundleIdentifier;
 // const NSString * global_bundleVersion = @"1.0.2";
 // const NSString * global_bundleIdentifier = @"com.example.SampleApp";
 
-BOOL verifyReceiptUsingURL(NSURL *receiptURL) {
 #if !TARGET_OS_OSX
+BOOL verifyReceiptUsingURL(NSURL *receiptURL) {
 	// it turns out, it's a bad idea, to use these two NSBundle methods in your app:
 	//
 	// bundleVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"];
@@ -537,8 +537,105 @@ BOOL verifyReceiptUsingURL(NSURL *receiptURL) {
 		return YES;
 	}
     
-	return NO;
-#else
     return NO;
-#endif
 }
+#else
+
+
+NSData* getGUID()
+{
+    // Open a MACH port
+    mach_port_t master_port;
+    kern_return_t kernResult = IOMasterPort(MACH_PORT_NULL, &master_port);
+    if (kernResult != KERN_SUCCESS) {
+        return nil;
+    }
+    
+    // Create a search for primary interface
+    CFMutableDictionaryRef matching_dict = IOBSDNameMatching(master_port, 0, "en0");
+    if (!matching_dict) {
+        return nil;
+    }
+    
+    // Perform the search
+    io_iterator_t iterator;
+    kernResult = IOServiceGetMatchingServices(master_port, matching_dict, &iterator);
+    if (kernResult != KERN_SUCCESS) {
+        return nil;
+    }
+    
+    // Iterate over the result
+    CFDataRef guid_cf_data = nil;
+    io_object_t service, parent_service;
+    while((service = IOIteratorNext(iterator)) != 0) {
+        kernResult = IORegistryEntryGetParentEntry(service, kIOServicePlane, &parent_service);
+        if (kernResult == KERN_SUCCESS) {
+            // Store the result
+            if (guid_cf_data) CFRelease(guid_cf_data);
+            guid_cf_data = (CFDataRef) IORegistryEntryCreateCFProperty(parent_service, CFSTR("IOMACAddress"), NULL, 0);
+            IOObjectRelease(parent_service);
+        }
+        IOObjectRelease(service);
+        if (guid_cf_data) {
+            break;
+        }
+    }
+    IOObjectRelease(iterator);
+    
+    NSData *guidData = [NSData dataWithData:(__bridge NSData *) guid_cf_data];
+    return guidData;
+}
+
+// in your project define those two somewhere as such:
+// const NSString * global_bundleVersion = @"1.0.2";
+// const NSString * global_bundleIdentifier = @"com.example.SampleApp";
+
+BOOL verifyReceiptWithURL(NSURL *receiptURL) {
+    // it turns out, it's a bad idea, to use these two NSBundle methods in your app:
+    //
+     global_bundleVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"];
+     global_bundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];
+    //
+    // http://www.craftymind.com/2011/01/06/mac-app-store-hacked-how-developers-can-better-protect-themselves/
+    //
+    // so use hard coded values instead (probably even somehow obfuscated)
+    
+    NSString *bundleVersion = (NSString*)global_bundleVersion;
+    NSString *bundleIdentifier = (NSString*)global_bundleIdentifier;
+
+    // avoid making stupid mistakes --> check again
+    NSCAssert([bundleVersion isEqualToString:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"]],
+              @"whoops! check the hard-coded CFBundleVersion!");
+    NSCAssert([bundleIdentifier isEqualToString:[[NSBundle mainBundle] bundleIdentifier]],
+              @"whoops! check the hard-coded bundle identifier!");
+    NSDictionary *receipt = dictionaryWithAppStoreReceipt(receiptURL);
+    
+    if (!receipt) {
+        return NO;
+    }
+    
+    NSData* guid = getGUID();
+    
+    if (guid == nil) {
+        return NO;
+    }
+
+    NSMutableData *input = [NSMutableData data];
+    [input appendBytes:[guid bytes] length: [guid length]];
+    [input appendData:[receipt objectForKey:kReceiptOpaqueValue]];
+    [input appendData:[receipt objectForKey:kReceiptBundleIdentifierData]];
+
+    NSMutableData *hash = [NSMutableData dataWithLength:SHA_DIGEST_LENGTH];
+    SHA1((const unsigned char*)[input bytes], [input length], (unsigned char*)[hash mutableBytes]);
+
+    if ([bundleIdentifier isEqualToString:[receipt objectForKey:kReceiptBundleIdentifier]] &&
+        [bundleVersion isEqualToString:[receipt objectForKey:kReceiptVersion]] &&
+        [hash isEqualToData:[receipt objectForKey:kReceiptHash]]) {
+        return YES;
+    }
+    
+    return NO;
+}
+
+
+#endif

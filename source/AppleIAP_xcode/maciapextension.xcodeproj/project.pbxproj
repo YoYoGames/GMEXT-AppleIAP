@@ -163,7 +163,21 @@
 		2BD4EA912A1D7FDA0081EF8F /* ebcdic.h in Headers */ = {isa = PBXBuildFile; fileRef = 2BD4EA082A1D7FDA0081EF8F /* ebcdic.h */; };
 		2BD4EA922A1D7FDA0081EF8F /* mdc2.h in Headers */ = {isa = PBXBuildFile; fileRef = 2BD4EA092A1D7FDA0081EF8F /* mdc2.h */; };
 		2BD4EA932A1D7FDA0081EF8F /* ocsperr.h in Headers */ = {isa = PBXBuildFile; fileRef = 2BD4EA0A2A1D7FDA0081EF8F /* ocsperr.h */; };
+		2BD4EA952A1D92150081EF8F /* libMacIapExtension.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2B7821DA278CE36400EE6530 /* libMacIapExtension.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		2BD4EA942A1D91FD0081EF8F /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "${PROJECT_DIR}/../AppleIAP_gml/extensions/ios_iaps";
+			dstSubfolderSpec = 0;
+			files = (
+				2BD4EA952A1D92150081EF8F /* libMacIapExtension.dylib in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		2B5A6E6E2A1BFBE10015F35D /* iOS_IAPEnums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iOS_IAPEnums.h; path = "../../../../GMEXT-AppleIAP/source/AppleIAP_gml/extensions/ios_iaps/iOSSource/iOS_IAPEnums.h"; sourceTree = "<group>"; };
@@ -772,6 +786,7 @@
 				2B7821D6278CE36400EE6530 /* Headers */,
 				2B7821D7278CE36400EE6530 /* Sources */,
 				2B7821D8278CE36400EE6530 /* Frameworks */,
+				2BD4EA942A1D91FD0081EF8F /* CopyFiles */,
 			);
 			buildRules = (
 			);

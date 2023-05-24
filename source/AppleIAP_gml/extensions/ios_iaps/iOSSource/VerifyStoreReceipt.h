@@ -51,4 +51,8 @@ extern NSString *kReceiptInAppWebOrderLineItemID;
 
 NSDictionary *dictionaryWithAppStoreReceipt(NSString *receiptPath);
 NSArray *obtainInAppPurchases(NSString *receiptPath);
+#if !TARGET_OS_OSX
 BOOL verifyReceiptUsingURL(NSURL *receiptPath);
+#else
+BOOL verifyReceiptWithURL(NSURL *receiptURL);
+#endif
