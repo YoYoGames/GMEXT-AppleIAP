@@ -86,7 +86,11 @@ NSData *appleRootCert(void) {
     // Download the Apple Inc. Root Certificate ( http://www.apple.com/appleca/AppleIncRootCertificate.cer )
     // Add the AppleIncRootCertificate.cer to your app's resource bundle.
 
+#if TARGET_OS_OSX
+    NSData *cert = [NSData dataWithContentsOfURL:[[NSBundle mainBundle] URLForResource:@"appleincrootcertificate" withExtension:@"cer"]];
+    #else
     NSData *cert = [NSData dataWithContentsOfURL:[[NSBundle mainBundle] URLForResource:@"appleincrootcertificate" withExtension:@"cer" subdirectory:@"games"]];
+    #endif
     
 	return cert;
 }
