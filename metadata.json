@@ -1,16 +1,14 @@
 [
     {
         "projectFile": "source/AppleIAP_gml/AppleIAP.yyp",
-        "extensionFile": "source/Firebase_gml/extensions/AppleIAPs/AppleIAPs.yy",
-        "packageid": "com.yoyogames.appleiaps",
-        "packagename": "Apple IAPs Ext",
-        "resources": {
-            "includedFolders": null,
-            "includedResources": null,
-            "excludedFolders": null,
-            "excludedResources": null
-        },
-        "format": "LTS22",
-        "version": "1.1.0"
+        "extensionFile": "source/AppleIAP_gml/extensions/AppleIAPs/AppleIAPs.yy",
+        "packageId": "com.yoyogames.appleiaps",
+        "packageName": "Apple IAPs Ext",
+        "packageVersion": "1.1.0",
+        "includeFolders": null,
+        "includeResources": null,
+        "excludeFolders": null,
+        "excludeResources": null,
+        "format": "LTS22"
     }
 ]
