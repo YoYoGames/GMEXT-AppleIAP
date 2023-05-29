@@ -182,7 +182,7 @@ void CreateAsyncEventWithDSMap_comaptibility_(int dsMapIndex)
     return [[iOS_StoreManager sharedInstance] startPaymentRequestWithIdentifier:_productName];
 }
 
-- (double) ios_iap_RestorePurchases
+- (double) iap_RestorePurchases
 {
     if (self.m_products == nil)
     {
@@ -304,10 +304,10 @@ YYEXPORT void /*- (double)*/ iap_PurchaseProduct_C(RValue& Result, CInstance* se
     Result.val = [mac iap_PurchaseProduct:@(_productName)];
 }
 
-YYEXPORT void /*- (double)*/ ios_iap_RestorePurchases_C(RValue& Result, CInstance* selfinst, CInstance* otherinst, int argc, RValue* arg)//
+YYEXPORT void /*- (double)*/ iap_RestorePurchases_C(RValue& Result, CInstance* selfinst, CInstance* otherinst, int argc, RValue* arg)//
 {
     Result.kind = VALUE_REAL;
-    Result.val = [mac ios_iap_RestorePurchases];
+    Result.val = [mac iap_RestorePurchases];
 }
 
 YYEXPORT void /*- (double)*/ iap_FinishTransaction_C(RValue& Result, CInstance* selfinst, CInstance* otherinst, int argc, RValue* arg)//(NSString*)_transactionId

@@ -6,7 +6,7 @@ switch(async_load[?"id"])
 {
 	/// ############### QUERY PRODUCTS ###############
 	case ios_product_update:
-	case mac_product_update:
+	//case mac_product_update:
 
 		show_debug_message("[INFO] Query Products Callback");
 
@@ -19,7 +19,7 @@ switch(async_load[?"id"])
 	
 	/// ############### PURCHASE PRODUCT ###############
 	case ios_payment_queue_update:
-	case mac_payment_queue_update:
+	//case mac_payment_queue_update:
 
 		show_debug_message("[INFO] Purchase Product Callback");
 
@@ -63,7 +63,7 @@ switch(async_load[?"id"])
 		break;
 		
 	case ios_receipt_refresh:
-	case mac_receipt_refresh:
+	//case mac_receipt_refresh:
 
 		if (!waitingRefreh) exit;
 

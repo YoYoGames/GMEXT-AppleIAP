@@ -26,7 +26,7 @@ function HandlePurchases(_purchases, _shouldValidate = false) {
 		
 		var _responseCode = _purchase.responseCode; // Check the manual for response codes
 			
-		if (!iap_PurchaseFailed(_purchaseState)) {
+		if (_purchaseState != ios_purchase_failed) {
 		
 			switch (_productId) {
 					
