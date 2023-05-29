@@ -209,10 +209,10 @@
     char jResponse[20];
     sprintf(jResponse, "response_json");
     
-    int dsMapIndex = CreateDsMap(0);
-    DsMapAddDouble(dsMapIndex, jId, product_update);
-    DsMapAddString(dsMapIndex, jResponse, const_cast<char*>([jsonStr UTF8String]));
-    CreateAsynEventWithDSMap(dsMapIndex, EVENT_OTHER_WEB_IAP);
+    int dsMapIndex = CreateDsMap_comaptibility_();
+    DsMapAddDouble_comaptibility_(dsMapIndex, jId, product_update);
+    DsMapAddString_comaptibility_(dsMapIndex, jResponse, const_cast<char*>([jsonStr UTF8String]));
+    CreateAsyncEventWithDSMap_comaptibility_(dsMapIndex);
     
     [number release];
     [results release];
