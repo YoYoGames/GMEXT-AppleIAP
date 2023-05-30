@@ -118,6 +118,9 @@ void CreateAsyncEventWithDSMap_comaptibility_(int dsMapIndex)
 	// http://www.craftymind.com/2011/01/06/mac-app-store-hacked-how-developers-can-better-protect-themselves/
 	//
 	// so use hard coded values instead (probably even somehow obfuscated)
+    
+    [self Init];//initializate delegate
+    
     global_bundleVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"];
     global_bundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];
     
