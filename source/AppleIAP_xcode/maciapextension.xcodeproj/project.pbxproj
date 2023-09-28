@@ -169,7 +169,7 @@
 		2BD4EA942A1D91FD0081EF8F /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = "${PROJECT_DIR}/../AppleIAP_gml/extensions/ios_iaps";
+			dstPath = "${PROJECT_DIR}/../AppleIAP_gml/extensions/AppleIAP";
 			dstSubfolderSpec = 0;
 			files = (
 				2BD4EA952A1D92150081EF8F /* libMacIapExtension.dylib in CopyFiles */,
@@ -179,15 +179,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		2B5A6E6E2A1BFBE10015F35D /* iOS_IAPEnums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iOS_IAPEnums.h; path = "../../../../GMEXT-AppleIAP/source/AppleIAP_gml/extensions/ios_iaps/iOSSource/iOS_IAPEnums.h"; sourceTree = "<group>"; };
-		2B5A6E6F2A1BFBE10015F35D /* VerifyStoreReceipt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VerifyStoreReceipt.h; path = "../../../../GMEXT-AppleIAP/source/AppleIAP_gml/extensions/ios_iaps/iOSSource/VerifyStoreReceipt.h"; sourceTree = "<group>"; };
-		2B5A6E702A1BFBE10015F35D /* iOS_StoreManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = iOS_StoreManager.mm; path = "../../../../GMEXT-AppleIAP/source/AppleIAP_gml/extensions/ios_iaps/iOSSource/iOS_StoreManager.mm"; sourceTree = "<group>"; };
-		2B5A6E712A1BFBE10015F35D /* iOS_TransactionListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iOS_TransactionListener.h; path = "../../../../GMEXT-AppleIAP/source/AppleIAP_gml/extensions/ios_iaps/iOSSource/iOS_TransactionListener.h"; sourceTree = "<group>"; };
-		2B5A6E722A1BFBE10015F35D /* iOS_InAppPurchase.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = iOS_InAppPurchase.mm; path = "../../../../GMEXT-AppleIAP/source/AppleIAP_gml/extensions/ios_iaps/iOSSource/iOS_InAppPurchase.mm"; sourceTree = "<group>"; };
-		2B5A6E732A1BFBE20015F35D /* iOS_IAPEnums.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = iOS_IAPEnums.mm; path = "../../../../GMEXT-AppleIAP/source/AppleIAP_gml/extensions/ios_iaps/iOSSource/iOS_IAPEnums.mm"; sourceTree = "<group>"; };
-		2B5A6E742A1BFBE20015F35D /* iOS_StoreManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iOS_StoreManager.h; path = "../../../../GMEXT-AppleIAP/source/AppleIAP_gml/extensions/ios_iaps/iOSSource/iOS_StoreManager.h"; sourceTree = "<group>"; };
-		2B5A6E752A1BFBE20015F35D /* iOS_InAppPurchase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iOS_InAppPurchase.h; path = "../../../../GMEXT-AppleIAP/source/AppleIAP_gml/extensions/ios_iaps/iOSSource/iOS_InAppPurchase.h"; sourceTree = "<group>"; };
-		2B5A6E772A1BFBE20015F35D /* VerifyStoreReceipt.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = VerifyStoreReceipt.mm; path = "../../../../GMEXT-AppleIAP/source/AppleIAP_gml/extensions/ios_iaps/iOSSource/VerifyStoreReceipt.mm"; sourceTree = "<group>"; };
+		2B5A6E6E2A1BFBE10015F35D /* iOS_IAPEnums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iOS_IAPEnums.h; path = ../../AppleIAP_gml/extensions/AppleIAP/iOSSource/iOS_IAPEnums.h; sourceTree = "<group>"; };
+		2B5A6E6F2A1BFBE10015F35D /* VerifyStoreReceipt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VerifyStoreReceipt.h; path = ../../AppleIAP_gml/extensions/AppleIAP/iOSSource/VerifyStoreReceipt.h; sourceTree = "<group>"; };
+		2B5A6E702A1BFBE10015F35D /* iOS_StoreManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = iOS_StoreManager.mm; path = ../../AppleIAP_gml/extensions/AppleIAP/iOSSource/iOS_StoreManager.mm; sourceTree = "<group>"; };
+		2B5A6E712A1BFBE10015F35D /* iOS_TransactionListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iOS_TransactionListener.h; path = ../../AppleIAP_gml/extensions/AppleIAP/iOSSource/iOS_TransactionListener.h; sourceTree = "<group>"; };
+		2B5A6E722A1BFBE10015F35D /* iOS_InAppPurchase.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = iOS_InAppPurchase.mm; path = ../../AppleIAP_gml/extensions/AppleIAP/iOSSource/iOS_InAppPurchase.mm; sourceTree = "<group>"; };
+		2B5A6E732A1BFBE20015F35D /* iOS_IAPEnums.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = iOS_IAPEnums.mm; path = ../../AppleIAP_gml/extensions/AppleIAP/iOSSource/iOS_IAPEnums.mm; sourceTree = "<group>"; };
+		2B5A6E742A1BFBE20015F35D /* iOS_StoreManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iOS_StoreManager.h; path = ../../AppleIAP_gml/extensions/AppleIAP/iOSSource/iOS_StoreManager.h; sourceTree = "<group>"; };
+		2B5A6E752A1BFBE20015F35D /* iOS_InAppPurchase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iOS_InAppPurchase.h; path = ../../AppleIAP_gml/extensions/AppleIAP/iOSSource/iOS_InAppPurchase.h; sourceTree = "<group>"; };
+		2B5A6E772A1BFBE20015F35D /* VerifyStoreReceipt.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = VerifyStoreReceipt.mm; path = ../../AppleIAP_gml/extensions/AppleIAP/iOSSource/VerifyStoreReceipt.mm; sourceTree = "<group>"; };
 		2B5A6F242A1BFC380015F35D /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		2B5A6F262A1BFC670015F35D /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		2B5A6F282A1BFD370015F35D /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -195,7 +195,7 @@
 		2B5A6F2C2A1C012E0015F35D /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = "../../../../../GMEXT-AppleIAP/source/AppleIAP_xcode/maciapextension/lib/libssl.a"; sourceTree = "<group>"; };
 		2B5A6F302A1C038B0015F35D /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		2B5A6F322A1C03BD0015F35D /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
-		2B5A6F342A1C2C0A0015F35D /* iOS_TransactionListener.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = iOS_TransactionListener.mm; path = ../../AppleIAP_gml/extensions/ios_iaps/iOSSource/iOS_TransactionListener.mm; sourceTree = "<group>"; };
+		2B5A6F342A1C2C0A0015F35D /* iOS_TransactionListener.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = iOS_TransactionListener.mm; path = ../../AppleIAP_gml/extensions/AppleIAP/iOSSource/iOS_TransactionListener.mm; sourceTree = "<group>"; };
 		2B7821DA278CE36400EE6530 /* libMacIapExtension.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libMacIapExtension.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B9F11212A0F36CE0059D11A /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		2B9F11272A1081410059D11A /* Ref.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ref.h; sourceTree = "<group>"; };

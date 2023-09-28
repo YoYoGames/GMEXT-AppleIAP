@@ -19,6 +19,6 @@
     {"name":"Font_YoYo_50","order":2,"path":"fonts/Font_YoYo_50/Font_YoYo_50.yy",},
     {"name":"Obj_AppleIAPs_RefreshReceipt","order":4,"path":"objects/Obj_AppleIAPs_RefreshReceipt/Obj_AppleIAPs_RefreshReceipt.yy",},
     {"name":"Room_AppleIAPs","order":1,"path":"rooms/Room_AppleIAPs/Room_AppleIAPs.yy",},
-    {"name":"iOS_IAPs","order":1,"path":"extensions/iOS_IAPs/iOS_IAPs.yy",},
+    {"name":"AppleIAP","order":1,"path":"extensions/AppleIAP/AppleIAP.yy",},
   ],
 }

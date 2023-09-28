@@ -4,10 +4,6 @@
 #macro iap_renewablesub "yyg_iap_monthlysub"
 #macro iap_nonrenewablesub "yyg_iap_yearpromosub"
 
-show_debug_message("HERE?")
-show_debug_message(ext_test_str())
-show_debug_message("HERE END")
-
 iap_Init()
 
 waitingRefreh = false;
@@ -24,6 +20,7 @@ iap_QueryProducts();
 // Handle pending purchases
 var purchasesJson = iap_QueryPurchases();
 if (purchasesJson != "") {
+	
 	var purchasesData = json_parse(purchasesJson);
 	var purchases = purchasesData.purchases;
 	

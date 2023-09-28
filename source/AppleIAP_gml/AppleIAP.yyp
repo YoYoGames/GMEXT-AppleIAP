@@ -30,7 +30,7 @@
   "isEcma": false,
   "LibraryEmitters": [],
   "MetaData": {
-    "IDEVersion": "2023.4.0.84",
+    "IDEVersion": "2023.8.1.102",
   },
   "resources": [
     {"id":{"name":"Font_YoYo_30","path":"fonts/Font_YoYo_30/Font_YoYo_30.yy",},},
@@ -56,12 +56,13 @@
     {"id":{"name":"Font_YoYo_50","path":"fonts/Font_YoYo_50/Font_YoYo_50.yy",},},
     {"id":{"name":"Obj_AppleIAPs_RefreshReceipt","path":"objects/Obj_AppleIAPs_RefreshReceipt/Obj_AppleIAPs_RefreshReceipt.yy",},},
     {"id":{"name":"Room_AppleIAPs","path":"rooms/Room_AppleIAPs/Room_AppleIAPs.yy",},},
-    {"id":{"name":"iOS_IAPs","path":"extensions/iOS_IAPs/iOS_IAPs.yy",},},
+    {"id":{"name":"AppleIAP","path":"extensions/AppleIAP/AppleIAP.yy",},},
   ],
   "RoomOrderNodes": [
     {"roomId":{"name":"Room_AppleIAPs","path":"rooms/Room_AppleIAPs/Room_AppleIAPs.yy",},},
     {"roomId":{"name":"Room_YoYo","path":"rooms/Room_YoYo/Room_YoYo.yy",},},
   ],
+  "templateType": null,
   "TextureGroups": [
     {"resourceType":"GMTextureGroup","resourceVersion":"1.3","name":"Default","autocrop":true,"border":2,"compressFormat":"bz2","directory":"","groupParent":null,"isScaled":true,"loadType":"default","mipsToGenerate":0,"targets":-1,},
   ],
