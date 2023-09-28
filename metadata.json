@@ -1,0 +1,14 @@
+[
+    {
+        "projectFile": "source/AppleIAP_gml/AppleIAP.yyp",
+        "extensionFile": "source/AppleIAP_gml/extensions/AppleIAPs/AppleIAPs.yy",
+        "packageId": "com.yoyogames.appleiaps",
+        "packageName": "Apple IAPs Ext",
+        "packageVersion": "1.1.0",
+        "includeFolders": null,
+        "includeResources": null,
+        "excludeFolders": null,
+        "excludeResources": null,
+        "format": "LTS22"
+    }
+]
