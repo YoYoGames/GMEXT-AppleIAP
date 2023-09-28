@@ -11,7 +11,6 @@
     {"name":"__macros__","order":6,"path":"scripts/__macros__/__macros__.yy",},
     {"name":"Obj_YoYo_text","order":1,"path":"objects/Obj_YoYo_text/Obj_YoYo_text.yy",},
     {"name":"HandleProducts","order":3,"path":"scripts/HandleProducts/HandleProducts.yy",},
-    {"name":"IAPs_Crossplatform_Functions","order":1,"path":"scripts/IAPs_Crossplatform_Functions/IAPs_Crossplatform_Functions.yy",},
     {"name":"Obj_AppleIAPs_Purchase","order":1,"path":"objects/Obj_AppleIAPs_Purchase/Obj_AppleIAPs_Purchase.yy",},
     {"name":"Room_YoYo","order":4,"path":"rooms/Room_YoYo/Room_YoYo.yy",},
     {"name":"Obj_AppleIAPs_Restore","order":2,"path":"objects/Obj_AppleIAPs_Restore/Obj_AppleIAPs_Restore.yy",},
@@ -20,7 +19,6 @@
     {"name":"Font_YoYo_50","order":2,"path":"fonts/Font_YoYo_50/Font_YoYo_50.yy",},
     {"name":"Obj_AppleIAPs_RefreshReceipt","order":4,"path":"objects/Obj_AppleIAPs_RefreshReceipt/Obj_AppleIAPs_RefreshReceipt.yy",},
     {"name":"Room_AppleIAPs","order":1,"path":"rooms/Room_AppleIAPs/Room_AppleIAPs.yy",},
-    {"name":"iOS_IAPs","order":1,"path":"extensions/iOS_IAPs/iOS_IAPs.yy",},
-    {"name":"Mac_IAPs","order":3,"path":"extensions/Mac_IAPs/Mac_IAPs.yy",},
+    {"name":"AppleIAP","order":1,"path":"extensions/AppleIAP/AppleIAP.yy",},
   ],
 }
