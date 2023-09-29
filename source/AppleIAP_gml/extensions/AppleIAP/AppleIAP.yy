@@ -91,7 +91,18 @@
   "maccompilerflags": "",
   "maclinkerflags": "",
   "macsourcedir": "",
-  "options": [],
+  "options": [
+    {"resourceType":"GMExtensionOption","resourceVersion":"1.0","name":"__extOptLabel","defaultValue":"EXTRA OPTIONS:","description":"","displayName":"","exportToINI":false,"extensionId":null,"guid":"2730301d-9b83-48a0-9b16-1c39b365bafb","hidden":false,"listItems":[],"optType":5,},
+    {"resourceType":"GMExtensionOption","resourceVersion":"1.0","name":"logLevel","defaultValue":"1","description":"The log level to be used by the script file.\n0: Show only errors\n1: Show errors and warnings (recommended)\n2: Show everything (use before submitting a bug)","displayName":"Log Level","exportToINI":false,"extensionId":null,"guid":"8481187c-e158-4799-9152-c56eb9f7ec31","hidden":false,"listItems":[
+        "0",
+        "1",
+        "2",
+      ],"optType":6,},
+    {"resourceType":"GMExtensionOption","resourceVersion":"1.0","name":"versionStable","defaultValue":"2023.8.1.0","description":"","displayName":"","exportToINI":false,"extensionId":null,"guid":"e0ca7ac0-f7b6-4a22-b40e-7196a20beb11","hidden":false,"listItems":[],"optType":2,},
+    {"resourceType":"GMExtensionOption","resourceVersion":"1.0","name":"versionBeta","defaultValue":"2023.800.1.0","description":"","displayName":"","exportToINI":false,"extensionId":null,"guid":"33ee7986-9d81-4c17-bc11-d7e601c7a840","hidden":false,"listItems":[],"optType":2,},
+    {"resourceType":"GMExtensionOption","resourceVersion":"1.0","name":"versionDev","defaultValue":"9.9.1.436","description":"","displayName":"","exportToINI":false,"extensionId":null,"guid":"5e8b249e-d1f2-4396-930f-8c5af0459fa4","hidden":false,"listItems":[],"optType":2,},
+    {"resourceType":"GMExtensionOption","resourceVersion":"1.0","name":"versionLTS","defaultValue":"2022.0.2.0","description":"","displayName":"","exportToINI":false,"extensionId":null,"guid":"a5270933-c4d2-4b3f-a534-5d1f6d8fa6be","hidden":false,"listItems":[],"optType":2,},
+  ],
   "optionsFile": "options.json",
   "packageId": "",
   "parent": {
