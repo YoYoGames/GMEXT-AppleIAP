@@ -609,7 +609,7 @@ YYEXPORT void /*- (double)*/ iap_Promotion_Order_Update(RValue& Result, CInstanc
 	const char* products = YYGetString(arg, 0);
 
     Result.kind = VALUE_REAL;
-    Result.val = [mac iapPromotionOrderUpdate:products];
+    Result.val = [mac iapPromotionOrderUpdate:[products UTF]];
 }
 
 YYEXPORT void /*- (double)*/ iap_Promotion_Visibility_Fetch(RValue& Result, CInstance* selfinst, CInstance* otherinst, int argc, RValue* arg)//:(NSString*) product
@@ -617,7 +617,7 @@ YYEXPORT void /*- (double)*/ iap_Promotion_Visibility_Fetch(RValue& Result, CIns
 	const char* product = YYGetString(arg, 0);
 
     Result.kind = VALUE_REAL;
-    Result.val = [mac iapPromotionVisibilityFetch:product];	
+    Result.val = [mac iapPromotionVisibilityFetch:@(product)];
 }
 
 YYEXPORT void /*- (double)*/ iap_Promotion_Visibility_Update(RValue& Result, CInstance* selfinst, CInstance* otherinst, int argc, RValue* arg)//:(NSString*) product visibility:(double) visibility
@@ -626,7 +626,7 @@ YYEXPORT void /*- (double)*/ iap_Promotion_Visibility_Update(RValue& Result, CIn
 	double visibility = YYGetReal(arg, 1);
 
     Result.kind = VALUE_REAL;
-    Result.val = [mac iapPromotionVisibilityUpdate:product visibility: visibility];
+    Result.val = [mac iapPromotionVisibilityUpdate:@(product) visibility: visibility];
 }
 
 #endif
