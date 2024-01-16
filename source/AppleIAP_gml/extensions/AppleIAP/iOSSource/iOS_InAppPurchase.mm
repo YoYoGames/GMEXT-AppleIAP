@@ -456,20 +456,17 @@ void CreateAsyncEventWithDSMap_comaptibility_(int dsMapIndex)
      {
         
         int dsMapIndex = CreateDsMap_comaptibility_();
-        char jId[3];
-        sprintf(jId, "id");
-        DsMapAddDouble_comaptibility_(dsMapIndex, jId, promotion_order_fetch);
+        DsMapAddDouble_comaptibility_(dsMapIndex, "id", promotion_order_fetch);
         
         
-        char _jId[8];
-        sprintf(jId, "success");
+        
         if(error)
         {
-            DsMapAddDouble_comaptibility_(dsMapIndex, _jId, 0.0);
+            DsMapAddDouble_comaptibility_(dsMapIndex, "success", 0.0);
         }
         else
         {
-            DsMapAddDouble_comaptibility_(dsMapIndex, _jId, 1.0);
+            DsMapAddDouble_comaptibility_(dsMapIndex, "success", 1.0);
             
             NSMutableArray *mutarray = [NSMutableArray new];
             for(SKProduct *pro in promotionOrder)
@@ -480,9 +477,7 @@ void CreateAsyncEventWithDSMap_comaptibility_(int dsMapIndex)
             NSData *jsonData = [NSJSONSerialization dataWithJSONObject:mutarray options:NSJSONWritingPrettyPrinted error:&error];
             NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
             
-            char jResponse[9];
-            sprintf(jResponse, "products");
-            DsMapAddString_comaptibility_(dsMapIndex, jResponse, [jsonString UTF8String]);
+            DsMapAddString_comaptibility_(dsMapIndex, "products", [jsonString UTF8String]);
         }
         
         CreateAsyncEventWithDSMap_comaptibility_(dsMapIndex);

@@ -213,7 +213,7 @@
         return (int)error_no_skus;
     }
     
-    for(NSString *str in products)
+    for(NSString *str in jsonObject)
     for (int i = 0; i < ((self.m_validIaps).count); ++i)
     {
         SKProduct* product = self.m_validIaps[i];
@@ -228,19 +228,15 @@
     [[SKProductStorePromotionController defaultController] updateStorePromotionOrder:products_nstive completionHandler:^(NSError * _Nullable error)
      {
         int dsMapIndex = CreateDsMap_comaptibility_();
-        char jId[3];
-        sprintf(jId, "id");
-        DsMapAddDouble_comaptibility_(dsMapIndex, jId, promotion_order_update);
+        DsMapAddDouble_comaptibility_(dsMapIndex, "id", promotion_order_update);
         
-        char _jId[8];
-        sprintf(jId, "success");
         if(error)
         {
-            DsMapAddDouble_comaptibility_(dsMapIndex, _jId, 0.0);
+            DsMapAddDouble_comaptibility_(dsMapIndex, "success", 0.0);
         }
         else
         {
-            DsMapAddDouble_comaptibility_(dsMapIndex, _jId, 1.0);
+            DsMapAddDouble_comaptibility_(dsMapIndex, "success", 1.0);
 
         }
         
@@ -274,21 +270,16 @@
         [[SKProductStorePromotionController defaultController] fetchStorePromotionVisibilityForProduct:foundProduct completionHandler:^(SKProductStorePromotionVisibility storePromotionVisibility, NSError * _Nullable error) 
          {
             int dsMapIndex = CreateDsMap_comaptibility_();
-            char jId[3];
-            sprintf(jId, "id");
-            DsMapAddDouble_comaptibility_(dsMapIndex, jId, promotion_visibility_fetch);
+            DsMapAddDouble_comaptibility_(dsMapIndex, "id", promotion_visibility_fetch);
             DsMapAddString_comaptibility_(dsMapIndex, "product", [identifier UTF8String]);
 
-            
-            char _jId[8];
-            sprintf(jId, "success");
             if(error)
             {
-                DsMapAddDouble_comaptibility_(dsMapIndex, _jId, 0.0);
+                DsMapAddDouble_comaptibility_(dsMapIndex, "success", 0.0);
             }
             else
             {
-                DsMapAddDouble_comaptibility_(dsMapIndex, _jId, 1.0);
+                DsMapAddDouble_comaptibility_(dsMapIndex, "success", 1.0);
                 DsMapAddDouble_comaptibility_(dsMapIndex, "visibility", (double) storePromotionVisibility);
             }
             
@@ -322,19 +313,15 @@
         [[SKProductStorePromotionController defaultController] updateStorePromotionVisibility:(SKProductStorePromotionVisibility) visibility forProduct:foundProduct completionHandler:^(NSError * _Nullable error) {
             
             int dsMapIndex = CreateDsMap_comaptibility_();
-            char jId[3];
-            sprintf(jId, "id");
-            DsMapAddDouble_comaptibility_(dsMapIndex, jId, promotion_visibility_update);
+            DsMapAddDouble_comaptibility_(dsMapIndex, "id", promotion_visibility_update);
             
-            char _jId[8];
-            sprintf(jId, "success");
             if(error)
             {
-                DsMapAddDouble_comaptibility_(dsMapIndex, _jId, 0.0);
+                DsMapAddDouble_comaptibility_(dsMapIndex, "success", 0.0);
             }
             else
             {
-                DsMapAddDouble_comaptibility_(dsMapIndex, _jId, 1.0);
+                DsMapAddDouble_comaptibility_(dsMapIndex, "success", 1.0);
             }
             
             CreateAsyncEventWithDSMap_comaptibility_(dsMapIndex);
