@@ -97,6 +97,41 @@ switch(async_load[?"id"])
 			}
 		}
 		break;
+		
+		case ios_promotion_purchase:
+			var product = async_load[?"product"]
+		break;
+		
+		case ios_promotion_order_fetch:
+			
+			if(async_load[?"success"])
+			{
+				var products = async_load[?"products"]
+			}
+		break;
+		
+		case ios_promotion_order_update:
+			
+			if(async_load[?"success"])
+			{}
+			
+		break;
+		
+		case ios_promotion_visibility_fetch:
+			
+			if(async_load[?"success"])
+			{
+				var product = async_load[?"product"]
+				var visibility = async_load[?"visibility"]
+			}
+		break;
+		
+		case ios_promotion_visibility_update:
+			
+			if(async_load[?"success"])
+			{}
+			show_message_async(json_encode(async_load))
+		break;
 }
 
 
