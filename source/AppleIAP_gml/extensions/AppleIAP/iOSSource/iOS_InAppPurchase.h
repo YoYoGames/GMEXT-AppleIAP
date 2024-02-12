@@ -6,6 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <StoreKit/StoreKit.h>
 
 #if TARGET_OS_OSX
 #import "Extension_Interface.h"
@@ -20,6 +21,7 @@
 
 @property (nonatomic, retain) NSMutableArray* m_products;
 
++ (NSMutableDictionary*) product2map:(SKProduct*) product;
 
 @end
 

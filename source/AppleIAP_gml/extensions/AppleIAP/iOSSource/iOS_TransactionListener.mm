@@ -263,4 +263,28 @@ const int EVENT_OTHER_WEB_IAP = 66;
 #endif
 }
 
+- (BOOL)paymentQueue:(SKPaymentQueue *)queue shouldAddStorePayment:(SKPayment *)payment forProduct:(SKProduct *)product
+{
+    
+    int map = CreateDsMap_comaptibility_();
+    
+    char jId[3];
+    sprintf(jId, "id");
+    DsMapAddDouble_comaptibility_(map,jId,promotion_purchase);
+    
+    NSMutableDictionary* productMap = [iOS_InAppPurchase product2map:product];
+
+    NSError* pError = nil;
+    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:productMap options:0 error:&pError];
+    NSString* jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    
+    DsMapAddString_comaptibility_(map,"product",[jsonStr UTF8String]);
+    CreateAsyncEventWithDSMap_comaptibility_(map);
+    
+    [productMap release];
+    [jsonStr release];
+    
+    return false;
+}
+
 @end

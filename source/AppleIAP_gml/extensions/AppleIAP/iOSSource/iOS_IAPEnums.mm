@@ -27,3 +27,10 @@ const int product_period_unit_day       = 22101;
 const int product_period_unit_week      = 22102;
 const int product_period_unit_month     = 22103;
 const int product_period_unit_year      = 22104;
+
+const int promotion_purchase            = 22800;
+
+const int promotion_order_fetch         = 22801;
+const int promotion_order_update        = 22802;
+const int promotion_visibility_fetch    = 22803;
+const int promotion_visibility_update   = 22804;

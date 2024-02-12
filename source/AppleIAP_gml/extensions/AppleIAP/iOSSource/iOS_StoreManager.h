@@ -20,4 +20,11 @@
 - (void) restorePurchases;
 
 - (void) refreshReceipt;
+
+- (double) iapPromotionOrderUpdate:(NSString *)products;
+
+- (double) iapPromotionVisibilityFetch:(NSString *)identifier;
+
+- (double) iapPromotionVisibilityUpdate:(NSString *)identifier visibility:(double) visibility;
+
 @end

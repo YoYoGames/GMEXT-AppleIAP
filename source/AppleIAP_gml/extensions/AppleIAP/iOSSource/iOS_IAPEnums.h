@@ -28,4 +28,9 @@ extern const int product_period_unit_week;
 extern const int product_period_unit_month;
 extern const int product_period_unit_year;
 
+extern const int promotion_purchase;
+extern const int promotion_order_fetch;
+extern const int promotion_order_update;
+extern const int promotion_visibility_fetch;
+extern const int promotion_visibility_update;
 #endif

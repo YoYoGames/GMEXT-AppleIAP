@@ -6,7 +6,6 @@
 //
 
 #import "iOS_InAppPurchase.h"
-#import <StoreKit/StoreKit.h>
 #import "iOS_TransactionListener.h"
 #import "iOS_StoreManager.h"
 #include "iOS_IAPEnums.h"
@@ -249,6 +248,260 @@ void CreateAsyncEventWithDSMap_comaptibility_(int dsMapIndex)
     return valid == YES ? 1.0 : 0.0;
 }
 
+
+
++ (NSMutableDictionary*) product2map:(SKProduct*) product
+{
+    NSNumberFormatter* number = [[NSNumberFormatter alloc] init];
+    [number setNumberStyle:NSNumberFormatterCurrencyStyle];
+    
+#if TARGET_OS_OSX
+    NSMutableDictionary* productMap = [[NSMutableDictionary alloc] init];
+    
+    [number setLocale:[product priceLocale]];
+    NSString* price = [number stringFromNumber:[product price]];
+    productMap[@"price"] = price;
+    productMap[@"locale_localeIdentifier"] = [[product priceLocale] localeIdentifier];
+    productMap[@"localizedTitle"] = [product localizedTitle];
+    productMap[@"localizedDescription"] = [product localizedDescription];
+    productMap[@"productId"] = [product productIdentifier];
+    
+    if (@available(macOS 10.12, *)) {
+        productMap[@"locale"] = [[product priceLocale] languageCode];
+        productMap[@"locale_languageCode"] = [[product priceLocale] languageCode];
+        productMap[@"locale_countryCode"] = [[product priceLocale] countryCode];
+    }
+    
+    if (@available(macOS 10.13.2, *))
+    {
+        if ([product introductoryPrice] != nil)
+        {
+            NSMutableDictionary* introPriceMap = [[NSMutableDictionary alloc] init];
+            NSString* introPrice = [number stringFromNumber:[[product introductoryPrice] price]];
+            introPriceMap[@"price"] = introPrice;
+            introPriceMap[@"priceLocale"] = [[[product introductoryPrice] priceLocale] languageCode];
+            
+            productMap[@"introductoryPrice"] = introPriceMap;
+        }
+    }
+    
+    if (@available(macOS 10.14.4, *))
+    {
+        NSMutableArray* discounts = [[NSMutableArray alloc] init];
+        for (SKProductDiscount* discountProd in [product discounts])
+        {
+            NSMutableDictionary* discountProdMap = [[NSMutableDictionary alloc] init];
+            NSString* introPrice = [number stringFromNumber:[discountProd price]];
+            discountProdMap[@"price"] = introPrice;
+            discountProdMap[@"priceLocale"] = [[discountProd priceLocale] languageCode];
+            [discounts addObject:discountProdMap];
+        }
+        productMap[@"discounts"] = discounts;
+    }
+    
+    // Subscriptions
+    {
+        if (@available(macOS 10.13.2, *))
+        {
+            if ([product subscriptionPeriod] != nil)
+            {
+                NSMutableDictionary* subPeriodMap = [[NSMutableDictionary alloc] init];
+                NSUInteger numUnits = [[product subscriptionPeriod] numberOfUnits];
+                subPeriodMap[@"numberOfUnits"] = [NSNumber numberWithUnsignedInteger:numUnits];
+                
+                SKProductPeriodUnit unitType = [[product subscriptionPeriod] unit];
+                int yyUnitEnum = 0;
+                switch (unitType)
+                {
+                    case SKProductPeriodUnitDay:
+                        yyUnitEnum = product_period_unit_day;
+                        break;
+                    case SKProductPeriodUnitWeek:
+                        yyUnitEnum = product_period_unit_week;
+                        break;
+                    case SKProductPeriodUnitMonth:
+                        yyUnitEnum = product_period_unit_month;
+                        break;
+                    case SKProductPeriodUnitYear:
+                        yyUnitEnum = product_period_unit_year;
+                        break;
+                }
+                subPeriodMap[@"unit"] = [NSNumber numberWithInteger:yyUnitEnum];
+                productMap[@"subscriptionPeriod"] = subPeriodMap;
+            }
+        }
+        
+        if (@available(macOS 10.14.0, *))
+        {
+            if ([product subscriptionGroupIdentifier] != nil)
+            {
+                productMap[@"subscriptionGroupIdentifier"] = [product subscriptionGroupIdentifier];
+                productMap[@"downloadContentVersion"] = [product downloadContentVersion];
+                productMap[@"downloadContentLengths"] = [product downloadContentLengths];
+            }
+        }
+        
+        if (@available(macOS 10.15.0, *))
+        {
+//                productMap[@"isDownloadable"] = [NSNumber numberWithBool:[product isDownloadable]];
+        }
+    }
+#else
+    
+    NSMutableDictionary* productMap = [[NSMutableDictionary alloc] init];
+    
+    [number setLocale:[product priceLocale]];
+    NSString* price = [number stringFromNumber:[product price]];
+    productMap[@"price"] = price;
+    productMap[@"locale"] = [[product priceLocale] languageCode];
+    productMap[@"locale_localeIdentifier"] = [[product priceLocale] localeIdentifier];
+    productMap[@"locale_languageCode"] = [[product priceLocale] languageCode];
+    productMap[@"locale_countryCode"] = [[product priceLocale] countryCode];
+    productMap[@"localizedTitle"] = [product localizedTitle];
+    productMap[@"localizedDescription"] = [product localizedDescription];
+    productMap[@"productId"] = [product productIdentifier];
+    
+    productMap[@"currencyCode"] = [[product priceLocale] currencyCode];
+    productMap[@"currencySymbol"] = [[product priceLocale] currencySymbol];
+    
+    if (@available(iOS 13.0, tvOS 13.0, *))
+    {
+        //productMap[@"contentVersion"] = [product contentVersion];
+    }
+    
+    if (@available(iOS 11.2, tvOS 11.2, *))
+    {
+        if ([product introductoryPrice] != nil)
+        {
+            NSMutableDictionary* introPriceMap = [[NSMutableDictionary alloc] init];
+            NSString* introPrice = [number stringFromNumber:[[product introductoryPrice] price]];
+            introPriceMap[@"price"] = introPrice;
+            introPriceMap[@"priceLocale"] = [[[product introductoryPrice] priceLocale] languageCode];
+            
+            productMap[@"introductoryPrice"] = introPriceMap;
+        }
+    }
+    
+    if (@available(iOS 12.2, tvOS 12.2, *))
+    {
+        NSMutableArray* discounts = [[NSMutableArray alloc] init];
+        for (SKProductDiscount* discountProd in [product discounts])
+        {
+            NSMutableDictionary* discountProdMap = [[NSMutableDictionary alloc] init];
+            NSString* introPrice = [number stringFromNumber:[discountProd price]];
+            discountProdMap[@"price"] = introPrice;
+            discountProdMap[@"priceLocale"] = [[discountProd priceLocale] languageCode];
+            [discounts addObject:discountProdMap];
+        }
+        productMap[@"discounts"] = discounts;
+    }
+    
+    // Subscriptions
+    {
+        if (@available(iOS 11.2, tvOS 11.2, *))
+        {
+            if ([product subscriptionPeriod] != nil)
+            {
+                NSMutableDictionary* subPeriodMap = [[NSMutableDictionary alloc] init];
+                NSUInteger numUnits = [[product subscriptionPeriod] numberOfUnits];
+                subPeriodMap[@"numberOfUnits"] = [NSNumber numberWithUnsignedInteger:numUnits];
+                
+                SKProductPeriodUnit unitType = [[product subscriptionPeriod] unit];
+                int yyUnitEnum = 0;
+                switch (unitType)
+                {
+                    case SKProductPeriodUnitDay:
+                        yyUnitEnum = product_period_unit_day;
+                        break;
+                    case SKProductPeriodUnitWeek:
+                        yyUnitEnum = product_period_unit_week;
+                        break;
+                    case SKProductPeriodUnitMonth:
+                        yyUnitEnum = product_period_unit_month;
+                        break;
+                    case SKProductPeriodUnitYear:
+                        yyUnitEnum = product_period_unit_year;
+                        break;
+                }
+                subPeriodMap[@"unit"] = [NSNumber numberWithInteger:yyUnitEnum];
+                productMap[@"subscriptionPeriod"] = subPeriodMap;
+            }
+        }
+        
+        if (@available(iOS 12.0, tvOS 12.0, *))
+        {
+            if ([product subscriptionGroupIdentifier] != nil)
+            {
+                productMap[@"subscriptionGroupIdentifier"] = [product subscriptionGroupIdentifier];
+            }
+        }
+        
+        productMap[@"downloadContentVersion"] = [product downloadContentVersion];
+        productMap[@"downloadContentLengths"] = [product downloadContentLengths];
+        productMap[@"isDownloadable"] = [NSNumber numberWithBool:[product isDownloadable]];
+    }
+#endif
+    [number release];
+    
+    return productMap;
+}
+
+//https://developer.apple.com/documentation/storekit/skproductstorepromotioncontroller?language=objc
+
+- (void) iap_Promotion_Order_Fetch
+{
+	// - (void)fetchStorePromotionOrderWithCompletionHandler:(void (^)(NSArray<SKProduct *> *promotionOrder, NSError *error))completionHandler;
+    if (@available(iOS 11.0, tvOS 11.0, macOS 11.0, macCatalyst 14.0, *))
+    [[SKProductStorePromotionController defaultController] fetchStorePromotionOrderWithCompletionHandler:^(NSArray<SKProduct *> * _Nonnull promotionOrder, NSError * _Nullable error)
+     {
+        
+        int dsMapIndex = CreateDsMap_comaptibility_();
+        DsMapAddDouble_comaptibility_(dsMapIndex, "id", promotion_order_fetch);
+        
+        
+        
+        if(error)
+        {
+            DsMapAddDouble_comaptibility_(dsMapIndex, "success", 0.0);
+        }
+        else
+        {
+            DsMapAddDouble_comaptibility_(dsMapIndex, "success", 1.0);
+            
+            NSMutableArray *mutarray = [NSMutableArray new];
+            for(SKProduct *pro in promotionOrder)
+            {
+                [mutarray addObject:[iOS_InAppPurchase product2map:pro]];
+            }
+            
+            NSData *jsonData = [NSJSONSerialization dataWithJSONObject:mutarray options:NSJSONWritingPrettyPrinted error:&error];
+            NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+            
+            DsMapAddString_comaptibility_(dsMapIndex, "products", [jsonString UTF8String]);
+        }
+        
+        CreateAsyncEventWithDSMap_comaptibility_(dsMapIndex);
+        }
+    ];
+
+}
+
+- (double) iap_Promotion_Order_Update: products
+{
+	return [[iOS_StoreManager sharedInstance] iapPromotionOrderUpdate:products];
+}
+
+- (double) iap_Promotion_Visibility_Fetch:(NSString*) product
+{
+	return [[iOS_StoreManager sharedInstance] iapPromotionVisibilityFetch:product];
+}
+
+- (double) iap_Promotion_Visibility_Update:(NSString*) product visibility:(double) visibility
+{
+	return [[iOS_StoreManager sharedInstance] iapPromotionVisibilityUpdate:product visibility: visibility];
+}
+
+
 ///////////////////////////////////Callbacks
 - (void) Init //-(BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -339,9 +592,36 @@ YYEXPORT void /*- (double)*/ iap_ValidateReceipt(RValue& Result, CInstance* self
     Result.val = [mac iap_ValidateReceipt];
 }
 
-YYEXPORT void /*- (NSString*)*/ ext_test_str(RValue& Result, CInstance* selfinst, CInstance* otherinst, int argc, RValue* arg)//
+YYEXPORT void /*- (void)*/ iap_Promotion_Order_Fetch(RValue& Result, CInstance* selfinst, CInstance* otherinst, int argc, RValue* arg)//
 {
-    YYCreateString(&Result, "Hello IAPs");
+    // Result.kind = VALUE_REAL;
+    // Result.val = 
+	[mac iap_Promotion_Order_Fetch];
+}
+
+YYEXPORT void /*- (double)*/ iap_Promotion_Order_Update(RValue& Result, CInstance* selfinst, CInstance* otherinst, int argc, RValue* arg)//: products
+{
+	const char* products = YYGetString(arg, 0);
+
+    Result.kind = VALUE_REAL;
+    Result.val = [mac iapPromotionOrderUpdate:[products UTF]];
+}
+
+YYEXPORT void /*- (double)*/ iap_Promotion_Visibility_Fetch(RValue& Result, CInstance* selfinst, CInstance* otherinst, int argc, RValue* arg)//:(NSString*) product
+{
+	const char* product = YYGetString(arg, 0);
+
+    Result.kind = VALUE_REAL;
+    Result.val = [mac iapPromotionVisibilityFetch:@(product)];
+}
+
+YYEXPORT void /*- (double)*/ iap_Promotion_Visibility_Update(RValue& Result, CInstance* selfinst, CInstance* otherinst, int argc, RValue* arg)//:(NSString*) product visibility:(double) visibility
+{
+	const char* product = YYGetString(arg, 0);
+	double visibility = YYGetReal(arg, 1);
+
+    Result.kind = VALUE_REAL;
+    Result.val = [mac iapPromotionVisibilityUpdate:@(product) visibility: visibility];
 }
 
 #endif
