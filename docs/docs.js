@@ -267,12 +267,7 @@ The `HandlePurchases` function is a custom function that handles the purchases o
  * @param {string} purchase_token The purchase token returned by the purchase request.
  * 
  * @example
- * For examples of using this function, please see: 
- * 
- * * ${function.iap_QueryPurchases}
- * * ${function.iap_PurchaseProduct}
- * * ${function.iap_RestorePurchases}
- * 
+ * For examples of using this function, please see the `HandlePurchases` function in the demo project.
  * @function_end
  */
 
@@ -540,15 +535,16 @@ The `HandlePurchases` function is a custom function that handles the purchases o
  *
  * It is worth noting that in some cases the function description will mention the use of a private server to verify purchases. This is not strictly required, as the extension supplies a verification method that verifies purchases locally with Apple, and purchases can be made and finalised even without server verification. However, YoYo Games and Apple both highly recommend private server verification for all IAPs. Setting up the server to deal with purchase verification is outside of the scope of this documentation and, instead, we refer you to the Apple docs here:
  * 
- * [Apple Developer Docs: Validating receipts on the device](https://developer.apple.com/documentation/appstorereceipts/validating_receipts_on_the_device#//apple_ref/doc/uid/TP40010573-CH1-SW2)
- * [Apple Developer Docs: Validating receipts with the App Store](https://developer.apple.com/documentation/storekit/in-app_purchase/original_api_for_in-app_purchase/validating_receipts_with_the_app_store#//apple_ref/doc/uid/TP40010573-CH104-SW1)
+ * > [Apple Developer Docs: Validating receipts on the device](https://developer.apple.com/documentation/appstorereceipts/validating_receipts_on_the_device#//apple_ref/doc/uid/TP40010573-CH1-SW2)
+ * > 
+ * > [Apple Developer Docs: Validating receipts with the App Store](https://developer.apple.com/documentation/storekit/in-app_purchase/original_api_for_in-app_purchase/validating_receipts_with_the_app_store#//apple_ref/doc/uid/TP40010573-CH104-SW1)
  * 
  * [[IMPORTANT: In order for the function ${function.iap_ValidateReceipt} to return a `true` response, users must download the Apple Inc. Root Certificate and include it with their project in the [Included Files](https://manual.gamemaker.io/monthly/en/Settings/Included_Files.htm) (using included files covers iOS/tvOS and macOS). See:
  * 
  * * https://www.apple.com/certificateauthority/
  * * https://www.apple.com/appleca/AppleIncRootCertificate.cer
  * 
- * Please see [Validation](workflow#validation) for more information.]]
+ * Please see [Validating](workflow#validating) for more information.]]
  * 
  * @section_func Functions
  * @desc These are the general functions of the extension.
