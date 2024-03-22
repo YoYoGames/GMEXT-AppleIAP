@@ -4,7 +4,7 @@
 
 In this guide we'll be looking at how to set up things in the App Store to allow for **In-App Purchases (IAP)** in your macOS, iOS and tvOS apps for the App Store.
 
-> The methods shown in this guide require GameMaker 2.2.4 runtimes or newer, plus this Apple IAP extension. If you're using 2.2.3 runtimes (or older) you will need to update and ensure you have the correct extension in your project before you can follow this guide.
+[[Warning: You need to make sure to use the right version of the extension. Information on it can be found in the release info.]]
 
 Before continuing, you should have already set up and tested that the exports are working and have a test project or finished game that you want to add IAPs to. You can find out how to set up GameMaker for the different supported platforms here:
 
