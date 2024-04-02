@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "__macros__",
-  "isCompatibility": false,
-  "isDnD": false,
-  "parent": {
-    "name": "AppleIAP",
-    "path": "AppleIAP.yyp",
+  "$GMScript":"",
+  "%Name":"__macros__",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"__macros__",
+  "parent":{
+    "name":"AppleIAP",
+    "path":"AppleIAP.yyp",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }

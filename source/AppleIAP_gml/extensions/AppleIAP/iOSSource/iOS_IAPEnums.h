@@ -22,6 +22,8 @@ extern const int product_update;
 extern const int receipt_refresh;
 extern const int receipt_refresh_success;
 extern const int receipt_refresh_failure;
+extern const int restore_success;
+extern const int restore_failed;
 
 extern const int product_period_unit_day;
 extern const int product_period_unit_week;

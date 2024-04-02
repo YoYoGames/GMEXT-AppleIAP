@@ -19,6 +19,8 @@ const int purchase_failed               = 23002;
 const int purchase_restored             = 23003;
 const int product_update                = 23004;
 const int receipt_refresh               = 23005;
+const int restore_success               = 23006;
+const int restore_failed                = 23007;
 
 const int receipt_refresh_success       = 22500;
 const int receipt_refresh_failure       = 22501;

@@ -132,6 +132,19 @@ switch(async_load[?"id"])
 			{}
 			show_message_async(json_encode(async_load))
 		break;
+		
+		
+		case ios_restore_success:
+			//Trigered by iap_RestorePurchases();
+			show_debug_message("Restore Request Success")
+		break
+		
+		case ios_restore_failed:
+			//Trigered by iap_RestorePurchases();
+			show_debug_message("Restore Request Failed")
+		break
+		
+		
 }
 
 

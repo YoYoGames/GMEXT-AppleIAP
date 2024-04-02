@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "Scr_IAPs_getRenewalActive",
-  "isCompatibility": false,
-  "isDnD": false,
-  "parent": {
-    "name": "xExtra",
-    "path": "folders/xExtra.yy",
+  "$GMScript":"",
+  "%Name":"Scr_IAPs_getRenewalActive",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"Scr_IAPs_getRenewalActive",
+  "parent":{
+    "name":"xExtra",
+    "path":"folders/xExtra.yy",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }

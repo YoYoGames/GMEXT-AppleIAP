@@ -80,6 +80,26 @@ const int EVENT_OTHER_WEB_IAP = 66;
     CreateAsyncEventWithDSMap_comaptibility_(dsMapIndex);
 }
 
+- (void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue
+{
+    char jId[3];
+    sprintf(jId, "id");
+
+    int dsMapIndex = CreateDsMap_comaptibility_();
+    DsMapAddDouble_comaptibility_(dsMapIndex, jId, restore_success);
+    CreateAsyncEventWithDSMap_comaptibility_(dsMapIndex);
+}
+
+- (void)paymentQueue:(SKPaymentQueue *)queue restoreCompletedTransactionsFailedWithError:(NSError *)error
+{
+    char jId[3];
+    sprintf(jId, "id");
+
+    int dsMapIndex = CreateDsMap_comaptibility_();
+    DsMapAddDouble_comaptibility_(dsMapIndex, jId, restore_failed);
+    CreateAsyncEventWithDSMap_comaptibility_(dsMapIndex);
+}
+
 - (NSString*) parsePaymentTransactionsIntoJson:(nonnull NSArray<SKPaymentTransaction*>*)transactions
 {
     NSMutableArray* jsonTransactions = [[NSMutableArray alloc] initWithCapacity:transactions.count];

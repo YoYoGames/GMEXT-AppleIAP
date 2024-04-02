@@ -1,6 +1,6 @@
 {
-  "FolderOrderSettings": [],
-  "ResourceOrderSettings": [
+  "FolderOrderSettings":[],
+  "ResourceOrderSettings":[
     {"name":"RequestServerValidation","order":4,"path":"scripts/RequestServerValidation/RequestServerValidation.yy",},
     {"name":"HandlePurchases","order":5,"path":"scripts/HandlePurchases/HandlePurchases.yy",},
     {"name":"Font_YoYo_20","order":1,"path":"fonts/Font_YoYo_20/Font_YoYo_20.yy",},
