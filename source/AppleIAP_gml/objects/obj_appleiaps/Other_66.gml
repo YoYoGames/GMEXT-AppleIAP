@@ -5,7 +5,7 @@ show_debug_message("Async Apple IAPs: " + json_encode(async_load));
 switch(async_load[?"id"])
 {
 	/// ############### QUERY PRODUCTS ###############
-	case ios_product_update:
+	case iap_product_update:
 	//case mac_product_update:
 
 		show_debug_message("[INFO] Query Products Callback");
@@ -18,7 +18,7 @@ switch(async_load[?"id"])
 		break;
 	
 	/// ############### PURCHASE PRODUCT ###############
-	case ios_payment_queue_update:
+	case iap_payment_queue_update:
 	//case mac_payment_queue_update:
 
 		show_debug_message("[INFO] Purchase Product Callback");
@@ -62,7 +62,7 @@ switch(async_load[?"id"])
 		}
 		break;
 		
-	case ios_receipt_refresh:
+	case iap_receipt_refresh:
 	//case mac_receipt_refresh:
 
 		if (!waitingRefreh) exit;
@@ -79,13 +79,13 @@ switch(async_load[?"id"])
 		var _purchases = _purchasesData.purchases;
 		
 		// We succeeded to refresh the receipt (and it is valid)
-		if (_status == ios_receipt_refresh_success && iap_ValidateReceipt()) {
+		if (_status == iap_receipt_refresh_success && iap_ValidateReceipt()) {
 			
 			// We can handle how purchases
 			HandlePurchases(_purchases, true);
 		}
 		// We failed to refresh the receipt
-		else if (_status == ios_receipt_refresh_failure) {
+		else if (_status == iap_receipt_refresh_failure) {
 		
 			// We force finish all the pending transactions
 			for(var _n = 0; _n < array_length(_purchases); _n++) {
@@ -98,11 +98,11 @@ switch(async_load[?"id"])
 		}
 		break;
 		
-		case ios_promotion_purchase:
+		case iap_promotion_purchase:
 			var product = async_load[?"product"]
 		break;
 		
-		case ios_promotion_order_fetch:
+		case iap_promotion_order_fetch:
 			
 			if(async_load[?"success"])
 			{
@@ -110,14 +110,14 @@ switch(async_load[?"id"])
 			}
 		break;
 		
-		case ios_promotion_order_update:
+		case iap_promotion_order_update:
 			
 			if(async_load[?"success"])
 			{}
 			
 		break;
 		
-		case ios_promotion_visibility_fetch:
+		case iap_promotion_visibility_fetch:
 			
 			if(async_load[?"success"])
 			{
@@ -126,7 +126,7 @@ switch(async_load[?"id"])
 			}
 		break;
 		
-		case ios_promotion_visibility_update:
+		case iap_promotion_visibility_update:
 			
 			if(async_load[?"success"])
 			{}
@@ -134,12 +134,12 @@ switch(async_load[?"id"])
 		break;
 		
 		
-		case ios_restore_success:
+		case iap_restore_success:
 			//Trigered by iap_RestorePurchases();
 			show_debug_message("Restore Request Success")
 		break
 		
-		case ios_restore_failed:
+		case iap_restore_failed:
 			//Trigered by iap_RestorePurchases();
 			show_debug_message("Restore Request Failed")
 		break

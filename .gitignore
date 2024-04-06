@@ -67,4 +67,5 @@ fastlane/test_output
 
 iOSInjectionProject/
 
+source/AppleIAP_gml/options/extensions/
 output/

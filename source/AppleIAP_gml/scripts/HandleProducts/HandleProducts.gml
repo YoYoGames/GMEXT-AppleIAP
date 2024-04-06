@@ -21,13 +21,11 @@ function HandleProducts(_products) {
 		show_debug_message("valid prouduct: " + string(_product.productId))
 	
 		_dataLookup[$ _productId] = {
-	
 			price: _product.price,
 			localizedTitle: _product.localizedTitle,
 			localizedDescription: _product.localizedDescription,
-			currencyCode: variable_struct_exists(_product, "currencyCode") ? _product.currencyCode : "", // Only available on iOS
-			currencySymbol: variable_struct_exists(_product, "currencySymbol") ? _product.currencySymbol : "", // Only available on iOS
-	
+			currencyCode: _product.currencyCode,
+			currencySymbol: _product.currencySymbol
 		}
 	}
 
@@ -36,7 +34,7 @@ function HandleProducts(_products) {
 		
 		var _data = _dataLookup[$ productId];
 	
-		// If thre is no data skip element
+		// If there is no data skip element
 		if (!is_struct(_data)) continue;
 	
 		price = _data.price;

@@ -265,6 +265,8 @@ void CreateAsyncEventWithDSMap_comaptibility_(int dsMapIndex)
     productMap[@"localizedTitle"] = [product localizedTitle];
     productMap[@"localizedDescription"] = [product localizedDescription];
     productMap[@"productId"] = [product productIdentifier];
+    productMap[@"currencyCode"] = [[product priceLocale] currencyCode];
+    productMap[@"currencySymbol"] = [[product priceLocale] currencySymbol];
     
     if (@available(macOS 10.12, *)) {
         productMap[@"locale"] = [[product priceLocale] languageCode];
@@ -360,7 +362,6 @@ void CreateAsyncEventWithDSMap_comaptibility_(int dsMapIndex)
     productMap[@"localizedTitle"] = [product localizedTitle];
     productMap[@"localizedDescription"] = [product localizedDescription];
     productMap[@"productId"] = [product productIdentifier];
-    
     productMap[@"currencyCode"] = [[product priceLocale] currencyCode];
     productMap[@"currencySymbol"] = [[product priceLocale] currencySymbol];
     

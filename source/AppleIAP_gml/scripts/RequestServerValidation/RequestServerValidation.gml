@@ -14,7 +14,7 @@ function RequestServerValidation(_receipt) {
 	_data[$ "receipt-data"] = _receipt;
 	
 	// Password: My Apps -> Select My App -> In-App Purchases -> App-Specific Share Secret
-	_data[$ "password"] = APP_SHARED_SECRET;
+	_data[$ "password"] = extension_get_option_value("AppleIAP", "appSharedSecret");
 	
 	// Optional: Use only for subscriptions
 	_data[$ "exclude-old-transactions"] = true;
