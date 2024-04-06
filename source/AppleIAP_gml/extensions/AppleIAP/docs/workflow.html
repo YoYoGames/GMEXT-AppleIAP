@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="img/favicon.ico" />
+    <title>Workflow - GMEXT-AppleIAP</title>
+    <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+        <link href="assets/css/gmext_style.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Workflow";
+        var mkdocs_page_input_path = "workflow.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/gml.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="." class="icon icon-home"> GMEXT-AppleIAP
+        </a>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="home.html">AppleIAP Extension</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="setup.html">Setting Up</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="workflow.html">Workflow</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#the-asynchronous-iap-event">The Asynchronous IAP Event</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#initialising-in-app-purchases">Initialising In-App Purchases</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#purchasing-products">Purchasing Products</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#initialising-your-iaps">Initialising Your IAPs</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#product-queries">Product Queries</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#purchase-queries">Purchase Queries</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#restoring-purchases">Restoring Purchases</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#making-a-purchase">Making a Purchase</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#validating">Validating</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#local-validation">Local Validation</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#finalising-purchase-requests">Finalising Purchase Requests</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#cancelled-purchases">Cancelled Purchases</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="general.html">General</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="promotions.html">Promotions</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href=".">GMEXT-AppleIAP</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Workflow</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/YoYoGames/GMEXT-AppleIAP/edit/master/docs/workflow.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="workflow">Workflow</h1>
+<p>This page describes the workflow when using the Apple In-App Purchases extension.</p>
+<p>The workflow consists of the following main parts:</p>
+<ul>
+<li><a href="#initialising-in-app-purchases.md">Initialising In-App Purchases</a></li>
+<li><a href="#purchasing-products.md">Purchasing Products</a></li>
+</ul>
+<h3 id="the-asynchronous-iap-event">The Asynchronous IAP Event</h3>
+<p>When using the Apple IAP extension in your projects, you will be calling different functions that will trigger "callbacks" from the Apple API. What this means is that certain functions will be run but won't return a result until sometime in the future - which could be the next step, or it could be a few seconds later. This result, when it comes, is called the "callback" and is Apple's IAP API responding to something you've done. This callback is dealt with in the <a href="https://manual.gamemaker.io/monthly/en/The_Asset_Editors/Object_Properties/Async_Events/IAP.htm">In-App Purchase Async Event</a>. This event will always have a DS map in the GML variable <a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Variables/Builtin_Global_Variables/async_load.htm">async_load</a>, and this map can be parsed to get the required information. Each function will generate different callbacks, but they will all have the <code>"id"</code> key in common:</p>
+<blockquote>
+<p>The <code>"id"</code> key holds an <a href="general.html#iap_event_id">iap_event_id</a> constant with the ID of the event that has been triggered. For example, if it's an event for a product query, then the constant will be <code>iap_product_update</code>.</p>
+</blockquote>
+<p>The rest of the key/value pairs in the map depends on the function that triggered the Async Event and the ID of the event, and you should check the individual functions listed in the rest of this manual for exact details.</p>
+<h2 id="initialising-in-app-purchases">Initialising In-App Purchases</h2>
+<ol>
+<li>At the start of the game, initialise the extension with a call to <a href="general.html#iap_init">iap_Init</a>.</li>
+<li>Next, check if the user is authorised to buy in-app products using <a href="general.html#iap_isauthorisedforpayment">iap_IsAuthorisedForPayment</a>.</li>
+<li>If they are not, disable the possibility for purchases in your game's UI and code.</li>
+<li>If purchases <em>are</em> permitted, add the different products to the internal products list using <a href="general.html#iap_addproduct">iap_AddProduct</a> and - if required - query product details using <a href="general.html#iap_queryproducts">iap_QueryProducts</a>. See <a href="#product-queries.md">Product Queries</a>.</li>
+<li>After adding the products but before accepting purchases, query existing purchases using <a href="general.html#iap_querypurchases">iap_QueryPurchases</a>. If there are any unfinished transactions then deal with them, and enable any features based on durable or subscription transactions. For an example on how to do this, see the <code>HandleProducts</code> function in the demo project.</li>
+<li>Permit the game to run as normal and let the user purchase/consume products as required, verifying each purchase, then querying them, and then finalising them. See <a href="#purchasing-products.md">Purchasing Products</a>.</li>
+<li>Store non-consumable and subscription purchases on your server so they can be checked when the game starts (or store them securely locally, but a server is recommended).</li>
+<li>Ensure that the game has a "Restore Purchases" button, in case of a change of device or anything of that nature.</li>
+</ol>
+<blockquote>
+<p>Important</p>
+<p>With the Apple Purchase API there is no function or method for consuming a consumable IAP, therefore all consumables must be given to the user the moment the purchase receipt is validated.</p>
+</blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Apple wants ALL purchase requests to be "finalised", regardless of whether the purchase was actually a success or not (see the function <a href="general.html#iap_finishtransaction">iap_FinishTransaction</a> for more details).</p>
+</div>
+<h2 id="purchasing-products">Purchasing Products</h2>
+<ol>
+<li>Call <a href="general.html#iap_purchaseproduct">iap_PurchaseProduct</a> to purchase a product.</li>
+<li>In the <a href="https://manual.gamemaker.io/monthly/en/The_Asset_Editors/Object_Properties/Async_Events/IAP.htm">In-App Purchase Async Event</a>, check for the event type <code>iap_payment_queue_update</code>.</li>
+<li>Validate the receipt using <a href="general.html#iap_validatereceipt">iap_ValidateReceipt</a>.</li>
+<li>If the receipt isn't valid, refresh the receipt using <a href="general.html#iap_refreshreceipt">iap_RefreshReceipt</a>.<ul>
+<li>Listen to the <a href="https://manual.gamemaker.io/monthly/en/The_Asset_Editors/Object_Properties/Async_Events/IAP.htm">In-App Purchase Async Event</a> of type <code>iap_receipt_refresh</code>.</li>
+<li>If the status is <code>iap_receipt_refresh_success</code>, validate the receipt using <a href="general.html#iap_validatereceipt">iap_ValidateReceipt</a>.</li>
+<li>If the receipt isn't valid then finish the transaction with <a href="general.html#iap_finishtransaction">iap_FinishTransaction</a>.</li>
+<li>Handle the purchases with a function such as <code>HandlePurchases</code>.</li>
+</ul>
+</li>
+<li>Do the server validation (as shown for example in the script asset <code>RequestServerValidation</code>).</li>
+<li>If the status value is different from 0, the purchase is invalid.</li>
+<li>Is the status is okay, handle the products similar to the function <code>HandleProducts</code>.</li>
+</ol>
+<h2 id="initialising-your-iaps">Initialising Your IAPs</h2>
+<p>When dealing with IAPs we recommend that you have a dedicated, persistent, controller instance that deals with all the initialisation as well as the callback <a href="https://manual.gamemaker.io/monthly/en/The_Asset_Editors/Object_Properties/Async_Events/IAP.htm">In-App Purchase Async Event</a> that the different functions generate. This keeps it all in one place and you only need to add purchase functions to buttons and things for the player to interact with. This article builds on this premise, however you don't have to do it this way if that's not appropriate to your project.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This article will <strong>not</strong> detail all the different returns or async callbacks in detail, but will instead concentrate on the approximate workflow and general code required to set up IAPs on macOS, iOS and tvOS. For more complete information about what each function does, please see the function reference.</p>
+</div>
+<p>To start with, you'll need to initialise the IAPs that you want to be available in your game, and this should be done right at the start of the game in the <strong>Create Event</strong> of the controller object. You want to accompany this with a check to see if the device is enabled to permit purchases too, as it is possible that the device has had this disabled (for children or whatever):</p>
+<pre class="highlight"><code class="language-gml">/// Create Event - Controller object
+#macro iap_consumable "yyg_iap_100gems"
+#macro iap_nonconsumable "yyg_iap_noads"
+#macro iap_renewablesub "yyg_iap_monthlysub"
+#macro iap_nonrenewablesub "yyg_iap_yearpromosub"
+
+iap_Init();
+
+iap_enabled = false;
+if (!iap_IsAuthorisedForPayment()) { exit; }
+
+iap_enabled = true;
+
+iap_AddProduct(iap_consumable);
+iap_AddProduct(iap_nonconsumable);
+iap_AddProduct(iap_renewablesub);
+iap_AddProduct(iap_nonrenewablesub);
+iap_QueryProducts();</code></pre>
+<p>You'll notice that we first add macros for the product IDs, then initialise the extension using <a href="general.html#iap_init">iap_Init</a> and, after that, check for the availability of purchasing using <a href="general.html#iap_isauthorisedforpayment">iap_IsAuthorisedForPayment</a>. If that returns <code>true</code>, we go ahead and add our products to the internal list and then fire off a product query. If it returns <code>false</code>, then you can disable IAPs in the game, as the user won't be able to purchase anything (and, indeed, Apple insists that you do this).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We have used <a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Variables/Constants.htm#macros">macros</a> here to store product IDs. This is not required and you can store your product IDs as you wish, using <a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Variables/Global_Variables.htm">Global Variables</a> or <a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Arrays.htm">Arrays</a> for example.</p>
+</div>
+<h2 id="product-queries">Product Queries</h2>
+<p>Querying your products is not essential, however doing so means that you can then display up-to-date and localised information about them in your game, rather than hard-coding them. When you send off a product query request it will trigger an <a href="https://manual.gamemaker.io/monthly/en/The_Asset_Editors/Object_Properties/Async_Events/IAP.htm">In-App Purchase Async Event</a> where the DS map <a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Variables/Builtin_Global_Variables/async_load.htm">async_load</a> will have an <code>"id"</code> key with the constant <code>iap_product_update</code> as the value. This would be dealt with in the Async Event something like this:</p>
+<pre class="highlight"><code class="language-gml">/// Async IAP Event
+switch(async_load[?"id"])
+{
+    case ios_product_update:
+
+        show_debug_message("[INFO] Query Products Callback");
+
+        var _response_json = async_load[?"response_json"];
+        if (_response_json == "") { exit; }
+
+        var _response_data = json_parse(_response_json);
+        HandleProducts(_response_data);
+        break;
+}
+
+function HandleProducts(_products) {
+
+    var _invalidArray = _products.invalid;
+    for (var _i = 0; _i &lt; array_length(_invalidArray); ++_i)
+    {
+        var _sku = _invalidArray[_i];
+        show_debug_message("[WARNING] Invalid SKU: " + string(_sku));
+    }
+
+    // Variable used as a lookup for storing product data
+    var _dataLookup = {};
+
+    var _validArray = _products.valid;
+    for (var _i = 0; _i &lt; array_length(_validArray); ++_i)
+    {
+        var _product = _validArray[_i];
+        var _productId = _product.productId;
+
+        show_debug_message("valid prouduct: " + string(_product.productId));
+
+        _dataLookup[$ _productId] = {
+
+            price: _product.price,
+            localizedTitle: _product.localizedTitle,
+            localizedDescription: _product.localizedDescription,
+            currencyCode: variable_struct_exists(_product, "currencyCode") ? _product.currencyCode : "",
+            currencySymbol: variable_struct_exists(_product, "currencySymbol") ? _product.currencySymbol : ""
+        }
+    }
+
+    // Apply the stored data to instances here
+    // ...
+}</code></pre>
+<h2 id="purchase-queries">Purchase Queries</h2>
+<p>It may be that the game was closed before a purchase could be completed, or something went wrong or even that the user has changed devices while a purchase was in progress. To deal with those - and other - potential issues, you must query ongoing purchases at the start of your game too. This is done with the function <a href="general.html#iap_querypurchases">iap_QueryPurchases</a>, and should be done after initialising the IAPs in the <a href="https://manual.gamemaker.io/monthly/en/The_Asset_Editors/Object_Properties/Object_Events.htm">Create Event</a>, or after querying product details in the <a href="https://manual.gamemaker.io/monthly/en/The_Asset_Editors/Object_Properties/Async_Events/IAP.htm">In-App Purchase Async Event</a>.</p>
+<p>The purchase query function will <em>not</em> generate an async event callback, but will instead immediately return the outstanding purchase requests which can be dealt with something like this:</p>
+<pre class="highlight"><code class="language-gml">var _purchases_json = iap_QueryPurchases();
+if (_purchases_json != "")
+{
+    var _purchases_data = json_parse(_purchases_json);
+    var _purchases = _purchases_data.purchases;
+
+    HandlePurchases(_purchases, true);
+}</code></pre>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Before awarding anything to the user we attempt to <strong>validate</strong> the purchases. This can be done through a server (recommended) or through local validation. If validation fails, you should NOT continue to check further purchases and instead break the loop and re-check the validation by refreshing the receipt. This is discussed in more detail further on.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>ALL purchase queries must be finalised, whether they are awarded or not, or whether the purchase succeeded or not (but NOT when the validation has failed). Again, we discuss finalising purchases in more detail further on.</p>
+</div>
+<h2 id="restoring-purchases">Restoring Purchases</h2>
+<p>Apple's rules state that you must have a button in your game to restore purchases, and to do this you would call the function <a href="general.html#iap_restorepurchases">iap_RestorePurchases</a>. This will trigger an <a href="https://manual.gamemaker.io/monthly/en/The_Asset_Editors/Object_Properties/Async_Events/IAP.htm">In-App Purchase Async Event</a> where the <a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Variables/Builtin_Global_Variables/async_load.htm">async_load</a> map has the <code>"id"</code> constant <code>iap_payment_queue_update</code>. See the code example of <a href="general.html#iap_restorepurchases">iap_RestorePurchases</a> for an example on how to check this in the <a href="https://manual.gamemaker.io/monthly/en/The_Asset_Editors/Object_Properties/Async_Events/IAP.htm">In-App Purchase Async Event</a>.</p>
+<h2 id="making-a-purchase">Making a Purchase</h2>
+<p>To make a purchase of a product, you must call the function <a href="general.html#iap_purchaseproduct">iap_PurchaseProduct</a>, e.g.:</p>
+<pre class="highlight"><code class="language-gml">iap_PurchaseProduct(product_id);</code></pre>
+<p>This function will generate an <a href="https://manual.gamemaker.io/monthly/en/The_Asset_Editors/Object_Properties/Async_Events/IAP.htm">In-App Purchase Async Event</a> of ID (or type) <code>iap_payment_queue_update</code>. This can then be processed in the exact same way as outlined above in the section on <a href="#restoring-purchases.md">Restoring Purchases</a>, as the async callback is identical.</p>
+<h2 id="validating">Validating</h2>
+<p>Before awarding and finalising any purchases, they must first be <strong>validated</strong>. Apple recommends that you do this with a private server but there is also a function to validate locally, but this is slightly less secure and requires you to include a <strong>Root Certificate</strong> with your game (see the section on <a href="#setting-up-your-game.md">Setting Up Your Game</a> for more details). The general workflow for validating using the two methods would be:</p>
+<ul>
+<li><strong>Server</strong>: When a purchase or restore event is triggered, you would get the purchase receipt (using the function <a href="general.html#iap_getreceipt">iap_GetReceipt</a>) and then send that off to your server using one of the <a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Reference/Asynchronous_Functions/HTTP/HTTP.htm">http_*() functions</a>. This would then validate the purchase with Apple and send a response back. This response would then be dealt with in the <a href="https://manual.gamemaker.io/monthly/en/The_Asset_Editors/Object_Properties/Async_Events/HTTP.htm">Http Async Event</a>, where you would then award the user the product they've bought or enable any features it unlocked. You would also store these details on your server so the game can check on restart any purchases or subscriptions. For more information, please see the <a href="https://developer.apple.com/documentation/appstorereceipts">Apple Documentation</a>.</li>
+<li><strong>Local</strong>: To validate locally, you must first call the function <a href="general.html#iap_getreceipt">iap_GetReceipt</a> to retrieve the receipt file, and then call the function <a href="general.html#iap_validatereceipt">iap_ValidateReceipt</a>. If that returns <code>true</code> then you can award products and unlock features as required. This would then be securely stored to a file so that on game restart it can be checked and all features or items be unlocked correctly.</li>
+</ul>
+<p>If validation fails you can re-check again by requesting a new receipt with the function <a href="general.html#iap_refreshreceipt">iap_RefreshReceipt</a>. This will trigger an <a href="https://manual.gamemaker.io/monthly/en/The_Asset_Editors/Object_Properties/Async_Events/IAP.htm">In-App Purchase Async Event</a>, and in this event the <a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Variables/Builtin_Global_Variables/async_load.htm">async_load</a> DS map <code>"id"</code> key will be the constant <code>iap_receipt_refresh</code>. It will also have an additional key <code>"status"</code>, which will be one of two constants: <code>iap_receipt_refresh_success</code> or <code>iap_receipt_refresh_failure</code>. If the refresh is successful, you can then retrieve the new receipt using the <a href="general.html#iap_getreceipt">iap_GetReceipt</a> function and go ahead and validate as before, but if it fails then you may want to try again at least once before deciding that something is wrong.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Failing validation is a rare occurrence and is very indicative that there is something unauthorised going on with the request. As such, you may want to consider locking down and preventing any further purchases – or at least not granting the products that were being validated – should validation fail 2 or more times. Any outstanding purchases should still be finalised at this time.</p>
+</div>
+<h3 id="local-validation">Local Validation</h3>
+<p>This extension includes a method of validating in-app purchases that does not require the setting up or use of external servers. However, the extension code also includes a warning about the potential for hacking intrinsic to this method of validation. This warning is in place as a means of highlighting the sensitive nature of the Receipt Validation code which is based on an open-source repository (and is credited as such).</p>
+<p>The intention of the inclusion of local receipt validation was to give you (the user) a means of allowing your project to get IAP code running quickly and be easily testable.</p>
+<p>It should be understood, however, that <strong>there is risk involved with running it in production</strong>. Since the source code is open source and is widely available and readable, using this code will make your receipt validation more vulnerable to potential attackers, and Apple themselves state that "it's important that you employ a solution that is unique to your application":</p>
+<blockquote>
+<p>https://developer.apple.com/library/archive/releasenotes/General/ValidateAppStoreReceipt/Introduction.html</p>
+</blockquote>
+<p>In this case, your available options are as follows:</p>
+<ul>
+<li>Leave this code in place and use local validation, having assessed and understood the risks.</li>
+<li>Alter the code in question (<code>VerifyStoreReceipt.h</code>/<code>VerifyStoreReceipt.mm</code>) to create your own custom solution for validating receipts, in which case you should study the following documentation: <a href="https://developer.apple.com/documentation/appstorereceipts/validating_receipts_on_the_device#//apple_ref/doc/uid/TP40010573-CH1-SW2">Validating receipts on the device</a>. In doing so, you should create your own solution for parsing and validating the iOS IAP receipt.</li>
+<li>Validate the receipt with the Apple App Store using the apple endpoints (not recommended) as described in the documentation: <a href="https://developer.apple.com/documentation/storekit/in-app_purchase/original_api_for_in-app_purchase/validating_receipts_with_the_app_store?language=objc">Validating receipts with the App Store</a>. If you decide to do so please refer to the function <code>RequestServerValidation</code> on the demo project, for an implementation example.</li>
+<li>Run a server that validates IAP receipts. This is Apple's preferred and suggested method, as it removes the ability for tampered-with iOS devices to spoof your validation code (since it is not executed on said compromised device).</li>
+</ul>
+<h2 id="finalising-purchase-requests">Finalising Purchase Requests</h2>
+<p>After making any purchase, it must be validated and finalised using the function <a href="general.html#iap_finishtransaction">iap_FinishTransaction</a>. Finalising a purchase removes it from the purchase queue and tells Apple that the transaction has been completed in one way or another, and this must be done <strong>regardless of whether the purchase was a success or a failure</strong>. When we talk about success or failure, we are referring to the <em>purchase status</em> as returned as part of the response data from a purchase query, a restore request, or a purchase request, and not to validation failure or anything else.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you do not finalise a purchase then the user will not be able to buy that product again.</p>
+</div>
+<h2 id="cancelled-purchases">Cancelled Purchases</h2>
+<p>If at any time during the product/subscription purchase you cancel and give up on buying the product, this will result in an <a href="https://manual.gamemaker.io/monthly/en/The_Asset_Editors/Object_Properties/Async_Events/IAP.htm">In-App Purchase Async Event</a> of type <code>iap_payment_queue_update</code>.</p>
+<p>More information is provided in the <code>"response_json"</code> key. You can get this information from parsing the string using <a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Reference/File_Handling/Encoding_And_Hashing/json_parse.htm">json_parse</a>, which returns a <a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Structs.htm">Struct</a>:</p>
+<ul>
+<li>"response_data" – This is just a container DS map/struct, decoded or parsed from the JSON string in <code>"response_json"</code>, with the following entries:</li>
+<li>"cancelled" – This will be represented by a <a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Data_Types.htm">Boolean</a> and will always contain a <code>true</code> value (1, one) stored within.</li>
+<li>"product" – To help identify which purchase was cancelled the product ID is also returned and presented inside this field.</li>
+</ul>
+<p>In your code you should check if the "cancelled" key is present. If it is, you can add code to handle this situation:</p>
+<pre class="highlight"><code class="language-gml">switch(async_load[?"id"])
+{
+    case iap_payment_queue_update:
+
+        show_debug_message("[INFO] Purchase Product Callback");
+
+        var _response_json = async_load[?"response_json"];
+        if (_response_json == "") { exit; }
+
+        var _response_data = json_parse(_response_json);
+
+        if(variable_struct_exists(_responseData,"cancelled") &amp;&amp; _responseData.cancelled)
+        {
+      // This event was triggered for a cancelled purchase
+      //The user closed the popup
+            show_debug_message($"Buy Cancelled: {_responseData.product}");
+            return;
+        }
+
+    // This event wasn't triggered for a cancelled purchase =&gt; continue processing it
+}</code></pre>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="setup.html" class="btn btn-neutral float-left" title="Setting Up"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="general.html" class="btn btn-neutral float-right" title="General">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>YoYoGames 2024</p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/YoYoGames/GMEXT-AppleIAP" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="setup.html" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="general.html" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = ".";</script>
+    <script src="js/theme_extra.js"></script>
+    <script src="js/theme.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/gml.min.js"></script>
+      <script src="assets/js/gmext_script.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

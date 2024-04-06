@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="img/favicon.ico" />
+    <title>Setting Up - GMEXT-AppleIAP</title>
+    <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+        <link href="assets/css/gmext_style.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Setting Up";
+        var mkdocs_page_input_path = "setup.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/gml.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="." class="icon icon-home"> GMEXT-AppleIAP
+        </a>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="home.html">AppleIAP Extension</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="setup.html">Setting Up</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#setting-up-the-app-id">Setting Up The App ID</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#add-a-new-app">Add a new app</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#setting-up-app-store-connect">Setting Up App Store Connect</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#add-a-new-iap">Add a new IAP</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#setting-up-a-sandbox-tester-account">Setting Up A Sandbox Tester Account</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#setting-up-your-game">Setting Up Your Game</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="workflow.html">Workflow</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="general.html">General</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="promotions.html">Promotions</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href=".">GMEXT-AppleIAP</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Setting Up</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/YoYoGames/GMEXT-AppleIAP/edit/master/docs/setup.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="setup">Setup</h1>
+<p>In this guide we'll be looking at how to set up things in the App Store to allow for <strong>In-App Purchases (IAP)</strong> in your macOS, iOS and tvOS apps for the App Store.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>You need to make sure to use the right version of the extension. Information on it can be found in the release info.</p>
+</div>
+<p>Before continuing, you should have already set up and tested that the exports are working and have a test project or finished game that you want to add IAPs to. You can find out how to set up GameMaker for the different supported platforms here:</p>
+<ul>
+<li><a href="https://help.gamemaker.io/hc/en-us/articles/235186128-Setting-Up-For-macOS">Setting Up For macOS</a></li>
+<li><a href="https://help.gamemaker.io/hc/en-us/articles/115001368747-Setting-Up-For-iOS-Including-iPadOS#_ga=2.83227282.525071896.1710877857-1987929704.1700668779">Setting Up For iOS (Including iPadOS)</a></li>
+<li><a href="https://help.gamemaker.io/hc/en-us/articles/360025349592-Setting-Up-For-tvOS#_ga=2.83227282.525071896.1710877857-1987929704.1700668779">Setting Up For tvOS</a></li>
+</ul>
+<h2 id="setting-up-the-app-id">Setting Up The App ID</h2>
+<p>Before you can add any IAP code and test it, you first have to <a href="https://developer.apple.com/macos/distribution/">set up an app listing</a> on your <a href="https://appstoreconnect.apple.com/">App Store Connect Console</a> for the game.</p>
+<p>Before that, however, you will need to sign in to your <a href="https://developer.apple.com/account">Apple Developer console</a> and <a href="https://developer.apple.com/help/account/manage-identifiers/register-an-app-id/">Register an App ID</a>.</p>
+<blockquote>
+<p><strong>IMPORTANT</strong> If you've already set up the App ID for the project, then you can skip down to the section <a href="#setting-up-app-store-connect.md">Setting Up App Store Connect</a>.</p>
+</blockquote>
+<h3 id="add-a-new-app">Add a new app</h3>
+<p>The first thing to do is <a href="https://developer.apple.com/help/app-store-connect/create-an-app-record/add-a-new-app">Add a new app</a>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Make sure to select the correct <strong>Bundle ID</strong> in the <strong>New App</strong> dialog.</p>
+</div>
+<p>When filling in the app information, make sure to select <strong>Explicit Bundle ID</strong> and supply a reverse URL format App ID, for example <code>"com.yoyogames.iosiaptest"</code>. Wildcard IDs will <em>not</em> be valid for creating and testing IAPs:</p>
+<p><img alt="Explicit Bundle ID" src="assets/IAP_iOSExplicitID.png" /></p>
+<p>The app ID will be created and will, by default, already have in-app purchases enabled. You can now move on to setting up the app listing and IAP details through <strong>App Store Connect</strong>.</p>
+<h2 id="setting-up-app-store-connect">Setting Up App Store Connect</h2>
+<p>Once you have your App ID created, you need to go to <a href="https://appstoreconnect.apple.com/">App Store Connect</a> and set up a basic store listing and include the information that is required for the in-app purchases you need.</p>
+<h3 id="add-a-new-iap">Add a new IAP</h3>
+<p>You then need to go to the <strong>Features</strong> tab, and add your first IAP. You can only add one for now, as Apple requires you to upload a binary which includes IAPs before you can create others, but the process for adding them later is the same as we outline here.</p>
+<p><img alt="Features Tab" src="assets/IAP_MacNewIAP.png" /></p>
+<p>When you add the new IAP it can be any one of the types listed in <a href="https://developer.apple.com/help/app-store-connect/reference/in-app-purchase-types/">In-app purchase types</a>:</p>
+<ul>
+<li><strong>Consumable</strong> - A product that is used once, after which it becomes depleted and must be purchased again.</li>
+<li><strong>Non-Consumable</strong> - A product that is purchased once and does not expire or decrease with use.</li>
+<li><strong>Auto-Renewable Subscription</strong> - A product that allows users to purchase dynamic content for a set period. This type of subscription renews automatically unless cancelled by the user.</li>
+<li><strong>Non-Renewing Subscription</strong> - A product that allows users to purchase a service with a limited duration. The content of this in-app purchase can be static. This type of subscription does not renew automatically.</li>
+</ul>
+<p>In this case we probably want to start with <a href="https://developer.apple.com/help/app-store-connect/manage-in-app-purchases/create-consumable-or-non-consumable-in-app-purchases/">creating a consumable IAP</a>, so select that then fill in the IAP details.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <strong>Product ID</strong> will be used to identify the IAP in GameMaker so be sure to make it appropriate (in this guide we'll call it <code>ios_test_consumable</code>).</p>
+</div>
+<blockquote>
+<p><strong>IMPORTANT</strong> When targeting both iOS and macOS, Apple requires that you use different, <strong>unique</strong> product identifiers and doesn't distinguish between the two platforms, which is why in the examples on this page we use an "ios" prefix on the product IDs. iOS IAPs are also valid for tvOS so you do not need to set up different ones in that case.</p>
+</blockquote>
+<p>You can then go ahead and fill in the rest of the IAP details (price, descriptions, etc.) - and be sure to supply a 640x920px screenshot in the review information, otherwise you'll get a "missing metadata" error. Once that's all done, click the <strong>Save</strong> button.</p>
+<p>Later, after sending that first binary which includes IAP support, you will go through this process again and create an IAP listing for each purchase option that you want to include in your game. For the purposes of this tutorial we have made a second IAP called <code>ios_test_nonconsumable</code>, so our panel looks like this:</p>
+<p><img alt="IAPs Console" src="assets/IAP_iOSIAPsConsole.png" /></p>
+<p>Once you have all the IAPs set up that you'd like to include you can continue on to setting up test accounts.</p>
+<h2 id="setting-up-a-sandbox-tester-account">Setting Up A Sandbox Tester Account</h2>
+<p>Now that you've set up the initial IAP product you need to set up at least one <strong>Sandbox Tester Account</strong>. This account will be used to test the IAPs and any purchases will not be charged when using this account.</p>
+<blockquote>
+<p>See: <a href="https://developer.apple.com/help/app-store-connect/test-in-app-purchases/create-sandbox-apple-ids">Create Sandbox Apple IDs</a></p>
+</blockquote>
+<p>To set up this test account you need to go to <strong>App Store Connect</strong> &gt; <strong>Users and Access</strong> &gt; <strong>Sandbox Testers</strong> and then click the <strong>+</strong> button to add a new user:</p>
+<p><img alt="Add Sandbox Tester Account" src="assets/IAP_MacAddTester.png" /></p>
+<p>Fill in the details required then press <strong>Save</strong>. With that done, you are ready to set up the game in GameMaker and test the IAP process.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You cannot use the developer email when setting up test accounts.</p>
+</div>
+<h2 id="setting-up-your-game">Setting Up Your Game</h2>
+<p>Now that you have your initial IAP setup in the App Store Connect console, you need to prepare your game. For that you'll need to open the project in GameMaker and then go to the <a href="https://manual.gamemaker.io/monthly/en/Settings/Game_Options.htm">Game Options</a> for the specific OS that you're targeting. Here you should supply the game name and App ID (Bundle ID) that you defined for the project (see the section <a href="#setting-up-the-app-id.md">Setting Up The App ID</a>):</p>
+<p><img alt="General Options Bundle Name" src="assets/IAP_iOSGeneralOptions.png" /></p>
+<p>Save this setting now by clicking <strong>OK</strong> and you are almost ready to code, build, and then test purchases.</p>
+<p>If you're not going to use your own server to validate purchases (something that Apple recommends), there is a way to validate locally - that is almost as secure - using the extension function <a href="general.html#iap_validatereceipt">iap_ValidateReceipt</a>. Using this function, however, requires you to supply your <strong>Apple Inc. Root Certificate</strong> and include it with your project in the <a href="https://manual.gamemaker.io/monthly/en/Settings/Included_Files.htm">Included Files</a>.</p>
+<p><img alt="Root Certificate" src="assets/IAP_iOSRootCert.png" /></p>
+<p>Download this file and add it to your <a href="https://manual.gamemaker.io/monthly/en/Settings/Included_Files.htm">Included Files</a> for the project and then you can use the local validation function. For more information on this file, please see the following links:</p>
+<ul>
+<li>https://www.apple.com/certificateauthority/</li>
+<li>https://www.apple.com/appleca/AppleIncRootCertificate.cer</li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="home.html" class="btn btn-neutral float-left" title="AppleIAP Extension"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="workflow.html" class="btn btn-neutral float-right" title="Workflow">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>YoYoGames 2024</p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/YoYoGames/GMEXT-AppleIAP" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="home.html" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="workflow.html" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = ".";</script>
+    <script src="js/theme_extra.js"></script>
+    <script src="js/theme.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/gml.min.js"></script>
+      <script src="assets/js/gmext_script.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

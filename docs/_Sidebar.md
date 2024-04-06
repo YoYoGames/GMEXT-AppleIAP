@@ -1,4 +1,4 @@
-### [AppleIAP Extension](Home)
+## [AppleIAP Extension](home)
 
 ### Guides
 
