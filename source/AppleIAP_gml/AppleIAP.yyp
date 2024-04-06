@@ -23,8 +23,9 @@
     {"$GMFolder":"","%Name":"Sprites","folderPath":"folders/YoYo Extensions Assets/Sprites.yy","name":"Sprites","resourceType":"GMFolder","resourceVersion":"2.0",},
   ],
   "IncludedFiles":[
-    {"$GMIncludedFile":"","%Name":"Apple IAP Manual.pdf","CopyToMask":0,"filePath":"datafiles","name":"Apple IAP Manual.pdf","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"AppleIncRootCertificate.cer","CopyToMask":6,"filePath":"datafiles","name":"AppleIncRootCertificate.cer","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
+    {"$GMIncludedFile":"","%Name":"GMEXT-AppleIAP Unix Docs.html","CopyToMask":-1,"filePath":"datafiles","name":"GMEXT-AppleIAP Unix Docs.html","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
+    {"$GMIncludedFile":"","%Name":"GMEXT-AppleIAP Win Docs.lnk","CopyToMask":-1,"filePath":"datafiles","name":"GMEXT-AppleIAP Win Docs.lnk","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
   ],
   "isEcma":false,
   "LibraryEmitters":[],

@@ -1,18 +1,1 @@
-{
-    "gitHubUrl": "https://github.com/YoYoGames/GMEXT-AppleIAP",
-    "projectFile": "source/AppleIAP_gml/AppleIAP.yyp",
-    "projectVersion": "LTS22",
-    "releaseTemplate": "templates/release_body.md",
-    "extensionMetaData": [
-        {
-            "extensionFile": "source/AppleIAP_gml/extensions/AppleIAP/AppleIAP.yy",
-            "packageId": "com.yoyogames.appleiaps",
-            "packageName": "Apple IAPs Ext",
-            "packageVersion": "1.2.1",
-            "packageFormat": "LTS22",
-            "includeFolders": null,
-            "includeResources": null,
-            "excludeResources": null
-        }
-    ]
-}
+{"gitHubUrl":"https://github.com/YoYoGames/GMEXT-AppleIAP","projectFile":"source/AppleIAP_gml/AppleIAP.yyp","projectVersion":"LTS22","releaseTemplate":"templates/release_body.md","extensionMetaData":[{"extensionFile":"source/AppleIAP_gml/extensions/AppleIAP/AppleIAP.yy","packageId":"com.yoyogames.appleiaps","packageName":"Apple IAPs Ext","packageVersion":"2.0.0","packageFormat":"LTS22","includeFolders":null,"includeResources":null,"excludeFolders":null,"excludeResources":null}]}
