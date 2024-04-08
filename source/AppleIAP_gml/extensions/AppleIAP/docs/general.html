@@ -136,6 +136,7 @@
 <li><a href="general.html#productinfo">ProductInfo</a></li>
 <li><a href="general.html#purchaseinfo">PurchaseInfo</a></li>
 <li><a href="general.html#productsubscriptionperiod">ProductSubscriptionPeriod</a></li>
+<li><a href="general.html#productdiscount">ProductDiscount</a></li>
 </ul>
 <p><br></p>
 <hr />
@@ -910,9 +911,41 @@ switch(_event_id)
 <td>The number of "units" that the subscription is for.</td>
 </tr>
 <tr>
-<td>units</td>
+<td>unit</td>
 <td><a href="general.html#iap_product_period_unit">iap_product_period_unit</a></td>
 <td>The unit used to calculate the duration of the subscription.</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<hr />
+<p align="right"><a href="#top">Back To Top</a></p>
+
+<h1 id="productdiscount">ProductDiscount</h1>
+<p>This struct stores the details of an introductory offer or a promotional offer for an auto-renewable subscription.</p>
+<p>This struct is referenced by the following structs:</p>
+<ul>
+<li><a href="general.html#productinfo">ProductInfo</a></li>
+</ul>
+<p><br></p>
+<table>
+<thead>
+<tr>
+<th>Member</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>price</td>
+<td><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Reference/Strings/Strings.htm">String</a></td>
+<td>The discount price of the product in the local currency, represented as a string.</td>
+</tr>
+<tr>
+<td>priceLocale</td>
+<td><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Reference/Strings/Strings.htm">String</a></td>
+<td>The language code for the locale. Examples of language codes include "en", "es", and "zh".</td>
 </tr>
 </tbody>
 </table>
@@ -933,19 +966,14 @@ switch(_event_id)
 </thead>
 <tbody>
 <tr>
-<td>productId</td>
-<td><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Reference/Strings/Strings.htm">String</a></td>
-<td>The unique ID for the product as a string, for example <code>"mac_consumable"</code>.</td>
-</tr>
-<tr>
 <td>price</td>
 <td><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Reference/Strings/Strings.htm">String</a></td>
-<td>The localised price of the product as a string, for example <code>"£0.99"</code>.</td>
+<td>The localised price of the product as a string, for example <code>"0.99"</code>.</td>
 </tr>
 <tr>
-<td>localizedDescription</td>
+<td>locale_localeIdentifier</td>
 <td><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Reference/Strings/Strings.htm">String</a></td>
-<td>This holds the description of the product as a string, and localised.</td>
+<td>Examples of locale identifiers include "en_GB", "es_ES_PREEURO".</td>
 </tr>
 <tr>
 <td>localizedTitle</td>
@@ -953,39 +981,64 @@ switch(_event_id)
 <td>This holds the title of the product as a string, and localised.</td>
 </tr>
 <tr>
-<td>locale</td>
+<td>localizedDescription</td>
 <td><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Reference/Strings/Strings.htm">String</a></td>
-<td>A string representing the user's region settings (see <a href="https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPInternational/LanguageandLocaleIDs/LanguageandLocaleIDs.html">Language and Locale IDs</a> for more information).</td>
+<td>This holds the description of the product as a string, and localised.</td>
 </tr>
 <tr>
-<td>isDownloadable</td>
-<td><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Data_Types.htm">Boolean</a></td>
-<td>This will be a boolean <code>true</code> or <code>false</code>, depending on whether the App Store has downloadable content for this product.</td>
+<td>productId</td>
+<td><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Reference/Strings/Strings.htm">String</a></td>
+<td>The unique ID for the product as a string, for example <code>"mac_consumable"</code>.</td>
+</tr>
+<tr>
+<td>currencyCode</td>
+<td><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Reference/Strings/Strings.htm">String</a></td>
+<td>The currency code for the locale. Example currency codes include "USD", "EUR", and "JPY".</td>
+</tr>
+<tr>
+<td>currencySymbol</td>
+<td><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Reference/Strings/Strings.htm">String</a></td>
+<td>The currency symbol for the locale. Example currency symbols include "$", "€", and "¥".</td>
+</tr>
+<tr>
+<td>locale_languageCode</td>
+<td><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Reference/Strings/Strings.htm">String</a></td>
+<td>The language code for the locale. Examples of language codes include "en", "es", and "zh". (macOS 10.12+)</td>
+</tr>
+<tr>
+<td>introductoryPrice</td>
+<td><a href="general.html#productdiscount">ProductDiscount</a></td>
+<td>The object containing introductory price information for the product. (macOS 10.13+, iOS 11.2+, tvOS 11.2+)</td>
 </tr>
 <tr>
 <td>discounts</td>
-<td><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Arrays.htm">Array</a></td>
-<td>This will hold an array where each list entry corresponds to a discount value.</td>
-</tr>
-<tr>
-<td>ISOCountryCode</td>
-<td><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Reference/Strings/Strings.htm">String</a></td>
-<td>This is the <a href="https://en.wikipedia.org/wiki/ISO_3166-1">ISO 3166-1</a> country code, as a string (for example: <code>"USA"</code>, <code>"EUR"</code>, <code>"JPY"</code>)</td>
-</tr>
-<tr>
-<td>ISOLanguageCode</td>
-<td><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Reference/Strings/Strings.htm">String</a></td>
-<td>This is the <a href="https://en.wikipedia.org/wiki/List_of_ISO_639-2_codes">ISO 639-2</a> language code, as a string (for example: <code>"en"</code>, <code>"es"</code>, <code>"zh"</code>)</td>
-</tr>
-<tr>
-<td>ISOCurrencyCode</td>
-<td><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Reference/Strings/Strings.htm">String</a></td>
-<td>This is the <a href="https://en.wikipedia.org/wiki/ISO_4217">ISO 4217</a> currency code as a string (for example: <code>"$"</code>, <code>"€"</code>, <code>"¥"</code>)</td>
+<td><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Arrays.htm">Array</a> of <a href="general.html#productdiscount">ProductDiscount</a></td>
+<td>This will hold an array where each list entry corresponds to a discount value. (macOS 10.14+, iOS 12.2+, tvOS 12.2+)</td>
 </tr>
 <tr>
 <td>subscriptionPeriod</td>
 <td><a href="general.html#productsubscriptionperiod">ProductSubscriptionPeriod</a></td>
-<td>This is a struct with information on the subscription period.</td>
+<td>The period details for products that are subscriptions. (macOS 10.13+, iOS 11.2+, tvOS 11.2+)</td>
+</tr>
+<tr>
+<td>subscriptionGroupIdentifier</td>
+<td><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Reference/Strings/Strings.htm">String</a></td>
+<td>The identifier of the subscription group to which the subscription belongs. (macOS 10.14+, iOS 12.0+, tvOS 12.0+)</td>
+</tr>
+<tr>
+<td>downloadContentVersion</td>
+<td><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Reference/Strings/Strings.htm">String</a></td>
+<td>A string that identifies which version of the content is available for download. (macOS 10.15+, iOS 6.0+, tvOS 9.0+)</td>
+</tr>
+<tr>
+<td>downloadContentLengths</td>
+<td><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Arrays.htm">Array</a> of <a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Data_Types.htm">Real</a></td>
+<td>The lengths of the downloadable files available for this product. (macOS 10.15+, iOS 6.0+, tvOS 9.0+)</td>
+</tr>
+<tr>
+<td>isDownloadable</td>
+<td><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Data_Types.htm">Boolean</a></td>
+<td>This will be a boolean <code>true</code> or <code>false</code>, depending on whether the App Store has downloadable content for this product. (macOS 10.15+, iOS 6.0+, tvOS 9.0+)</td>
 </tr>
 </tbody>
 </table>

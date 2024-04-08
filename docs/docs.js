@@ -485,7 +485,7 @@ The `HandlePurchases` function is a custom function that handles the purchases o
  * @member {array[struct.ProductDiscount]} discounts This will hold an array where each list entry corresponds to a discount value. (macOS 10.14+, iOS 12.2+, tvOS 12.2+)
 
  * @member {struct.ProductSubscriptionPeriod} subscriptionPeriod The period details for products that are subscriptions. (macOS 10.13+, iOS 11.2+, tvOS 11.2+)
- * @member {string} subscriptionPeriod The identifier of the subscription group to which the subscription belongs. (macOS 10.14+, iOS 12.0+, tvOS 12.0+)
+ * @member {string} subscriptionGroupIdentifier The identifier of the subscription group to which the subscription belongs. (macOS 10.14+, iOS 12.0+, tvOS 12.0+)
 
  * @member {string} downloadContentVersion A string that identifies which version of the content is available for download. (macOS 10.15+, iOS 6.0+, tvOS 9.0+)
  * @member {array[real]} downloadContentLengths The lengths of the downloadable files available for this product. (macOS 10.15+, iOS 6.0+, tvOS 9.0+)
