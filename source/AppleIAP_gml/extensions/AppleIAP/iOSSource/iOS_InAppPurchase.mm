@@ -338,14 +338,14 @@ void CreateAsyncEventWithDSMap_comaptibility_(int dsMapIndex)
             if ([product subscriptionGroupIdentifier] != nil)
             {
                 productMap[@"subscriptionGroupIdentifier"] = [product subscriptionGroupIdentifier];
-                productMap[@"downloadContentVersion"] = [product downloadContentVersion];
-                productMap[@"downloadContentLengths"] = [product downloadContentLengths];
             }
         }
         
         if (@available(macOS 10.15.0, *))
         {
-//                productMap[@"isDownloadable"] = [NSNumber numberWithBool:[product isDownloadable]];
+            productMap[@"downloadContentVersion"] = [product downloadContentVersion];
+            productMap[@"downloadContentLengths"] = [product downloadContentLengths];
+            productMap[@"isDownloadable"] = [NSNumber numberWithBool:[product isDownloadable]];
         }
     }
 #else

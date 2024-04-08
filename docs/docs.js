@@ -457,24 +457,41 @@ The `HandlePurchases` function is a custom function that handles the purchases o
  * @struct ProductSubscriptionPeriod
  * @desc This struct stores a subscription period and the unit in which it is expressed.
  * @member {real} numberOfUnits The number of "units" that the subscription is for.
- * @member {constant.iap_product_period_unit} units The unit used to calculate the duration of the subscription.
+ * @member {constant.iap_product_period_unit} unit The unit used to calculate the duration of the subscription.
+ * @struct_end
+ */
+
+/**
+ * @struct ProductDiscount
+ * @desc This struct stores the details of an introductory offer or a promotional offer for an auto-renewable subscription.
+ * @member {string} price The discount price of the product in the local currency, represented as a string.
+ * @member {string} priceLocale The language code for the locale. Examples of language codes include "en", "es", and "zh".
  * @struct_end
  */
 
 /**
  * @struct ProductInfo
  * @desc This struct stores info about a product.
- * @member {string} productId The unique ID for the product as a string, for example `"mac_consumable"`.
- * @member {string} price The localised price of the product as a string, for example `"£0.99"`.
- * @member {string} localizedDescription This holds the description of the product as a string, and localised.
+ * @member {string} price The localised price of the product as a string, for example `"0.99"`.
+ * @member {string} locale_localeIdentifier Examples of locale identifiers include "en_GB", "es_ES_PREEURO". 
  * @member {string} localizedTitle  This holds the title of the product as a string, and localised.
- * @member {string} locale A string representing the user's region settings (see [Language and Locale IDs](https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPInternational/LanguageandLocaleIDs/LanguageandLocaleIDs.html) for more information).
- * @member {boolean} isDownloadable This will be a boolean `true` or `false`, depending on whether the App Store has downloadable content for this product.
- * @member {array} discounts This will hold an array where each list entry corresponds to a discount value.
- * @member {string} ISOCountryCode This is the [ISO 3166-1](https://en.wikipedia.org/wiki/ISO_3166-1) country code, as a string (for example: `"USA"`, `"EUR"`, `"JPY"`)
- * @member {string} ISOLanguageCode This is the [ISO 639-2](https://en.wikipedia.org/wiki/List_of_ISO_639-2_codes) language code, as a string (for example: `"en"`, `"es"`, `"zh"`)
- * @member {string} ISOCurrencyCode This is the [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) currency code as a string (for example: `"$"`, `"€"`, `"¥"`)
- * @member {struct.ProductSubscriptionPeriod} subscriptionPeriod This is a struct with information on the subscription period.
+ * @member {string} localizedDescription This holds the description of the product as a string, and localised.
+ * @member {string} productId The unique ID for the product as a string, for example `"mac_consumable"`.
+ * @member {string} currencyCode The currency code for the locale. Example currency codes include "USD", "EUR", and "JPY".
+ * @member {string} currencySymbol The currency symbol for the locale. Example currency symbols include "$", "€", and "¥".
+ * @member {string} locale_languageCode The language code for the locale. Examples of language codes include "en", "es", and "zh". (macOS 10.12+)
+
+ * @member {struct.ProductDiscount} introductoryPrice The object containing introductory price information for the product. (macOS 10.13+, iOS 11.2+, tvOS 11.2+)
+ * @member {array[struct.ProductDiscount]} discounts This will hold an array where each list entry corresponds to a discount value. (macOS 10.14+, iOS 12.2+, tvOS 12.2+)
+
+ * @member {struct.ProductSubscriptionPeriod} subscriptionPeriod The period details for products that are subscriptions. (macOS 10.13+, iOS 11.2+, tvOS 11.2+)
+ * @member {string} subscriptionPeriod The identifier of the subscription group to which the subscription belongs. (macOS 10.14+, iOS 12.0+, tvOS 12.0+)
+
+ * @member {string} downloadContentVersion A string that identifies which version of the content is available for download. (macOS 10.15+, iOS 6.0+, tvOS 9.0+)
+ * @member {array[real]} downloadContentLengths The lengths of the downloadable files available for this product. (macOS 10.15+, iOS 6.0+, tvOS 9.0+)
+ * @member {boolean} isDownloadable This will be a boolean `true` or `false`, depending on whether the App Store has downloadable content for this product. (macOS 10.15+, iOS 6.0+, tvOS 9.0+)
+
+
  * @struct_end
  */
 
@@ -576,6 +593,7 @@ The `HandlePurchases` function is a custom function that handles the purchases o
  * @ref ProductInfo
  * @ref PurchaseInfo
  * @ref ProductSubscriptionPeriod
+ * @ref ProductDiscount
  * @section_end
  * 
  * @module_end
