@@ -11,7 +11,16 @@ if(async_load[? "status"] != 0 || async_load[? "http_status"] != 200)
 }
 
 var _resultJson = async_load[? "result"];
-var _resultData = json_parse(_resultJson);
+
+try
+{
+	var _resultData = json_parse(_resultJson);
+}
+catch(e)
+{
+	show_debug_message("HTTP Error: " + _resultJson)
+	exit
+}
 
 // Reference links (result json structure):
 // https://developer.apple.com/documentation/appstorereceipts/responsebody

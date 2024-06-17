@@ -1,12 +1,18 @@
-/// @description Insert description here
-// You can write your code in this editor
 
 var _requestId = async_load[? "id"];
 
 if (!variable_struct_exists(validationRequests, _requestId)) exit;
 
 var _resultJson = async_load[? "result"];
-var _resultData = json_parse(_resultJson);
+try
+{
+	var _resultData = json_parse(_resultJson);
+}
+catch(e)
+{
+	show_debug_message("HTTP Error: " + _resultJson)
+	exit
+}
 
 // There was not error (the receipt is valid)
 if (_resultData.status == 0) {
