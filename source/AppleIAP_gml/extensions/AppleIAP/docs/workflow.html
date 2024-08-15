@@ -39,7 +39,7 @@
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="home.html">AppleIAP Extension</a>
+                <li class="toctree-l1"><a class="" href="home.md">AppleIAP Extension</a>
                 </li>
               </ul>
               <ul>
@@ -47,7 +47,7 @@
                 </li>
               </ul>
               <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="workflow.html">Workflow</a>
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Workflow</a>
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#the-asynchronous-iap-event">The Asynchronous IAP Event</a>
     </li>
@@ -114,8 +114,8 @@
 <p>This page describes the workflow when using the Apple In-App Purchases extension.</p>
 <p>The workflow consists of the following main parts:</p>
 <ul>
-<li><a href="#initialising-in-app-purchases.md">Initialising In-App Purchases</a></li>
-<li><a href="#purchasing-products.md">Purchasing Products</a></li>
+<li><a href="#initialising-in-app-purchases">Initialising In-App Purchases</a></li>
+<li><a href="#purchasing-products">Purchasing Products</a></li>
 </ul>
 <h3 id="the-asynchronous-iap-event">The Asynchronous IAP Event</h3>
 <p>When using the Apple IAP extension in your projects, you will be calling different functions that will trigger "callbacks" from the Apple API. What this means is that certain functions will be run but won't return a result until sometime in the future - which could be the next step, or it could be a few seconds later. This result, when it comes, is called the "callback" and is Apple's IAP API responding to something you've done. This callback is dealt with in the <a href="https://manual.gamemaker.io/monthly/en/The_Asset_Editors/Object_Properties/Async_Events/IAP.htm">In-App Purchase Async Event</a>. This event will always have a DS map in the GML variable <a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Variables/Builtin_Global_Variables/async_load.htm">async_load</a>, and this map can be parsed to get the required information. Each function will generate different callbacks, but they will all have the <code>"id"</code> key in common:</p>
@@ -128,9 +128,9 @@
 <li>At the start of the game, initialise the extension with a call to <a href="general.html#iap_init">iap_Init</a>.</li>
 <li>Next, check if the user is authorised to buy in-app products using <a href="general.html#iap_isauthorisedforpayment">iap_IsAuthorisedForPayment</a>.</li>
 <li>If they are not, disable the possibility for purchases in your game's UI and code.</li>
-<li>If purchases <em>are</em> permitted, add the different products to the internal products list using <a href="general.html#iap_addproduct">iap_AddProduct</a> and - if required - query product details using <a href="general.html#iap_queryproducts">iap_QueryProducts</a>. See <a href="#product-queries.md">Product Queries</a>.</li>
+<li>If purchases <em>are</em> permitted, add the different products to the internal products list using <a href="general.html#iap_addproduct">iap_AddProduct</a> and - if required - query product details using <a href="general.html#iap_queryproducts">iap_QueryProducts</a>. See <a href="#product-queries">Product Queries</a>.</li>
 <li>After adding the products but before accepting purchases, query existing purchases using <a href="general.html#iap_querypurchases">iap_QueryPurchases</a>. If there are any unfinished transactions then deal with them, and enable any features based on durable or subscription transactions. For an example on how to do this, see the <code>HandleProducts</code> function in the demo project.</li>
-<li>Permit the game to run as normal and let the user purchase/consume products as required, verifying each purchase, then querying them, and then finalising them. See <a href="#purchasing-products.md">Purchasing Products</a>.</li>
+<li>Permit the game to run as normal and let the user purchase/consume products as required, verifying each purchase, then querying them, and then finalising them. See <a href="#purchasing-products">Purchasing Products</a>.</li>
 <li>Store non-consumable and subscription purchases on your server so they can be checked when the game starts (or store them securely locally, but a server is recommended).</li>
 <li>Ensure that the game has a "Restore Purchases" button, in case of a change of device or anything of that nature.</li>
 </ol>
@@ -262,9 +262,9 @@ if (_purchases_json != "")
 <h2 id="making-a-purchase">Making a Purchase</h2>
 <p>To make a purchase of a product, you must call the function <a href="general.html#iap_purchaseproduct">iap_PurchaseProduct</a>, e.g.:</p>
 <pre class="highlight"><code class="language-gml">iap_PurchaseProduct(product_id);</code></pre>
-<p>This function will generate an <a href="https://manual.gamemaker.io/monthly/en/The_Asset_Editors/Object_Properties/Async_Events/IAP.htm">In-App Purchase Async Event</a> of ID (or type) <code>iap_payment_queue_update</code>. This can then be processed in the exact same way as outlined above in the section on <a href="#restoring-purchases.md">Restoring Purchases</a>, as the async callback is identical.</p>
+<p>This function will generate an <a href="https://manual.gamemaker.io/monthly/en/The_Asset_Editors/Object_Properties/Async_Events/IAP.htm">In-App Purchase Async Event</a> of ID (or type) <code>iap_payment_queue_update</code>. This can then be processed in the exact same way as outlined above in the section on <a href="#restoring-purchases">Restoring Purchases</a>, as the async callback is identical.</p>
 <h2 id="validating">Validating</h2>
-<p>Before awarding and finalising any purchases, they must first be <strong>validated</strong>. Apple recommends that you do this with a private server but there is also a function to validate locally, but this is slightly less secure and requires you to include a <strong>Root Certificate</strong> with your game (see the section on <a href="#setting-up-your-game.md">Setting Up Your Game</a> for more details). The general workflow for validating using the two methods would be:</p>
+<p>Before awarding and finalising any purchases, they must first be <strong>validated</strong>. Apple recommends that you do this with a private server but there is also a function to validate locally, but this is slightly less secure and requires you to include a <strong>Root Certificate</strong> with your game (see the section on <a href="#setting-up-your-game">Setting Up Your Game</a> for more details). The general workflow for validating using the two methods would be:</p>
 <ul>
 <li><strong>Server</strong>: When a purchase or restore event is triggered, you would get the purchase receipt (using the function <a href="general.html#iap_getreceipt">iap_GetReceipt</a>) and then send that off to your server using one of the <a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Reference/Asynchronous_Functions/HTTP/HTTP.htm">http_*() functions</a>. This would then validate the purchase with Apple and send a response back. This response would then be dealt with in the <a href="https://manual.gamemaker.io/monthly/en/The_Asset_Editors/Object_Properties/Async_Events/HTTP.htm">Http Async Event</a>, where you would then award the user the product they've bought or enable any features it unlocked. You would also store these details on your server so the game can check on restart any purchases or subscriptions. For more information, please see the <a href="https://developer.apple.com/documentation/appstorereceipts">Apple Documentation</a>.</li>
 <li><strong>Local</strong>: To validate locally, you must first call the function <a href="general.html#iap_getreceipt">iap_GetReceipt</a> to retrieve the receipt file, and then call the function <a href="general.html#iap_validatereceipt">iap_ValidateReceipt</a>. If that returns <code>true</code> then you can award products and unlock features as required. This would then be securely stored to a file so that on game restart it can be checked and all features or items be unlocked correctly.</li>
