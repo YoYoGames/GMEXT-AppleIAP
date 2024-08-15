@@ -1,5 +1,5 @@
 {
-  "$GMScript":"",
+  "$GMScript":"v1",
   "%Name":"Scr_IAPs_subsInf_load",
   "isCompatibility":false,
   "isDnD":false,

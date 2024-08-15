@@ -24,13 +24,12 @@
   ],
   "IncludedFiles":[
     {"$GMIncludedFile":"","%Name":"AppleIncRootCertificate.cer","CopyToMask":6,"filePath":"datafiles","name":"AppleIncRootCertificate.cer","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
-    {"$GMIncludedFile":"","%Name":"GMEXT-AppleIAP Unix Docs.html","CopyToMask":-1,"filePath":"datafiles","name":"GMEXT-AppleIAP Unix Docs.html","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
-    {"$GMIncludedFile":"","%Name":"GMEXT-AppleIAP Win Docs.lnk","CopyToMask":-1,"filePath":"datafiles","name":"GMEXT-AppleIAP Win Docs.lnk","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
+    {"$GMIncludedFile":"","%Name":"GMEXT-AppleIAP.html","CopyToMask":0,"filePath":"datafiles","name":"GMEXT-AppleIAP.html","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
   ],
   "isEcma":false,
   "LibraryEmitters":[],
   "MetaData":{
-    "IDEVersion":"2024.4.1.152",
+    "IDEVersion":"2024.800.0.605",
   },
   "name":"AppleIAP",
   "resources":[
