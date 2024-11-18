@@ -69,3 +69,7 @@ iOSInjectionProject/
 
 source/AppleIAP_gml/options/extensions/
 output/
+
+source/AppleIAP_gml/extensions/AppleIAP/scriptUtils.bat.bak
+
+source/AppleIAP_gml/extensions/AppleIAP/scriptUtils.sh.bak
