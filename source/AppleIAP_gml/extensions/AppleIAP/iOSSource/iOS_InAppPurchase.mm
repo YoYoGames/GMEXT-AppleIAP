@@ -239,13 +239,17 @@ void CreateAsyncEventWithDSMap_comaptibility_(int dsMapIndex)
 
 - (double) iap_ValidateReceipt
 {
-#if !TARGET_OS_OSX
-    BOOL valid = verifyReceiptUsingURL( [[NSBundle mainBundle] appStoreReceiptURL] );
-#else
-    BOOL valid = verifyReceiptWithURL( [[NSBundle mainBundle] appStoreReceiptURL] );
-#endif
-    // Boolean return.
-    return valid == YES ? 1.0 : 0.0;
+	//DEPRECATED
+	//https://developer.apple.com/news/upcoming-requirements/?id=01242025a
+// #if !TARGET_OS_OSX
+    // BOOL valid = verifyReceiptUsingURL( [[NSBundle mainBundle] appStoreReceiptURL] );
+// #else
+    // BOOL valid = verifyReceiptWithURL( [[NSBundle mainBundle] appStoreReceiptURL] );
+// #endif
+    // // Boolean return.
+    // return valid == YES ? 1.0 : 0.0;
+	
+	return 1.0;
 }
 
 
