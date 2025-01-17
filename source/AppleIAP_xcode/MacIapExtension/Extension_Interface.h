@@ -21,6 +21,7 @@
 
 #if defined(OS_Linux) || defined(OS_MacOs)
 #define YYEXPORT __attribute__((visibility("default")))
+
 #include <stddef.h>
 #endif
 
