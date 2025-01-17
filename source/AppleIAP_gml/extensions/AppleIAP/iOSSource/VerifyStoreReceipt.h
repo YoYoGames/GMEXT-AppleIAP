@@ -1,3 +1,7 @@
+
+	//DEPRECATED
+	//https://developer.apple.com/news/upcoming-requirements/?id=01242025a
+
 //
 //  VerifyStoreReceipt.h
 //
@@ -28,31 +32,31 @@
  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import <Foundation/Foundation.h>
+// #import <Foundation/Foundation.h>
 
-extern NSString *kReceiptBundleIdentifer;
-extern NSString *kReceiptBundleIdentiferData;
-extern NSString *kReceiptVersion;
-extern NSString *kReceiptOpaqueValue;
-extern NSString *kReceiptHash;
-extern NSString *kReceiptInApp;
-extern NSString *kReceiptOriginalVersion;
-extern NSString *kReceiptExpirationDate;
+// extern NSString *kReceiptBundleIdentifer;
+// extern NSString *kReceiptBundleIdentiferData;
+// extern NSString *kReceiptVersion;
+// extern NSString *kReceiptOpaqueValue;
+// extern NSString *kReceiptHash;
+// extern NSString *kReceiptInApp;
+// extern NSString *kReceiptOriginalVersion;
+// extern NSString *kReceiptExpirationDate;
 
-extern NSString *kReceiptInAppQuantity;
-extern NSString *kReceiptInAppProductIdentifier;
-extern NSString *kReceiptInAppTransactionIdentifier;
-extern NSString *kReceiptInAppPurchaseDate;
-extern NSString *kReceiptInAppOriginalTransactionIdentifier;
-extern NSString *kReceiptInAppOriginalPurchaseDate;
-extern NSString *kReceiptInAppSubscriptionExpirationDate;
-extern NSString *kReceiptInAppCancellationDate;
-extern NSString *kReceiptInAppWebOrderLineItemID;
+// extern NSString *kReceiptInAppQuantity;
+// extern NSString *kReceiptInAppProductIdentifier;
+// extern NSString *kReceiptInAppTransactionIdentifier;
+// extern NSString *kReceiptInAppPurchaseDate;
+// extern NSString *kReceiptInAppOriginalTransactionIdentifier;
+// extern NSString *kReceiptInAppOriginalPurchaseDate;
+// extern NSString *kReceiptInAppSubscriptionExpirationDate;
+// extern NSString *kReceiptInAppCancellationDate;
+// extern NSString *kReceiptInAppWebOrderLineItemID;
 
-NSDictionary *dictionaryWithAppStoreReceipt(NSString *receiptPath);
-NSArray *obtainInAppPurchases(NSString *receiptPath);
-#if !TARGET_OS_OSX
-BOOL verifyReceiptUsingURL(NSURL *receiptPath);
-#else
-BOOL verifyReceiptWithURL(NSURL *receiptURL);
-#endif
+// NSDictionary *dictionaryWithAppStoreReceipt(NSString *receiptPath);
+// NSArray *obtainInAppPurchases(NSString *receiptPath);
+// #if !TARGET_OS_OSX
+// BOOL verifyReceiptUsingURL(NSURL *receiptPath);
+// #else
+// BOOL verifyReceiptWithURL(NSURL *receiptURL);
+// #endif
