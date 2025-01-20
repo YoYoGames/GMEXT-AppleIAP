@@ -14,7 +14,7 @@
   "copyToTargets":9007199254740998,
   "description":"",
   "exportToGame":true,
-  "extensionVersion":"2.0.2",
+  "extensionVersion":"2.0.3",
   "files":[
     {"$GMExtensionFile":"","%Name":"AppleIAP.ext","constants":[
         {"$GMExtensionConstant":"","%Name":"iap_error_unknown","hidden":false,"name":"iap_error_unknown","resourceType":"GMExtensionConstant","resourceVersion":"2.0","value":"-1",},
