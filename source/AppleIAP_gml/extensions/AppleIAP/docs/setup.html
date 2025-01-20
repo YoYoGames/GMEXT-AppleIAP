@@ -39,7 +39,7 @@
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
-                <li class="toctree-l1"><a class="" href="home.md">AppleIAP Extension</a>
+                <li class="toctree-l1"><a class="reference internal" href="home.html">AppleIAP Extension</a>
                 </li>
               </ul>
               <ul class="current">
@@ -167,7 +167,7 @@
 <p>Now that you have your initial IAP setup in the App Store Connect console, you need to prepare your game. For that you'll need to open the project in GameMaker and then go to the <a href="https://manual.gamemaker.io/monthly/en/Settings/Game_Options.htm">Game Options</a> for the specific OS that you're targeting. Here you should supply the game name and App ID (Bundle ID) that you defined for the project (see the section <a href="#setting-up-the-app-id">Setting Up The App ID</a>):</p>
 <p><img alt="General Options Bundle Name" src="assets/IAP_iOSGeneralOptions.png" /></p>
 <p>Save this setting now by clicking <strong>OK</strong> and you are almost ready to code, build, and then test purchases.</p>
-<p>If you're not going to use your own server to validate purchases (something that Apple recommends), there is a way to validate locally - that is almost as secure - using the extension function <a href="general.html#iap_validatereceipt">iap_ValidateReceipt</a>. Using this function, however, requires you to supply your <strong>Apple Inc. Root Certificate</strong> and include it with your project in the <a href="https://manual.gamemaker.io/monthly/en/Settings/Included_Files.htm">Included Files</a>.</p>
+<p>If you're not going to use your own server to validate purchases (something that Apple recommends), there is a way to validate locally - that is almost as secure - using the extension function <a href="general.html#iap_validatereceipt">~~iap_ValidateReceipt~~ <img alt="⛔️" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/png/26d4.png" title=":no_entry:" /></a>. Using this function, however, requires you to supply your <strong>Apple Inc. Root Certificate</strong> and include it with your project in the <a href="https://manual.gamemaker.io/monthly/en/Settings/Included_Files.htm">Included Files</a>.</p>
 <p><img alt="Root Certificate" src="assets/IAP_iOSRootCert.png" /></p>
 <p>Download this file and add it to your <a href="https://manual.gamemaker.io/monthly/en/Settings/Included_Files.htm">Included Files</a> for the project and then you can use the local validation function. For more information on this file, please see the following links:</p>
 <ul>
@@ -178,6 +178,7 @@
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="home.html" class="btn btn-neutral float-left" title="AppleIAP Extension"><span class="icon icon-circle-arrow-left"></span> Previous</a>
         <a href="workflow.html" class="btn btn-neutral float-right" title="Workflow">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
@@ -185,7 +186,7 @@
 
   <div role="contentinfo">
     <!-- Copyright etc -->
-      <p>YoYoGames 2024</p>
+      <p>YoYoGames 2025</p>
   </div>
 
   Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
@@ -205,6 +206,8 @@
           <a href="https://github.com/YoYoGames/GMEXT-AppleIAP" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
         </span>
     
+    
+      <span><a href="home.html" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
       <span><a href="workflow.html" style="color: #fcfcfc">Next &raquo;</a></span>

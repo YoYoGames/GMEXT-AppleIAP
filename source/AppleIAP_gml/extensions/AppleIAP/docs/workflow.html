@@ -39,7 +39,7 @@
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
-                <li class="toctree-l1"><a class="" href="home.md">AppleIAP Extension</a>
+                <li class="toctree-l1"><a class="reference internal" href="home.html">AppleIAP Extension</a>
                 </li>
               </ul>
               <ul>
@@ -66,10 +66,6 @@
     <li class="toctree-l2"><a class="reference internal" href="#making-a-purchase">Making a Purchase</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#validating">Validating</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#local-validation">Local Validation</a>
-    </li>
-        </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#finalising-purchase-requests">Finalising Purchase Requests</a>
     </li>
@@ -146,10 +142,10 @@
 <ol>
 <li>Call <a href="general.html#iap_purchaseproduct">iap_PurchaseProduct</a> to purchase a product.</li>
 <li>In the <a href="https://manual.gamemaker.io/monthly/en/The_Asset_Editors/Object_Properties/Async_Events/IAP.htm">In-App Purchase Async Event</a>, check for the event type <code>iap_payment_queue_update</code>.</li>
-<li>Validate the receipt using <a href="general.html#iap_validatereceipt">iap_ValidateReceipt</a>.</li>
+<li>Validate the receipt using <a href="general.html#iap_validatereceipt">~~iap_ValidateReceipt~~ <img alt="⛔️" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/png/26d4.png" title=":no_entry:" /></a>.</li>
 <li>If the receipt isn't valid, refresh the receipt using <a href="general.html#iap_refreshreceipt">iap_RefreshReceipt</a>.<ul>
 <li>Listen to the <a href="https://manual.gamemaker.io/monthly/en/The_Asset_Editors/Object_Properties/Async_Events/IAP.htm">In-App Purchase Async Event</a> of type <code>iap_receipt_refresh</code>.</li>
-<li>If the status is <code>iap_receipt_refresh_success</code>, validate the receipt using <a href="general.html#iap_validatereceipt">iap_ValidateReceipt</a>.</li>
+<li>If the status is <code>iap_receipt_refresh_success</code>, validate the receipt using <a href="general.html#iap_validatereceipt">~~iap_ValidateReceipt~~ <img alt="⛔️" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/png/26d4.png" title=":no_entry:" /></a>.</li>
 <li>If the receipt isn't valid then finish the transaction with <a href="general.html#iap_finishtransaction">iap_FinishTransaction</a>.</li>
 <li>Handle the purchases with a function such as <code>HandlePurchases</code>.</li>
 </ul>
@@ -264,30 +260,18 @@ if (_purchases_json != "")
 <pre class="highlight"><code class="language-gml">iap_PurchaseProduct(product_id);</code></pre>
 <p>This function will generate an <a href="https://manual.gamemaker.io/monthly/en/The_Asset_Editors/Object_Properties/Async_Events/IAP.htm">In-App Purchase Async Event</a> of ID (or type) <code>iap_payment_queue_update</code>. This can then be processed in the exact same way as outlined above in the section on <a href="#restoring-purchases">Restoring Purchases</a>, as the async callback is identical.</p>
 <h2 id="validating">Validating</h2>
-<p>Before awarding and finalising any purchases, they must first be <strong>validated</strong>. Apple recommends that you do this with a private server but there is also a function to validate locally, but this is slightly less secure and requires you to include a <strong>Root Certificate</strong> with your game (see the section on <a href="#setting-up-your-game">Setting Up Your Game</a> for more details). The general workflow for validating using the two methods would be:</p>
-<ul>
-<li><strong>Server</strong>: When a purchase or restore event is triggered, you would get the purchase receipt (using the function <a href="general.html#iap_getreceipt">iap_GetReceipt</a>) and then send that off to your server using one of the <a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Reference/Asynchronous_Functions/HTTP/HTTP.htm">http_*() functions</a>. This would then validate the purchase with Apple and send a response back. This response would then be dealt with in the <a href="https://manual.gamemaker.io/monthly/en/The_Asset_Editors/Object_Properties/Async_Events/HTTP.htm">Http Async Event</a>, where you would then award the user the product they've bought or enable any features it unlocked. You would also store these details on your server so the game can check on restart any purchases or subscriptions. For more information, please see the <a href="https://developer.apple.com/documentation/appstorereceipts">Apple Documentation</a>.</li>
-<li><strong>Local</strong>: To validate locally, you must first call the function <a href="general.html#iap_getreceipt">iap_GetReceipt</a> to retrieve the receipt file, and then call the function <a href="general.html#iap_validatereceipt">iap_ValidateReceipt</a>. If that returns <code>true</code> then you can award products and unlock features as required. This would then be securely stored to a file so that on game restart it can be checked and all features or items be unlocked correctly.</li>
-</ul>
+<p>Before awarding and finalising any purchases, they must first be <strong>validated</strong>. Apple recommends that you do this with a private server using the following general workflow:</p>
+<ol>
+<li>When a purchase or restore event is triggered</li>
+<li>Here you would get the purchase receipt (using the function <a href="general.html#iap_getreceipt">iap_GetReceipt</a>).</li>
+<li>Send that off to your server using one of the <a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Reference/Asynchronous_Functions/HTTP/HTTP.htm">http_*() functions</a>.</li>
+<li>The server would then validate the purchase with Apple and send a response back. This response would then be dealt with in the <a href="https://manual.gamemaker.io/monthly/en/The_Asset_Editors/Object_Properties/Async_Events/HTTP.htm">Http Async Event</a>, where you would aftewards award the user the product they've bought or enable any features it unlocked. You would also store these details on your server so the game can check on restart any purchases or subscriptions. For more information, please see the <a href="https://developer.apple.com/documentation/appstorereceipts">Apple Documentation</a>.</li>
+</ol>
 <p>If validation fails you can re-check again by requesting a new receipt with the function <a href="general.html#iap_refreshreceipt">iap_RefreshReceipt</a>. This will trigger an <a href="https://manual.gamemaker.io/monthly/en/The_Asset_Editors/Object_Properties/Async_Events/IAP.htm">In-App Purchase Async Event</a>, and in this event the <a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Variables/Builtin_Global_Variables/async_load.htm">async_load</a> DS map <code>"id"</code> key will be the constant <code>iap_receipt_refresh</code>. It will also have an additional key <code>"status"</code>, which will be one of two constants: <code>iap_receipt_refresh_success</code> or <code>iap_receipt_refresh_failure</code>. If the refresh is successful, you can then retrieve the new receipt using the <a href="general.html#iap_getreceipt">iap_GetReceipt</a> function and go ahead and validate as before, but if it fails then you may want to try again at least once before deciding that something is wrong.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Failing validation is a rare occurrence and is very indicative that there is something unauthorised going on with the request. As such, you may want to consider locking down and preventing any further purchases – or at least not granting the products that were being validated – should validation fail 2 or more times. Any outstanding purchases should still be finalised at this time.</p>
 </div>
-<h3 id="local-validation">Local Validation</h3>
-<p>This extension includes a method of validating in-app purchases that does not require the setting up or use of external servers. However, the extension code also includes a warning about the potential for hacking intrinsic to this method of validation. This warning is in place as a means of highlighting the sensitive nature of the Receipt Validation code which is based on an open-source repository (and is credited as such).</p>
-<p>The intention of the inclusion of local receipt validation was to give you (the user) a means of allowing your project to get IAP code running quickly and be easily testable.</p>
-<p>It should be understood, however, that <strong>there is risk involved with running it in production</strong>. Since the source code is open source and is widely available and readable, using this code will make your receipt validation more vulnerable to potential attackers, and Apple themselves state that "it's important that you employ a solution that is unique to your application":</p>
-<blockquote>
-<p>https://developer.apple.com/library/archive/releasenotes/General/ValidateAppStoreReceipt/Introduction.html</p>
-</blockquote>
-<p>In this case, your available options are as follows:</p>
-<ul>
-<li>Leave this code in place and use local validation, having assessed and understood the risks.</li>
-<li>Alter the code in question (<code>VerifyStoreReceipt.h</code>/<code>VerifyStoreReceipt.mm</code>) to create your own custom solution for validating receipts, in which case you should study the following documentation: <a href="https://developer.apple.com/documentation/appstorereceipts/validating_receipts_on_the_device#//apple_ref/doc/uid/TP40010573-CH1-SW2">Validating receipts on the device</a>. In doing so, you should create your own solution for parsing and validating the iOS IAP receipt.</li>
-<li>Validate the receipt with the Apple App Store using the apple endpoints (not recommended) as described in the documentation: <a href="https://developer.apple.com/documentation/storekit/in-app_purchase/original_api_for_in-app_purchase/validating_receipts_with_the_app_store?language=objc">Validating receipts with the App Store</a>. If you decide to do so please refer to the function <code>RequestServerValidation</code> on the demo project, for an implementation example.</li>
-<li>Run a server that validates IAP receipts. This is Apple's preferred and suggested method, as it removes the ability for tampered-with iOS devices to spoof your validation code (since it is not executed on said compromised device).</li>
-</ul>
 <h2 id="finalising-purchase-requests">Finalising Purchase Requests</h2>
 <p>After making any purchase, it must be validated and finalised using the function <a href="general.html#iap_finishtransaction">iap_FinishTransaction</a>. Finalising a purchase removes it from the purchase queue and tells Apple that the transaction has been completed in one way or another, and this must be done <strong>regardless of whether the purchase was a success or a failure</strong>. When we talk about success or failure, we are referring to the <em>purchase status</em> as returned as part of the response data from a purchase query, a restore request, or a purchase request, and not to validation failure or anything else.</p>
 <div class="admonition note">
@@ -336,7 +320,7 @@ if (_purchases_json != "")
 
   <div role="contentinfo">
     <!-- Copyright etc -->
-      <p>YoYoGames 2024</p>
+      <p>YoYoGames 2025</p>
   </div>
 
   Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.

@@ -39,7 +39,7 @@
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
-                <li class="toctree-l1"><a class="" href="home.md">AppleIAP Extension</a>
+                <li class="toctree-l1"><a class="reference internal" href="home.html">AppleIAP Extension</a>
                 </li>
               </ul>
               <ul>
@@ -99,7 +99,7 @@
 <p><a href="https://developer.apple.com/documentation/appstorereceipts/validating_receipts_on_the_device#//apple_ref/doc/uid/TP40010573-CH1-SW2">Apple Developer Docs: Validating receipts on the device</a></p>
 <p><a href="https://developer.apple.com/documentation/storekit/in-app_purchase/original_api_for_in-app_purchase/validating_receipts_with_the_app_store#//apple_ref/doc/uid/TP40010573-CH104-SW1">Apple Developer Docs: Validating receipts with the App Store</a></p>
 <p>IMPORTANT</p>
-<p>In order for the function <a href="general.html#iap_validatereceipt">iap_ValidateReceipt</a> to return a <code>true</code> response, users must download the Apple Inc. Root Certificate and include it with their project in the <a href="https://manual.gamemaker.io/monthly/en/Settings/Included_Files.htm">Included Files</a> (using included files covers iOS/tvOS and macOS). See:</p>
+<p>In order for the function <a href="general.html#iap_validatereceipt">~~iap_ValidateReceipt~~ <img alt="⛔️" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/png/26d4.png" title=":no_entry:" /></a> to return a <code>true</code> response, users must download the Apple Inc. Root Certificate and include it with their project in the <a href="https://manual.gamemaker.io/monthly/en/Settings/Included_Files.htm">Included Files</a> (using included files covers iOS/tvOS and macOS). See:</p>
 <ul>
 <li>https://www.apple.com/certificateauthority/</li>
 <li>https://www.apple.com/appleca/AppleIncRootCertificate.cer</li>
@@ -119,7 +119,7 @@
 <li><a href="general.html#iap_querypurchases">iap_QueryPurchases</a></li>
 <li><a href="general.html#iap_getreceipt">iap_GetReceipt</a></li>
 <li><a href="general.html#iap_refreshreceipt">iap_RefreshReceipt</a></li>
-<li><a href="general.html#iap_validatereceipt">iap_ValidateReceipt</a></li>
+<li><a href="general.html#iap_validatereceipt">~~iap_ValidateReceipt~~ <img alt="⛔️" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/png/26d4.png" title=":no_entry:" /></a></li>
 </ul>
 <h2 id="constants">Constants</h2>
 <p>This section lists the constants of this extension.</p>
@@ -714,7 +714,14 @@ switch(_event_id)
 <p align="right"><a href="#top">Back To Top</a></p>
 
 <h1 id="iap_validatereceipt">iap_ValidateReceipt</h1>
+<blockquote>
+<p><img alt="⛔️" class="emojione" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/png/26d4.png" title=":no_entry:" /> This function was <strong>deprecated</strong> with version 2.0.3.</p>
+</blockquote>
 <p>This function can be used for local receipt validation with Apple. In general, you'd want to use a private server for validation of all purchases (especially subscriptions), but if that is not possible then you can use this function, after calling the <a href="general.html#iap_getreceipt">iap_GetReceipt</a> function to validate purchases. The function will return <code>true</code> if validation has been successful, or <code>false</code> otherwise, in which case you should attempt to refresh and revalidate the receipt using <a href="general.html#iap_refreshreceipt">iap_RefreshReceipt</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This function was deprecated and now always returns <code>true</code>.</p>
+</div>
 <p><br></p>
 <p><strong>Syntax:</strong></p>
 <blockquote>
@@ -730,6 +737,11 @@ switch(_event_id)
 <p><br></p>
 <p><strong>Example:</strong></p>
 <p>See <a href="general.html#iap_purchaseproduct">iap_PurchaseProduct</a> for an example on how to use this function.</p>
+<p><br></p>
+<p><strong>Versioning:</strong></p>
+<ul>
+<li><code>2.0.3</code> - This function was deprecated</li>
+</ul>
 <p><br></p>
 <p><br></p>
 <hr />
@@ -1120,7 +1132,7 @@ switch(_event_id)
 
   <div role="contentinfo">
     <!-- Copyright etc -->
-      <p>YoYoGames 2024</p>
+      <p>YoYoGames 2025</p>
   </div>
 
   Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.

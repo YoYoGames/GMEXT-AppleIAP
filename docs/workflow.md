@@ -171,31 +171,16 @@ This function will generate an ${event.iap} of ID (or type) `iap_payment_queue_u
 
 ## Validating
 
-Before awarding and finalising any purchases, they must first be **validated**. Apple recommends that you do this with a private server but there is also a function to validate locally, but this is slightly less secure and requires you to include a **Root Certificate** with your game (see the section on [Setting Up Your Game](#setting-up-your-game) for more details). The general workflow for validating using the two methods would be:
+Before awarding and finalising any purchases, they must first be **validated**. Apple recommends that you do this with a private server using the following general workflow:
 
-* **Server**: When a purchase or restore event is triggered, you would get the purchase receipt (using the function ${function.iap_GetReceipt}) and then send that off to your server using one of the [http_*() functions](https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Reference/Asynchronous_Functions/HTTP/HTTP.htm). This would then validate the purchase with Apple and send a response back. This response would then be dealt with in the ${event.http}, where you would then award the user the product they've bought or enable any features it unlocked. You would also store these details on your server so the game can check on restart any purchases or subscriptions. For more information, please see the [Apple Documentation](https://developer.apple.com/documentation/appstorereceipts).
-* **Local**: To validate locally, you must first call the function ${function.iap_GetReceipt} to retrieve the receipt file, and then call the function ${function.iap_ValidateReceipt}. If that returns `true` then you can award products and unlock features as required. This would then be securely stored to a file so that on game restart it can be checked and all features or items be unlocked correctly.
+1. When a purchase or restore event is triggered
+2. Here you would get the purchase receipt (using the function ${function.iap_GetReceipt}).
+3. Send that off to your server using one of the [http_*() functions](https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Reference/Asynchronous_Functions/HTTP/HTTP.htm).
+4. The server would then validate the purchase with Apple and send a response back. This response would then be dealt with in the ${event.http}, where you would aftewards award the user the product they've bought or enable any features it unlocked. You would also store these details on your server so the game can check on restart any purchases or subscriptions. For more information, please see the [Apple Documentation](https://developer.apple.com/documentation/appstorereceipts).
 
 If validation fails you can re-check again by requesting a new receipt with the function ${function.iap_RefreshReceipt}. This will trigger an ${event.iap}, and in this event the ${var.async_load} DS map `"id"` key will be the constant `iap_receipt_refresh`. It will also have an additional key `"status"`, which will be one of two constants: `iap_receipt_refresh_success` or `iap_receipt_refresh_failure`. If the refresh is successful, you can then retrieve the new receipt using the ${function.iap_GetReceipt} function and go ahead and validate as before, but if it fails then you may want to try again at least once before deciding that something is wrong.
 
 [[Note: Failing validation is a rare occurrence and is very indicative that there is something unauthorised going on with the request. As such, you may want to consider locking down and preventing any further purchases – or at least not granting the products that were being validated – should validation fail 2 or more times. Any outstanding purchases should still be finalised at this time.]]
-
-### Local Validation
-
-This extension includes a method of validating in-app purchases that does not require the setting up or use of external servers. However, the extension code also includes a warning about the potential for hacking intrinsic to this method of validation. This warning is in place as a means of highlighting the sensitive nature of the Receipt Validation code which is based on an open-source repository (and is credited as such).
-
-The intention of the inclusion of local receipt validation was to give you (the user) a means of allowing your project to get IAP code running quickly and be easily testable.
-
-It should be understood, however, that **there is risk involved with running it in production**. Since the source code is open source and is widely available and readable, using this code will make your receipt validation more vulnerable to potential attackers, and Apple themselves state that "it's important that you employ a solution that is unique to your application":
-
-> https://developer.apple.com/library/archive/releasenotes/General/ValidateAppStoreReceipt/Introduction.html
-
-In this case, your available options are as follows:
-
-* Leave this code in place and use local validation, having assessed and understood the risks.
-* Alter the code in question (`VerifyStoreReceipt.h`/`VerifyStoreReceipt.mm`) to create your own custom solution for validating receipts, in which case you should study the following documentation: [Validating receipts on the device](https://developer.apple.com/documentation/appstorereceipts/validating_receipts_on_the_device#//apple_ref/doc/uid/TP40010573-CH1-SW2). In doing so, you should create your own solution for parsing and validating the iOS IAP receipt.
-* Validate the receipt with the Apple App Store using the apple endpoints (not recommended) as described in the documentation: [Validating receipts with the App Store](https://developer.apple.com/documentation/storekit/in-app_purchase/original_api_for_in-app_purchase/validating_receipts_with_the_app_store?language=objc). If you decide to do so please refer to the function `RequestServerValidation` on the demo project, for an implementation example.
-* Run a server that validates IAP receipts. This is Apple's preferred and suggested method, as it removes the ability for tampered-with iOS devices to spoof your validation code (since it is not executed on said compromised device).
 
 ## Finalising Purchase Requests
 
