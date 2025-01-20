@@ -395,7 +395,12 @@ The `HandlePurchases` function is a custom function that handles the purchases o
 /**
  * @function iap_ValidateReceipt
  * @desc This function can be used for local receipt validation with Apple. In general, you'd want to use a private server for validation of all purchases (especially subscriptions), but if that is not possible then you can use this function, after calling the ${function.iap_GetReceipt} function to validate purchases. The function will return `true` if validation has been successful, or `false` otherwise, in which case you should attempt to refresh and revalidate the receipt using ${function.iap_RefreshReceipt}.
+ * 
+ * [[Note: This function was deprecated and now always returns `true`.]]
+ * 
  * @returns {boolean}
+ * 
+ * @version 2.0.3 (-) This function was deprecated
  * 
  * @example
  * See ${function.iap_PurchaseProduct} for an example on how to use this function.
