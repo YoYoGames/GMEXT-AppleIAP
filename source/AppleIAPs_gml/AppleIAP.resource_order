@@ -1,0 +1,11 @@
+{
+  "FolderOrderSettings":[
+    {"name":"ExtensionCore","order":1,"path":"folders/ExtensionCore.yy",},
+  ],
+  "ResourceOrderSettings":[
+    {"name":"GMAppleIAPs","order":2,"path":"extensions/GMAppleIAPs/GMAppleIAPs.yy",},
+    {"name":"AppleIAPs_Debug_Tools","order":1,"path":"scripts/AppleIAPs_Debug_Tools/AppleIAPs_Debug_Tools.yy",},
+    {"name":"ExtensionCore_api","order":1,"path":"scripts/ExtensionCore_api/ExtensionCore_api.yy",},
+    {"name":"GMAppleIAPs_API","order":3,"path":"scripts/GMAppleIAPs_API/GMAppleIAPs_API.yy",},
+  ],
+}

@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"GMAppleIAPs_API",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"GMAppleIAPs_API",
+  "parent":{
+    "name":"AppleIAP",
+    "path":"AppleIAP.yyp",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -1,0 +1,232 @@
+[gml_api]
+module GMAppleIAPs;
+
+// =============================================================================
+// Enums
+// =============================================================================
+
+[global, bind = typed_gml]
+enum AppleIAPProductsStatus : int32
+{
+    None = 0,
+    Success = 1,
+    EmptyProductIds = 2,
+    Error = 3,
+}
+
+[global, bind = typed_gml]
+enum AppleIAPPurchaseStatus : int32
+{
+    None = 0,
+    Success = 1,
+    UserCancelled = 2,
+    Pending = 3,
+    ProductNotFound = 4,
+    Error = 5,
+    Unknown = 6,
+}
+
+[global, bind = typed_gml]
+enum AppleIAPTransactionStatus : int32
+{
+    None = 0,
+    Success = 1,
+    InvalidTransactionId = 2,
+    TransactionNotFound = 3,
+    NoCurrentEntitlement = 4,
+    NoLatestTransaction = 5,
+    Error = 6,
+}
+
+[global, bind = typed_gml]
+enum AppleIAPSyncStatus : int32
+{
+    None = 0,
+    Success = 1,
+    Error = 2,
+}
+
+[global, bind = typed_gml]
+enum AppleIAPProductType : int32
+{
+    Unknown = 0,
+    Consumable = 1,
+    NonConsumable = 2,
+    NonRenewable = 3,
+    AutoRenewable = 4,
+}
+
+[global, bind = typed_gml]
+enum AppleIAPTransactionEnvironment : int32
+{
+    Unknown = 0,
+    Xcode = 1,
+    Sandbox = 2,
+    Production = 3,
+}
+
+[global, bind = typed_gml]
+enum AppleIAPTransactionOwnershipType : int32
+{
+    Unknown = 0,
+    Purchased = 1,
+    FamilyShared = 2,
+}
+
+[global, bind = typed_gml]
+enum AppleIAPRevocationReason : int32
+{
+    None = 0,
+    DeveloperIssue = 1,
+    Other = 2,
+    Unknown = 3,
+}
+
+// =============================================================================
+// Typed records
+// =============================================================================
+
+[global]
+class `[[AppleIAPProduct]]` prototype Object
+{
+    [field] property id : string { get; set; }
+    [field] property type : int32 { get; set; } // AppleIAPProductType
+    [field] property display_name : string { get; set; }
+    [field] property description : string { get; set; }
+    [field] property display_price : string { get; set; }
+    [field] property price : real { get; set; }
+    [field] property currency_code : string { get; set; }
+}
+
+[global]
+class `[[AppleIAPTransaction]]` prototype Object
+{
+    // IDs are strings to avoid UInt64 precision loss in GML.
+    [field] property id : string { get; set; }
+    [field] property original_id : string { get; set; }
+    [field] property web_order_line_item_id : string { get; set; }
+
+    [field] property product_id : string { get; set; }
+    [field] property product_type : int32 { get; set; } // AppleIAPProductType
+    [field] property subscription_group_id : string { get; set; }
+
+    // Dates are milliseconds since Unix epoch. 0 means unavailable.
+    [field] property purchase_date_ms : real { get; set; }
+    [field] property original_purchase_date_ms : real { get; set; }
+    [field] property expiration_date_ms : real { get; set; }
+    [field] property revocation_date_ms : real { get; set; }
+    [field] property signed_date_ms : real { get; set; }
+
+    [field] property revocation_reason : int32 { get; set; } // AppleIAPRevocationReason
+    [field] property is_upgraded : bool { get; set; }
+    [field] property ownership_type : int32 { get; set; } // AppleIAPTransactionOwnershipType
+    [field] property environment : int32 { get; set; } // AppleIAPTransactionEnvironment
+    [field] property app_account_token : string { get; set; }
+    [field] property offer_id : string { get; set; }
+}
+
+[global]
+class `[[AppleIAPVerifiedTransaction]]` prototype Object
+{
+    [field] property verified : bool { get; set; }
+    [field, type_hint = `AppleIAPTransaction`]
+    property transaction : gmval { get; set; }
+    [field] property verification_error : string { get; set; }
+}
+
+[global]
+class `[[AppleIAPProductsResult]]` prototype Object
+{
+    [field] property success : bool { get; set; }
+    [field] property status : int32 { get; set; } // AppleIAPProductsStatus
+    [field] property message : string { get; set; }
+    [field, type_hint = `AppleIAPProduct[]`]
+    property products : gmval { get; set; }
+}
+
+[global]
+class `[[AppleIAPPurchaseResult]]` prototype Object
+{
+    [field] property success : bool { get; set; }
+    [field] property status : int32 { get; set; } // AppleIAPPurchaseStatus
+    [field] property message : string { get; set; }
+    [field, type_hint = `AppleIAPVerifiedTransaction`]
+    property transaction : gmval { get; set; }
+}
+
+[global]
+class `[[AppleIAPTransactionFinishResult]]` prototype Object
+{
+    [field] property success : bool { get; set; }
+    [field] property status : int32 { get; set; } // AppleIAPTransactionStatus
+    [field] property message : string { get; set; }
+}
+
+[global]
+class `[[AppleIAPTransactionResult]]` prototype Object
+{
+    [field] property success : bool { get; set; }
+    [field] property status : int32 { get; set; } // AppleIAPTransactionStatus
+    [field] property message : string { get; set; }
+    [field, type_hint = `AppleIAPVerifiedTransaction`]
+    property transaction : gmval { get; set; }
+}
+
+[global]
+class `[[AppleIAPTransactionsResult]]` prototype Object
+{
+    [field] property success : bool { get; set; }
+    [field] property status : int32 { get; set; } // AppleIAPTransactionStatus
+    [field] property message : string { get; set; }
+    [field, type_hint = `AppleIAPVerifiedTransaction[]`]
+    property transactions : gmval { get; set; }
+}
+
+[global]
+class `[[AppleIAPSyncResult]]` prototype Object
+{
+    [field] property success : bool { get; set; }
+    [field] property status : int32 { get; set; } // AppleIAPSyncStatus
+    [field] property message : string { get; set; }
+}
+
+// =============================================================================
+// Functions
+// =============================================================================
+
+[global, bind = typed_gml]
+function apple_iap_init(): bool;
+
+[global, bind = typed_gml]
+function apple_iap_products([type_hint = `string[]`] products_id: gmval, callback: func): unit;
+
+[global, bind = typed_gml]
+function apple_iap_product_purchase(product_id: string, callback: func): unit;
+
+// transaction_id is string because StoreKit IDs are UInt64-sized.
+[global, bind = typed_gml]
+function apple_iap_transaction_finish(transaction_id: string, callback: func): unit;
+
+[global, bind = typed_gml]
+function apple_iap_transactions_updates(callback: func): unit;
+
+[global, bind = typed_gml]
+function apple_iap_transactions_updates_stop(): bool;
+
+[global, bind = typed_gml]
+function apple_iap_transactions_current_entitlement(product_id: string, callback: func): unit;
+
+[global, bind = typed_gml]
+function apple_iap_transactions_current_entitlements(callback: func): unit;
+
+[global, bind = typed_gml]
+function apple_iap_transactions_latest(product_id: string, callback: func): unit;
+
+[global, bind = typed_gml]
+function apple_iap_transactions_unfinished(callback: func): unit;
+
+[global, bind = typed_gml]
+function apple_iap_transactions_all(callback: func): unit;
+
+[global, bind = typed_gml]
+function apple_iap_synchronize(callback: func): unit;

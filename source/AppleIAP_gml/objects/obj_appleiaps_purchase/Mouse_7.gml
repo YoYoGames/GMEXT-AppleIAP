@@ -1,2 +1,0 @@
-
-iap_PurchaseProduct(productId);

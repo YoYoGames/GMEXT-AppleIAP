@@ -1,3 +1,0 @@
-
-text = "Locked"
-locked = true
