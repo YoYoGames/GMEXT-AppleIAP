@@ -82,13 +82,13 @@ enum AppleIAPRevocationReason
 // #####################################################################
 
 /**
- * @returns {Struct.AppleIAPProduct} 
+ * @returns {Struct.AppleIAPProduct}
  */
 function AppleIAPProduct() constructor
 {
     /**
      * Internally generated hash for quick validation
-     * @ignore 
+     * @ignore
      */
     static __uid = 2816369826;
 
@@ -103,13 +103,13 @@ function AppleIAPProduct() constructor
 }
 
 /**
- * @returns {Struct.AppleIAPTransaction} 
+ * @returns {Struct.AppleIAPTransaction}
  */
 function AppleIAPTransaction() constructor
 {
     /**
      * Internally generated hash for quick validation
-     * @ignore 
+     * @ignore
      */
     static __uid = 1635556429;
 
@@ -134,13 +134,13 @@ function AppleIAPTransaction() constructor
 }
 
 /**
- * @returns {Struct.AppleIAPTransactionFinishResult} 
+ * @returns {Struct.AppleIAPTransactionFinishResult}
  */
 function AppleIAPTransactionFinishResult() constructor
 {
     /**
      * Internally generated hash for quick validation
-     * @ignore 
+     * @ignore
      */
     static __uid = 1637047651;
 
@@ -151,13 +151,13 @@ function AppleIAPTransactionFinishResult() constructor
 }
 
 /**
- * @returns {Struct.AppleIAPSyncResult} 
+ * @returns {Struct.AppleIAPSyncResult}
  */
 function AppleIAPSyncResult() constructor
 {
     /**
      * Internally generated hash for quick validation
-     * @ignore 
+     * @ignore
      */
     static __uid = 1681862245;
 
@@ -168,13 +168,13 @@ function AppleIAPSyncResult() constructor
 }
 
 /**
- * @returns {Struct.AppleIAPProductsResult} 
+ * @returns {Struct.AppleIAPProductsResult}
  */
 function AppleIAPProductsResult() constructor
 {
     /**
      * Internally generated hash for quick validation
-     * @ignore 
+     * @ignore
      */
     static __uid = 717383690;
 
@@ -186,13 +186,13 @@ function AppleIAPProductsResult() constructor
 }
 
 /**
- * @returns {Struct.AppleIAPVerifiedTransaction} 
+ * @returns {Struct.AppleIAPVerifiedTransaction}
  */
 function AppleIAPVerifiedTransaction() constructor
 {
     /**
      * Internally generated hash for quick validation
-     * @ignore 
+     * @ignore
      */
     static __uid = 3715803513;
 
@@ -203,13 +203,13 @@ function AppleIAPVerifiedTransaction() constructor
 }
 
 /**
- * @returns {Struct.AppleIAPPurchaseResult} 
+ * @returns {Struct.AppleIAPPurchaseResult}
  */
 function AppleIAPPurchaseResult() constructor
 {
     /**
      * Internally generated hash for quick validation
-     * @ignore 
+     * @ignore
      */
     static __uid = 2439673653;
 
@@ -221,13 +221,13 @@ function AppleIAPPurchaseResult() constructor
 }
 
 /**
- * @returns {Struct.AppleIAPTransactionResult} 
+ * @returns {Struct.AppleIAPTransactionResult}
  */
 function AppleIAPTransactionResult() constructor
 {
     /**
      * Internally generated hash for quick validation
-     * @ignore 
+     * @ignore
      */
     static __uid = 3955262172;
 
@@ -239,13 +239,13 @@ function AppleIAPTransactionResult() constructor
 }
 
 /**
- * @returns {Struct.AppleIAPTransactionsResult} 
+ * @returns {Struct.AppleIAPTransactionsResult}
  */
 function AppleIAPTransactionsResult() constructor
 {
     /**
      * Internally generated hash for quick validation
-     * @ignore 
+     * @ignore
      */
     static __uid = 462979779;
 
@@ -266,7 +266,7 @@ function AppleIAPTransactionsResult() constructor
  * @param {Id.Buffer} _buffer
  * @param {Real} _offset
  * @param {String} _where
- * @ignore 
+ * @ignore
  */
 function __AppleIAPProduct_encode(_inst, _buffer, _offset, _where = _GMFUNCTION_)
 {
@@ -313,8 +313,8 @@ function __AppleIAPProduct_encode(_inst, _buffer, _offset, _where = _GMFUNCTION_
  * @func __AppleIAPProduct_decode(_buffer, _offset)
  * @param {Id.Buffer} _buffer
  * @param {Real} _offset
- * @returns {Struct.AppleIAPProduct} 
- * @ignore 
+ * @returns {Struct.AppleIAPProduct}
+ * @ignore
  */
 function __AppleIAPProduct_decode(_buffer, _offset)
 {
@@ -360,7 +360,7 @@ function __AppleIAPProduct_decode(_buffer, _offset)
  * @param {Id.Buffer} _buffer
  * @param {Real} _offset
  * @param {String} _where
- * @ignore 
+ * @ignore
  */
 function __AppleIAPTransaction_encode(_inst, _buffer, _offset, _where = _GMFUNCTION_)
 {
@@ -449,8 +449,8 @@ function __AppleIAPTransaction_encode(_inst, _buffer, _offset, _where = _GMFUNCT
  * @func __AppleIAPTransaction_decode(_buffer, _offset)
  * @param {Id.Buffer} _buffer
  * @param {Real} _offset
- * @returns {Struct.AppleIAPTransaction} 
- * @ignore 
+ * @returns {Struct.AppleIAPTransaction}
+ * @ignore
  */
 function __AppleIAPTransaction_decode(_buffer, _offset)
 {
@@ -528,7 +528,7 @@ function __AppleIAPTransaction_decode(_buffer, _offset)
  * @param {Id.Buffer} _buffer
  * @param {Real} _offset
  * @param {String} _where
- * @ignore 
+ * @ignore
  */
 function __AppleIAPTransactionFinishResult_encode(_inst, _buffer, _offset, _where = _GMFUNCTION_)
 {
@@ -555,8 +555,8 @@ function __AppleIAPTransactionFinishResult_encode(_inst, _buffer, _offset, _wher
  * @func __AppleIAPTransactionFinishResult_decode(_buffer, _offset)
  * @param {Id.Buffer} _buffer
  * @param {Real} _offset
- * @returns {Struct.AppleIAPTransactionFinishResult} 
- * @ignore 
+ * @returns {Struct.AppleIAPTransactionFinishResult}
+ * @ignore
  */
 function __AppleIAPTransactionFinishResult_decode(_buffer, _offset)
 {
@@ -586,7 +586,7 @@ function __AppleIAPTransactionFinishResult_decode(_buffer, _offset)
  * @param {Id.Buffer} _buffer
  * @param {Real} _offset
  * @param {String} _where
- * @ignore 
+ * @ignore
  */
 function __AppleIAPSyncResult_encode(_inst, _buffer, _offset, _where = _GMFUNCTION_)
 {
@@ -613,8 +613,8 @@ function __AppleIAPSyncResult_encode(_inst, _buffer, _offset, _where = _GMFUNCTI
  * @func __AppleIAPSyncResult_decode(_buffer, _offset)
  * @param {Id.Buffer} _buffer
  * @param {Real} _offset
- * @returns {Struct.AppleIAPSyncResult} 
- * @ignore 
+ * @returns {Struct.AppleIAPSyncResult}
+ * @ignore
  */
 function __AppleIAPSyncResult_decode(_buffer, _offset)
 {
@@ -644,7 +644,7 @@ function __AppleIAPSyncResult_decode(_buffer, _offset)
  * @param {Id.Buffer} _buffer
  * @param {Real} _offset
  * @param {String} _where
- * @ignore 
+ * @ignore
  */
 function __AppleIAPProductsResult_encode(_inst, _buffer, _offset, _where = _GMFUNCTION_)
 {
@@ -666,9 +666,9 @@ function __AppleIAPProductsResult_encode(_inst, _buffer, _offset, _where = _GMFU
 
         // field: products, type: struct AppleIAPProduct[]
         if (!is_array(self.products)) show_error($"{_where} :: self.products expected array", true);
-        var _length = array_length(self.products);
-        buffer_write(_buffer, buffer_u32, _length);
-        for (var _i = 0; _i < _length; ++_i)
+        var __length__ = array_length(self.products);
+        buffer_write(_buffer, buffer_u32, __length__);
+        for (var _i = 0; _i < __length__; ++_i)
         {
             if (self.products[_i].__uid != 2816369826) show_error($"{_where} :: self.products[_i] expected AppleIAPProduct", true);
             __AppleIAPProduct_encode(self.products[_i], _buffer, buffer_tell(_buffer), _where);
@@ -681,8 +681,8 @@ function __AppleIAPProductsResult_encode(_inst, _buffer, _offset, _where = _GMFU
  * @func __AppleIAPProductsResult_decode(_buffer, _offset)
  * @param {Id.Buffer} _buffer
  * @param {Real} _offset
- * @returns {Struct.AppleIAPProductsResult} 
- * @ignore 
+ * @returns {Struct.AppleIAPProductsResult}
+ * @ignore
  */
 function __AppleIAPProductsResult_decode(_buffer, _offset)
 {
@@ -702,9 +702,9 @@ function __AppleIAPProductsResult_decode(_buffer, _offset)
         self.message = buffer_read(_buffer, buffer_string);
 
         // field: products, type: struct AppleIAPProduct[]
-        var _length = buffer_read(_buffer, buffer_u32);
-        self.products = array_create(_length);
-        for (var _i = 0; _i < _length; ++_i)
+        var __length__ = buffer_read(_buffer, buffer_u32);
+        self.products = array_create(__length__);
+        for (var _i = 0; _i < __length__; ++_i)
         {
             self.products[_i] = __AppleIAPProduct_decode(_buffer, buffer_tell(_buffer));
         }
@@ -720,7 +720,7 @@ function __AppleIAPProductsResult_decode(_buffer, _offset)
  * @param {Id.Buffer} _buffer
  * @param {Real} _offset
  * @param {String} _where
- * @ignore 
+ * @ignore
  */
 function __AppleIAPVerifiedTransaction_encode(_inst, _buffer, _offset, _where = _GMFUNCTION_)
 {
@@ -747,8 +747,8 @@ function __AppleIAPVerifiedTransaction_encode(_inst, _buffer, _offset, _where = 
  * @func __AppleIAPVerifiedTransaction_decode(_buffer, _offset)
  * @param {Id.Buffer} _buffer
  * @param {Real} _offset
- * @returns {Struct.AppleIAPVerifiedTransaction} 
- * @ignore 
+ * @returns {Struct.AppleIAPVerifiedTransaction}
+ * @ignore
  */
 function __AppleIAPVerifiedTransaction_decode(_buffer, _offset)
 {
@@ -778,7 +778,7 @@ function __AppleIAPVerifiedTransaction_decode(_buffer, _offset)
  * @param {Id.Buffer} _buffer
  * @param {Real} _offset
  * @param {String} _where
- * @ignore 
+ * @ignore
  */
 function __AppleIAPPurchaseResult_encode(_inst, _buffer, _offset, _where = _GMFUNCTION_)
 {
@@ -809,8 +809,8 @@ function __AppleIAPPurchaseResult_encode(_inst, _buffer, _offset, _where = _GMFU
  * @func __AppleIAPPurchaseResult_decode(_buffer, _offset)
  * @param {Id.Buffer} _buffer
  * @param {Real} _offset
- * @returns {Struct.AppleIAPPurchaseResult} 
- * @ignore 
+ * @returns {Struct.AppleIAPPurchaseResult}
+ * @ignore
  */
 function __AppleIAPPurchaseResult_decode(_buffer, _offset)
 {
@@ -843,7 +843,7 @@ function __AppleIAPPurchaseResult_decode(_buffer, _offset)
  * @param {Id.Buffer} _buffer
  * @param {Real} _offset
  * @param {String} _where
- * @ignore 
+ * @ignore
  */
 function __AppleIAPTransactionResult_encode(_inst, _buffer, _offset, _where = _GMFUNCTION_)
 {
@@ -874,8 +874,8 @@ function __AppleIAPTransactionResult_encode(_inst, _buffer, _offset, _where = _G
  * @func __AppleIAPTransactionResult_decode(_buffer, _offset)
  * @param {Id.Buffer} _buffer
  * @param {Real} _offset
- * @returns {Struct.AppleIAPTransactionResult} 
- * @ignore 
+ * @returns {Struct.AppleIAPTransactionResult}
+ * @ignore
  */
 function __AppleIAPTransactionResult_decode(_buffer, _offset)
 {
@@ -908,7 +908,7 @@ function __AppleIAPTransactionResult_decode(_buffer, _offset)
  * @param {Id.Buffer} _buffer
  * @param {Real} _offset
  * @param {String} _where
- * @ignore 
+ * @ignore
  */
 function __AppleIAPTransactionsResult_encode(_inst, _buffer, _offset, _where = _GMFUNCTION_)
 {
@@ -930,9 +930,9 @@ function __AppleIAPTransactionsResult_encode(_inst, _buffer, _offset, _where = _
 
         // field: transactions, type: struct AppleIAPVerifiedTransaction[]
         if (!is_array(self.transactions)) show_error($"{_where} :: self.transactions expected array", true);
-        var _length = array_length(self.transactions);
-        buffer_write(_buffer, buffer_u32, _length);
-        for (var _i = 0; _i < _length; ++_i)
+        var __length__ = array_length(self.transactions);
+        buffer_write(_buffer, buffer_u32, __length__);
+        for (var _i = 0; _i < __length__; ++_i)
         {
             if (self.transactions[_i].__uid != 3715803513) show_error($"{_where} :: self.transactions[_i] expected AppleIAPVerifiedTransaction", true);
             __AppleIAPVerifiedTransaction_encode(self.transactions[_i], _buffer, buffer_tell(_buffer), _where);
@@ -945,8 +945,8 @@ function __AppleIAPTransactionsResult_encode(_inst, _buffer, _offset, _where = _
  * @func __AppleIAPTransactionsResult_decode(_buffer, _offset)
  * @param {Id.Buffer} _buffer
  * @param {Real} _offset
- * @returns {Struct.AppleIAPTransactionsResult} 
- * @ignore 
+ * @returns {Struct.AppleIAPTransactionsResult}
+ * @ignore
  */
 function __AppleIAPTransactionsResult_decode(_buffer, _offset)
 {
@@ -966,9 +966,9 @@ function __AppleIAPTransactionsResult_decode(_buffer, _offset)
         self.message = buffer_read(_buffer, buffer_string);
 
         // field: transactions, type: struct AppleIAPVerifiedTransaction[]
-        var _length = buffer_read(_buffer, buffer_u32);
-        self.transactions = array_create(_length);
-        for (var _i = 0; _i < _length; ++_i)
+        var __length__ = buffer_read(_buffer, buffer_u32);
+        self.transactions = array_create(__length__);
+        for (var _i = 0; _i < __length__; ++_i)
         {
             self.transactions[_i] = __AppleIAPVerifiedTransaction_decode(_buffer, buffer_tell(_buffer));
         }
@@ -991,15 +991,18 @@ function __AppleIAPTransactionsResult_decode(_buffer, _offset)
  */
 function apple_iap_products(_products_id, _callback)
 {
-    static __dispatcher = __GMAppleIAPs_get_dispatcher();
+    var __available__ = __GMAppleIAPs_is_available();
+    if (!__available__) return;
+
+    var __dispatcher__ = __GMAppleIAPs_get_dispatcher();
 
     var __args_buffer = __ext_core_get_args_buffer();
 
     // param: _products_id, type: String[]
     if (!is_array(_products_id)) show_error($"{_GMFUNCTION_} :: _products_id expected array", true);
-    var _length = array_length(_products_id);
-    buffer_write(__args_buffer, buffer_u32, _length);
-    for (var _i = 0; _i < _length; ++_i)
+    var __length__ = array_length(_products_id);
+    buffer_write(__args_buffer, buffer_u32, __length__);
+    for (var _i = 0; _i < __length__; ++_i)
     {
         if (!is_string(_products_id[_i])) show_error($"{_GMFUNCTION_} :: _products_id[_i] expected string", true);
         buffer_write(__args_buffer, buffer_u32, string_byte_length(_products_id[_i]));
@@ -1008,12 +1011,12 @@ function apple_iap_products(_products_id, _callback)
 
     // param: _callback, type: Function
     if (!is_callable(_callback)) show_error($"{_GMFUNCTION_} :: _callback expected callable type", true);
-    var _callback_handle = __ext_core_function_register(_callback, __dispatcher);
+    var _callback_handle = __ext_core_function_register(_callback, __dispatcher__);
     buffer_write(__args_buffer, buffer_u64, _callback_handle);
 
-    var _return_value = __apple_iap_products(buffer_get_address(__args_buffer), buffer_tell(__args_buffer));
+    var __return_value__ = __apple_iap_products(buffer_get_address(__args_buffer), buffer_tell(__args_buffer));
 
-    return _return_value;
+    return __return_value__;
 }
 
 /**
@@ -1022,7 +1025,10 @@ function apple_iap_products(_products_id, _callback)
  */
 function apple_iap_product_purchase(_product_id, _callback)
 {
-    static __dispatcher = __GMAppleIAPs_get_dispatcher();
+    var __available__ = __GMAppleIAPs_is_available();
+    if (!__available__) return;
+
+    var __dispatcher__ = __GMAppleIAPs_get_dispatcher();
 
     var __args_buffer = __ext_core_get_args_buffer();
 
@@ -1033,12 +1039,12 @@ function apple_iap_product_purchase(_product_id, _callback)
 
     // param: _callback, type: Function
     if (!is_callable(_callback)) show_error($"{_GMFUNCTION_} :: _callback expected callable type", true);
-    var _callback_handle = __ext_core_function_register(_callback, __dispatcher);
+    var _callback_handle = __ext_core_function_register(_callback, __dispatcher__);
     buffer_write(__args_buffer, buffer_u64, _callback_handle);
 
-    var _return_value = __apple_iap_product_purchase(buffer_get_address(__args_buffer), buffer_tell(__args_buffer));
+    var __return_value__ = __apple_iap_product_purchase(buffer_get_address(__args_buffer), buffer_tell(__args_buffer));
 
-    return _return_value;
+    return __return_value__;
 }
 
 /**
@@ -1047,7 +1053,10 @@ function apple_iap_product_purchase(_product_id, _callback)
  */
 function apple_iap_transaction_finish(_transaction_id, _callback)
 {
-    static __dispatcher = __GMAppleIAPs_get_dispatcher();
+    var __available__ = __GMAppleIAPs_is_available();
+    if (!__available__) return;
+
+    var __dispatcher__ = __GMAppleIAPs_get_dispatcher();
 
     var __args_buffer = __ext_core_get_args_buffer();
 
@@ -1058,12 +1067,12 @@ function apple_iap_transaction_finish(_transaction_id, _callback)
 
     // param: _callback, type: Function
     if (!is_callable(_callback)) show_error($"{_GMFUNCTION_} :: _callback expected callable type", true);
-    var _callback_handle = __ext_core_function_register(_callback, __dispatcher);
+    var _callback_handle = __ext_core_function_register(_callback, __dispatcher__);
     buffer_write(__args_buffer, buffer_u64, _callback_handle);
 
-    var _return_value = __apple_iap_transaction_finish(buffer_get_address(__args_buffer), buffer_tell(__args_buffer));
+    var __return_value__ = __apple_iap_transaction_finish(buffer_get_address(__args_buffer), buffer_tell(__args_buffer));
 
-    return _return_value;
+    return __return_value__;
 }
 
 /**
@@ -1071,18 +1080,21 @@ function apple_iap_transaction_finish(_transaction_id, _callback)
  */
 function apple_iap_transactions_updates(_callback)
 {
-    static __dispatcher = __GMAppleIAPs_get_dispatcher();
+    var __available__ = __GMAppleIAPs_is_available();
+    if (!__available__) return;
+
+    var __dispatcher__ = __GMAppleIAPs_get_dispatcher();
 
     var __args_buffer = __ext_core_get_args_buffer();
 
     // param: _callback, type: Function
     if (!is_callable(_callback)) show_error($"{_GMFUNCTION_} :: _callback expected callable type", true);
-    var _callback_handle = __ext_core_function_register(_callback, __dispatcher);
+    var _callback_handle = __ext_core_function_register(_callback, __dispatcher__);
     buffer_write(__args_buffer, buffer_u64, _callback_handle);
 
-    var _return_value = __apple_iap_transactions_updates(buffer_get_address(__args_buffer), buffer_tell(__args_buffer));
+    var __return_value__ = __apple_iap_transactions_updates(buffer_get_address(__args_buffer), buffer_tell(__args_buffer));
 
-    return _return_value;
+    return __return_value__;
 }
 
 // Skipping function apple_iap_transactions_updates_stop (no wrapper is required)
@@ -1094,7 +1106,10 @@ function apple_iap_transactions_updates(_callback)
  */
 function apple_iap_transactions_current_entitlement(_product_id, _callback)
 {
-    static __dispatcher = __GMAppleIAPs_get_dispatcher();
+    var __available__ = __GMAppleIAPs_is_available();
+    if (!__available__) return;
+
+    var __dispatcher__ = __GMAppleIAPs_get_dispatcher();
 
     var __args_buffer = __ext_core_get_args_buffer();
 
@@ -1105,12 +1120,12 @@ function apple_iap_transactions_current_entitlement(_product_id, _callback)
 
     // param: _callback, type: Function
     if (!is_callable(_callback)) show_error($"{_GMFUNCTION_} :: _callback expected callable type", true);
-    var _callback_handle = __ext_core_function_register(_callback, __dispatcher);
+    var _callback_handle = __ext_core_function_register(_callback, __dispatcher__);
     buffer_write(__args_buffer, buffer_u64, _callback_handle);
 
-    var _return_value = __apple_iap_transactions_current_entitlement(buffer_get_address(__args_buffer), buffer_tell(__args_buffer));
+    var __return_value__ = __apple_iap_transactions_current_entitlement(buffer_get_address(__args_buffer), buffer_tell(__args_buffer));
 
-    return _return_value;
+    return __return_value__;
 }
 
 /**
@@ -1118,18 +1133,21 @@ function apple_iap_transactions_current_entitlement(_product_id, _callback)
  */
 function apple_iap_transactions_current_entitlements(_callback)
 {
-    static __dispatcher = __GMAppleIAPs_get_dispatcher();
+    var __available__ = __GMAppleIAPs_is_available();
+    if (!__available__) return;
+
+    var __dispatcher__ = __GMAppleIAPs_get_dispatcher();
 
     var __args_buffer = __ext_core_get_args_buffer();
 
     // param: _callback, type: Function
     if (!is_callable(_callback)) show_error($"{_GMFUNCTION_} :: _callback expected callable type", true);
-    var _callback_handle = __ext_core_function_register(_callback, __dispatcher);
+    var _callback_handle = __ext_core_function_register(_callback, __dispatcher__);
     buffer_write(__args_buffer, buffer_u64, _callback_handle);
 
-    var _return_value = __apple_iap_transactions_current_entitlements(buffer_get_address(__args_buffer), buffer_tell(__args_buffer));
+    var __return_value__ = __apple_iap_transactions_current_entitlements(buffer_get_address(__args_buffer), buffer_tell(__args_buffer));
 
-    return _return_value;
+    return __return_value__;
 }
 
 /**
@@ -1138,7 +1156,10 @@ function apple_iap_transactions_current_entitlements(_callback)
  */
 function apple_iap_transactions_latest(_product_id, _callback)
 {
-    static __dispatcher = __GMAppleIAPs_get_dispatcher();
+    var __available__ = __GMAppleIAPs_is_available();
+    if (!__available__) return;
+
+    var __dispatcher__ = __GMAppleIAPs_get_dispatcher();
 
     var __args_buffer = __ext_core_get_args_buffer();
 
@@ -1149,12 +1170,12 @@ function apple_iap_transactions_latest(_product_id, _callback)
 
     // param: _callback, type: Function
     if (!is_callable(_callback)) show_error($"{_GMFUNCTION_} :: _callback expected callable type", true);
-    var _callback_handle = __ext_core_function_register(_callback, __dispatcher);
+    var _callback_handle = __ext_core_function_register(_callback, __dispatcher__);
     buffer_write(__args_buffer, buffer_u64, _callback_handle);
 
-    var _return_value = __apple_iap_transactions_latest(buffer_get_address(__args_buffer), buffer_tell(__args_buffer));
+    var __return_value__ = __apple_iap_transactions_latest(buffer_get_address(__args_buffer), buffer_tell(__args_buffer));
 
-    return _return_value;
+    return __return_value__;
 }
 
 /**
@@ -1162,18 +1183,21 @@ function apple_iap_transactions_latest(_product_id, _callback)
  */
 function apple_iap_transactions_unfinished(_callback)
 {
-    static __dispatcher = __GMAppleIAPs_get_dispatcher();
+    var __available__ = __GMAppleIAPs_is_available();
+    if (!__available__) return;
+
+    var __dispatcher__ = __GMAppleIAPs_get_dispatcher();
 
     var __args_buffer = __ext_core_get_args_buffer();
 
     // param: _callback, type: Function
     if (!is_callable(_callback)) show_error($"{_GMFUNCTION_} :: _callback expected callable type", true);
-    var _callback_handle = __ext_core_function_register(_callback, __dispatcher);
+    var _callback_handle = __ext_core_function_register(_callback, __dispatcher__);
     buffer_write(__args_buffer, buffer_u64, _callback_handle);
 
-    var _return_value = __apple_iap_transactions_unfinished(buffer_get_address(__args_buffer), buffer_tell(__args_buffer));
+    var __return_value__ = __apple_iap_transactions_unfinished(buffer_get_address(__args_buffer), buffer_tell(__args_buffer));
 
-    return _return_value;
+    return __return_value__;
 }
 
 /**
@@ -1181,18 +1205,21 @@ function apple_iap_transactions_unfinished(_callback)
  */
 function apple_iap_transactions_all(_callback)
 {
-    static __dispatcher = __GMAppleIAPs_get_dispatcher();
+    var __available__ = __GMAppleIAPs_is_available();
+    if (!__available__) return;
+
+    var __dispatcher__ = __GMAppleIAPs_get_dispatcher();
 
     var __args_buffer = __ext_core_get_args_buffer();
 
     // param: _callback, type: Function
     if (!is_callable(_callback)) show_error($"{_GMFUNCTION_} :: _callback expected callable type", true);
-    var _callback_handle = __ext_core_function_register(_callback, __dispatcher);
+    var _callback_handle = __ext_core_function_register(_callback, __dispatcher__);
     buffer_write(__args_buffer, buffer_u64, _callback_handle);
 
-    var _return_value = __apple_iap_transactions_all(buffer_get_address(__args_buffer), buffer_tell(__args_buffer));
+    var __return_value__ = __apple_iap_transactions_all(buffer_get_address(__args_buffer), buffer_tell(__args_buffer));
 
-    return _return_value;
+    return __return_value__;
 }
 
 /**
@@ -1200,24 +1227,27 @@ function apple_iap_transactions_all(_callback)
  */
 function apple_iap_synchronize(_callback)
 {
-    static __dispatcher = __GMAppleIAPs_get_dispatcher();
+    var __available__ = __GMAppleIAPs_is_available();
+    if (!__available__) return;
+
+    var __dispatcher__ = __GMAppleIAPs_get_dispatcher();
 
     var __args_buffer = __ext_core_get_args_buffer();
 
     // param: _callback, type: Function
     if (!is_callable(_callback)) show_error($"{_GMFUNCTION_} :: _callback expected callable type", true);
-    var _callback_handle = __ext_core_function_register(_callback, __dispatcher);
+    var _callback_handle = __ext_core_function_register(_callback, __dispatcher__);
     buffer_write(__args_buffer, buffer_u64, _callback_handle);
 
-    var _return_value = __apple_iap_synchronize(buffer_get_address(__args_buffer), buffer_tell(__args_buffer));
+    var __return_value__ = __apple_iap_synchronize(buffer_get_address(__args_buffer), buffer_tell(__args_buffer));
 
-    return _return_value;
+    return __return_value__;
 }
 
 /// @ignore
 function __GMAppleIAPs_get_decoders()
 {
-    static __decoders = [
+    static __decoders__ = [
         __AppleIAPProduct_decode,
         __AppleIAPTransaction_decode,
         __AppleIAPTransactionFinishResult_decode,
@@ -1228,11 +1258,17 @@ function __GMAppleIAPs_get_decoders()
         __AppleIAPTransactionResult_decode,
         __AppleIAPTransactionsResult_decode
     ];
-    return __decoders;
+    return __decoders__;
 }
 /// @ignore
 function __GMAppleIAPs_get_dispatcher()
 {
-    static __dispatcher = new __GMNativeFunctionDispatcher(__GMAppleIAPs_invocation_handler, __GMAppleIAPs_get_decoders());
-    return __dispatcher;
+    static __dispatcher__ = new __GMNativeFunctionDispatcher(__GMAppleIAPs_invocation_handler, __GMAppleIAPs_get_decoders());
+    return __dispatcher__;
+}
+/// @ignore
+function __GMAppleIAPs_is_available()
+{
+    static __available__ = extension_exists("GMAppleIAPs");
+    return __available__;
 }
