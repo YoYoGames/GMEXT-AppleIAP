@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"AppleIAPs_Debug_Tools",
+  "%Name":"scr_apple_iap_debug_tools",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"AppleIAPs_Debug_Tools",
+  "name":"scr_apple_iap_debug_tools",
   "parent":{
     "name":"AppleIAPs Demo",
     "path":"folders/AppleIAPs Demo.yy",
