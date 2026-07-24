@@ -85,7 +85,7 @@ apple_iap_products(_product_ids, function(result, products) {
 			200 + 300 * a,
 			room_height / 2,
 			0,
-			Obj_AppleIAP_Product,
+			obj_apple_iap_product,
 			{
 				data: _product
 			}
