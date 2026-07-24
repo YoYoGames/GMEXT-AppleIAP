@@ -57,7 +57,8 @@ public class GMAppleIAPsSwift: GMAppleIAPsInternalSwift {
 
                 do {
                     let transaction = try self.checkVerified(result)
-                    callback.call(
+                    self.invokeCallback(
+                        callback,
                         self.transactionResult(
                             success: true,
                             status: AppleIAPTransactionStatus.Success
@@ -65,22 +66,24 @@ public class GMAppleIAPsSwift: GMAppleIAPsInternalSwift {
                         self.transactionToRecord(transaction)
                     )
                 } catch StoreError.failedVerification {
-                    callback.call(
+                    self.invokeCallback(
+                        callback,
                         self.transactionResult(
                             success: false,
                             status: AppleIAPTransactionStatus.VerificationFailed,
                             message: StoreError.failedVerification.localizedDescription
                         ),
-                        self.emptyTransaction()
+                        nil
                     )
                 } catch {
-                    callback.call(
+                    self.invokeCallback(
+                        callback,
                         self.transactionResult(
                             success: false,
                             status: AppleIAPTransactionStatus.Error,
                             message: error.localizedDescription
                         ),
-                        self.emptyTransaction()
+                        nil
                     )
                 }
             }
@@ -136,13 +139,14 @@ public class GMAppleIAPsSwift: GMAppleIAPsInternalSwift {
     public override func apple_iap_product_purchase(product_id: String, callback: GMFunction) {
         Task {
             guard let product = await self.productCache.product(for: product_id) else {
-                callback.call(
+                self.invokeCallback(
+                    callback,
                     self.purchaseResult(
                         success: false,
                         status: AppleIAPPurchaseStatus.ProductNotFound,
                         message: "Product not found. Call apple_iap_products first."
                     ),
-                    self.emptyTransaction()
+                    nil
                 )
                 return
             }
@@ -153,7 +157,8 @@ public class GMAppleIAPsSwift: GMAppleIAPsInternalSwift {
                 switch purchaseResult {
                 case .success(let verificationResult):
                     let transaction = try self.checkVerified(verificationResult)
-                    callback.call(
+                    self.invokeCallback(
+                        callback,
                         self.purchaseResult(
                             success: true,
                             status: AppleIAPPurchaseStatus.Success
@@ -162,50 +167,55 @@ public class GMAppleIAPsSwift: GMAppleIAPsInternalSwift {
                     )
 
                 case .userCancelled:
-                    callback.call(
+                    self.invokeCallback(
+                        callback,
                         self.purchaseResult(
-                            success: true,
+                            success: false,
                             status: AppleIAPPurchaseStatus.UserCancelled
                         ),
-                        self.emptyTransaction()
+                        nil
                     )
 
                 case .pending:
-                    callback.call(
+                    self.invokeCallback(
+                        callback,
                         self.purchaseResult(
-                            success: true,
+                            success: false,
                             status: AppleIAPPurchaseStatus.Pending
                         ),
-                        self.emptyTransaction()
+                        nil
                     )
 
                 @unknown default:
-                    callback.call(
+                    self.invokeCallback(
+                        callback,
                         self.purchaseResult(
                             success: false,
                             status: AppleIAPPurchaseStatus.Unknown,
                             message: "Unknown StoreKit purchase result."
                         ),
-                        self.emptyTransaction()
+                        nil
                     )
                 }
             } catch StoreError.failedVerification {
-                callback.call(
+                self.invokeCallback(
+                    callback,
                     self.purchaseResult(
                         success: false,
                         status: AppleIAPPurchaseStatus.VerificationFailed,
                         message: StoreError.failedVerification.localizedDescription
                     ),
-                    self.emptyTransaction()
+                    nil
                 )
             } catch {
-                callback.call(
+                self.invokeCallback(
+                    callback,
                     self.purchaseResult(
                         success: false,
                         status: AppleIAPPurchaseStatus.Error,
                         message: error.localizedDescription
                     ),
-                    self.emptyTransaction()
+                    nil
                 )
             }
         }
@@ -227,17 +237,32 @@ public class GMAppleIAPsSwift: GMAppleIAPsInternalSwift {
             }
 
             for await result in StoreKit.Transaction.unfinished {
-                // Never finish an unverified transaction.
-                guard case .verified(let transaction) = result else {
-                    continue
-                }
+                switch result {
+                case .verified(let transaction):
+                    guard transaction.id == targetId else {
+                        continue
+                    }
 
-                if transaction.id == targetId {
                     await transaction.finish()
                     callback.call(
                         self.transactionFinishResult(
                             success: true,
                             status: AppleIAPTransactionStatus.Success
+                        )
+                    )
+                    return
+
+                case .unverified(let transaction, let verificationError):
+                    guard transaction.id == targetId else {
+                        continue
+                    }
+
+                    // Identify the matching transaction, but never finish it.
+                    callback.call(
+                        self.transactionFinishResult(
+                            success: false,
+                            status: AppleIAPTransactionStatus.VerificationFailed,
+                            message: verificationError.localizedDescription
                         )
                     )
                     return
@@ -248,7 +273,7 @@ public class GMAppleIAPsSwift: GMAppleIAPsInternalSwift {
                 self.transactionFinishResult(
                     success: false,
                     status: AppleIAPTransactionStatus.TransactionNotFound,
-                    message: "Transaction not found in verified unfinished transactions."
+                    message: "Transaction not found in unfinished transactions."
                 )
             )
         }
@@ -260,7 +285,8 @@ public class GMAppleIAPsSwift: GMAppleIAPsInternalSwift {
                 if #available(iOS 18.4, macOS 15.4, tvOS 18.4, *) {
                     for await result in Transaction.currentEntitlements(for: product_id) {
                         let transaction = try self.checkVerified(result)
-                        callback.call(
+                        self.invokeCallback(
+                            callback,
                             self.transactionResult(
                                 success: true,
                                 status: AppleIAPTransactionStatus.Success
@@ -271,7 +297,8 @@ public class GMAppleIAPsSwift: GMAppleIAPsInternalSwift {
                     }
                 } else if let result = await self.legacyCurrentEntitlement(for: product_id) {
                     let transaction = try self.checkVerified(result)
-                    callback.call(
+                    self.invokeCallback(
+                        callback,
                         self.transactionResult(
                             success: true,
                             status: AppleIAPTransactionStatus.Success
@@ -281,31 +308,34 @@ public class GMAppleIAPsSwift: GMAppleIAPsInternalSwift {
                     return
                 }
 
-                callback.call(
+                self.invokeCallback(
+                    callback,
                     self.transactionResult(
                         success: false,
                         status: AppleIAPTransactionStatus.NoCurrentEntitlement,
                         message: "No current entitlement for this product."
                     ),
-                    self.emptyTransaction()
+                    nil
                 )
             } catch StoreError.failedVerification {
-                callback.call(
+                self.invokeCallback(
+                    callback,
                     self.transactionResult(
                         success: false,
                         status: AppleIAPTransactionStatus.VerificationFailed,
                         message: StoreError.failedVerification.localizedDescription
                     ),
-                    self.emptyTransaction()
+                    nil
                 )
             } catch {
-                callback.call(
+                self.invokeCallback(
+                    callback,
                     self.transactionResult(
                         success: false,
                         status: AppleIAPTransactionStatus.Error,
                         message: error.localizedDescription
                     ),
-                    self.emptyTransaction()
+                    nil
                 )
             }
         }
@@ -313,40 +343,30 @@ public class GMAppleIAPsSwift: GMAppleIAPsInternalSwift {
 
     public override func apple_iap_transactions_current_entitlements(callback: GMFunction) {
         Task {
-            do {
-                var transactions: [AppleIAPTransaction] = []
+            var transactions: [AppleIAPTransaction] = []
+            var verificationFailureCount = 0
+            var firstVerificationError = ""
 
-                for await result in Transaction.currentEntitlements {
-                    let transaction = try self.checkVerified(result)
+            for await result in Transaction.currentEntitlements {
+                switch result {
+                case .verified(let transaction):
                     transactions.append(self.transactionToRecord(transaction))
-                }
 
-                callback.call(
-                    self.transactionsResult(
-                        success: true,
-                        status: AppleIAPTransactionStatus.Success
-                    ),
-                    transactions
-                )
-            } catch StoreError.failedVerification {
-                callback.call(
-                    self.transactionsResult(
-                        success: false,
-                        status: AppleIAPTransactionStatus.VerificationFailed,
-                        message: StoreError.failedVerification.localizedDescription
-                    ),
-                    [AppleIAPTransaction]()
-                )
-            } catch {
-                callback.call(
-                    self.transactionsResult(
-                        success: false,
-                        status: AppleIAPTransactionStatus.Error,
-                        message: error.localizedDescription
-                    ),
-                    [AppleIAPTransaction]()
-                )
+                case .unverified(_, let verificationError):
+                    verificationFailureCount += 1
+                    if firstVerificationError.isEmpty {
+                        firstVerificationError = verificationError.localizedDescription
+                    }
+                }
             }
+
+            callback.call(
+                self.transactionsResultForCollection(
+                    verificationFailureCount: verificationFailureCount,
+                    firstVerificationError: firstVerificationError
+                ),
+                transactions
+            )
         }
     }
 
@@ -354,19 +374,21 @@ public class GMAppleIAPsSwift: GMAppleIAPsInternalSwift {
         Task {
             do {
                 guard let result = await Transaction.latest(for: product_id) else {
-                    callback.call(
+                    self.invokeCallback(
+                        callback,
                         self.transactionResult(
                             success: false,
                             status: AppleIAPTransactionStatus.NoLatestTransaction,
                             message: "No latest transaction for this product."
                         ),
-                        self.emptyTransaction()
+                        nil
                     )
                     return
                 }
 
                 let transaction = try self.checkVerified(result)
-                callback.call(
+                self.invokeCallback(
+                    callback,
                     self.transactionResult(
                         success: true,
                         status: AppleIAPTransactionStatus.Success
@@ -374,22 +396,24 @@ public class GMAppleIAPsSwift: GMAppleIAPsInternalSwift {
                     self.transactionToRecord(transaction)
                 )
             } catch StoreError.failedVerification {
-                callback.call(
+                self.invokeCallback(
+                    callback,
                     self.transactionResult(
                         success: false,
                         status: AppleIAPTransactionStatus.VerificationFailed,
                         message: StoreError.failedVerification.localizedDescription
                     ),
-                    self.emptyTransaction()
+                    nil
                 )
             } catch {
-                callback.call(
+                self.invokeCallback(
+                    callback,
                     self.transactionResult(
                         success: false,
                         status: AppleIAPTransactionStatus.Error,
                         message: error.localizedDescription
                     ),
-                    self.emptyTransaction()
+                    nil
                 )
             }
         }
@@ -397,79 +421,59 @@ public class GMAppleIAPsSwift: GMAppleIAPsInternalSwift {
 
     public override func apple_iap_transactions_unfinished(callback: GMFunction) {
         Task {
-            do {
-                var transactions: [AppleIAPTransaction] = []
+            var transactions: [AppleIAPTransaction] = []
+            var verificationFailureCount = 0
+            var firstVerificationError = ""
 
-                for await result in Transaction.unfinished {
-                    let transaction = try self.checkVerified(result)
+            for await result in Transaction.unfinished {
+                switch result {
+                case .verified(let transaction):
                     transactions.append(self.transactionToRecord(transaction))
-                }
 
-                callback.call(
-                    self.transactionsResult(
-                        success: true,
-                        status: AppleIAPTransactionStatus.Success
-                    ),
-                    transactions
-                )
-            } catch StoreError.failedVerification {
-                callback.call(
-                    self.transactionsResult(
-                        success: false,
-                        status: AppleIAPTransactionStatus.VerificationFailed,
-                        message: StoreError.failedVerification.localizedDescription
-                    ),
-                    [AppleIAPTransaction]()
-                )
-            } catch {
-                callback.call(
-                    self.transactionsResult(
-                        success: false,
-                        status: AppleIAPTransactionStatus.Error,
-                        message: error.localizedDescription
-                    ),
-                    [AppleIAPTransaction]()
-                )
+                case .unverified(_, let verificationError):
+                    verificationFailureCount += 1
+                    if firstVerificationError.isEmpty {
+                        firstVerificationError = verificationError.localizedDescription
+                    }
+                }
             }
+
+            callback.call(
+                self.transactionsResultForCollection(
+                    verificationFailureCount: verificationFailureCount,
+                    firstVerificationError: firstVerificationError
+                ),
+                transactions
+            )
         }
     }
 
     public override func apple_iap_transactions_all(callback: GMFunction) {
         Task {
-            do {
-                var transactions: [AppleIAPTransaction] = []
+            var transactions: [AppleIAPTransaction] = []
+            var verificationFailureCount = 0
+            var firstVerificationError = ""
 
-                for await result in Transaction.all {
-                    let transaction = try self.checkVerified(result)
+            for await result in Transaction.all {
+                switch result {
+                case .verified(let transaction):
                     transactions.append(self.transactionToRecord(transaction))
-                }
 
-                callback.call(
-                    self.transactionsResult(
-                        success: true,
-                        status: AppleIAPTransactionStatus.Success
-                    ),
-                    transactions
-                )
-            } catch StoreError.failedVerification {
-                callback.call(
-                    self.transactionsResult(
-                        success: false,
-                        status: AppleIAPTransactionStatus.VerificationFailed,
-                        message: StoreError.failedVerification.localizedDescription
-                    ),
-                    [AppleIAPTransaction]()
-                )
-            } catch {
-                callback.call(
-                    self.transactionsResult(
-                        success: false,
-                        status: AppleIAPTransactionStatus.Error,
-                        message: error.localizedDescription
-                    ),
-                    [AppleIAPTransaction]()
-                )
+                case .unverified(_, let verificationError):
+                    verificationFailureCount += 1
+                    if firstVerificationError.isEmpty {
+                        firstVerificationError = verificationError.localizedDescription
+                    }
+                }
             }
+
+            callback.call(
+                self.transactionsResultForCollection(
+                    verificationFailureCount: verificationFailureCount,
+                    firstVerificationError: firstVerificationError
+                ),
+                transactions
+            )
         }
     }
 
@@ -517,6 +521,59 @@ private extension GMAppleIAPsSwift {
     func legacyCurrentEntitlement(for productId: String) async -> VerificationResult<Transaction>? {
         return await Transaction.currentEntitlement(for: productId)
     }
+
+    // MARK: - Typed callback helpers
+
+    /// GMFunction's C++ bridge cannot construct std::optional<T> directly from
+    /// Swift. When the optional payload is absent, call the GML function with
+    /// only the result argument; the declared second GML parameter is undefined.
+    func invokeCallback(
+        _ callback: GMFunction,
+        _ result: AppleIAPPurchaseResult,
+        _ transaction: AppleIAPTransaction?
+    ) {
+        if let transaction {
+            callback.call(result, transaction)
+        } else {
+            callback.call(result)
+        }
+    }
+
+    func invokeCallback(
+        _ callback: GMFunction,
+        _ result: AppleIAPTransactionResult,
+        _ transaction: AppleIAPTransaction?
+    ) {
+        if let transaction {
+            callback.call(result, transaction)
+        } else {
+            callback.call(result)
+        }
+    }
+
+    func transactionsResultForCollection(
+        verificationFailureCount: Int,
+        firstVerificationError: String
+    ) -> AppleIAPTransactionsResult {
+        guard verificationFailureCount > 0 else {
+            return transactionsResult(
+                success: true,
+                status: AppleIAPTransactionStatus.Success
+            )
+        }
+
+        var message = "\(verificationFailureCount) transaction(s) failed StoreKit verification. Verified transactions are included."
+        if !firstVerificationError.isEmpty {
+            message += " First verification error: \(firstVerificationError)"
+        }
+
+        return transactionsResult(
+            success: false,
+            status: AppleIAPTransactionStatus.VerificationFailed,
+            message: message
+        )
+    }
+
 
     // MARK: - Result helpers
 
@@ -592,27 +649,6 @@ private extension GMAppleIAPsSwift {
         )
     }
 
-    func emptyTransaction() -> AppleIAPTransaction {
-        return AppleIAPTransaction(
-            id: "",
-            original_id: "",
-            web_order_line_item_id: "",
-            product_id: "",
-            product_type: AppleIAPProductType.Unknown,
-            subscription_group_id: "",
-            purchase_date_ms: 0.0,
-            original_purchase_date_ms: 0.0,
-            expiration_date_ms: 0.0,
-            revocation_date_ms: 0.0,
-            signed_date_ms: 0.0,
-            revocation_reason: AppleIAPRevocationReason.None,
-            is_upgraded: false,
-            ownership_type: AppleIAPTransactionOwnershipType.Unknown,
-            environment: AppleIAPTransactionEnvironment.Unknown,
-            app_account_token: "",
-            offer_id: ""
-        )
-    }
 
     // MARK: - Product conversion
 

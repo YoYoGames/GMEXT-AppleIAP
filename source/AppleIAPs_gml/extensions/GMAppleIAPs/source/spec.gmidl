@@ -200,7 +200,8 @@ class `[[AppleIAPSyncResult]]` prototype Object
 
 /// Starts the StoreKit.Transaction.updates listener immediately.
 /// callback(result: AppleIAPTransactionResult, transaction: AppleIAPTransaction?)
-/// fires for every update. transaction is undefined unless verification succeeds.
+/// fires for every update. When no verified transaction exists, the optional
+/// payload is omitted and the GML transaction parameter is undefined.
 /// Calling apple_iap_init again replaces the previous listener callback.
 [global, bind = typed_gml]
 function apple_iap_init(callback: func): bool;
@@ -219,6 +220,8 @@ function apple_iap_products(
 
 /// callback(result: AppleIAPPurchaseResult, transaction: AppleIAPTransaction?)
 /// transaction is undefined unless StoreKit returns a verified .success transaction.
+/// result.success is true only when that verified transaction is delivered;
+/// UserCancelled and Pending are non-error statuses with success = false.
 [global, bind = typed_gml]
 function apple_iap_product_purchase(product_id: string, callback: func): unit;
 
@@ -228,31 +231,40 @@ function apple_iap_product_purchase(product_id: string, callback: func): unit;
 
 /// transaction_id is string because StoreKit IDs are UInt64-sized.
 /// callback(result: AppleIAPTransactionFinishResult).
+/// A matching unverified transaction returns VerificationFailed and is never finished.
 [global, bind = typed_gml]
 function apple_iap_transaction_finish(transaction_id: string, callback: func): unit;
 
 /// callback(result: AppleIAPTransactionResult, transaction: AppleIAPTransaction?)
-/// transaction is undefined when no verified transaction is available.
+/// When no verified transaction is available, the optional payload is omitted
+/// and the GML transaction parameter is undefined.
 [global, bind = typed_gml]
 function apple_iap_transactions_current_entitlement(product_id: string, callback: func): unit;
 
 /// callback(result: AppleIAPTransactionsResult, transactions: std::vector<AppleIAPTransaction>)
-/// transactions is always present and may be empty.
+/// transactions is always present and may be empty. If one or more entries fail
+/// verification, result is VerificationFailed/success=false while every verified
+/// transaction collected from the sequence is still returned.
 [global, bind = typed_gml]
 function apple_iap_transactions_current_entitlements(callback: func): unit;
 
 /// callback(result: AppleIAPTransactionResult, transaction: AppleIAPTransaction?)
-/// transaction is undefined when no verified transaction is available.
+/// When no verified transaction is available, the optional payload is omitted
+/// and the GML transaction parameter is undefined.
 [global, bind = typed_gml]
 function apple_iap_transactions_latest(product_id: string, callback: func): unit;
 
 /// callback(result: AppleIAPTransactionsResult, transactions: std::vector<AppleIAPTransaction>)
-/// transactions is always present and may be empty.
+/// transactions is always present and may be empty. If one or more entries fail
+/// verification, result is VerificationFailed/success=false while every verified
+/// transaction collected from the sequence is still returned.
 [global, bind = typed_gml]
 function apple_iap_transactions_unfinished(callback: func): unit;
 
 /// callback(result: AppleIAPTransactionsResult, transactions: std::vector<AppleIAPTransaction>)
-/// transactions is always present and may be empty.
+/// transactions is always present and may be empty. If one or more entries fail
+/// verification, result is VerificationFailed/success=false while every verified
+/// transaction collected from the sequence is still returned.
 [global, bind = typed_gml]
 function apple_iap_transactions_all(callback: func): unit;
 
