@@ -10,7 +10,7 @@ open class GMAppleIAPsInternalSwift
     {
     }
 
-    open func apple_iap_init() -> Bool
+    open func apple_iap_init(callback: GMFunction) -> Bool
     {
         // default stub for apple_iap_init
         return false
@@ -29,17 +29,6 @@ open class GMAppleIAPsInternalSwift
     open func apple_iap_transaction_finish(transaction_id: String, callback: GMFunction)
     {
         // default stub for apple_iap_transaction_finish
-    }
-
-    open func apple_iap_transactions_updates(callback: GMFunction)
-    {
-        // default stub for apple_iap_transactions_updates
-    }
-
-    open func apple_iap_transactions_updates_stop() -> Bool
-    {
-        // default stub for apple_iap_transactions_updates_stop
-        return false
     }
 
     open func apple_iap_transactions_current_entitlement(product_id: String, callback: GMFunction)
@@ -72,10 +61,23 @@ open class GMAppleIAPsInternalSwift
         // default stub for apple_iap_synchronize
     }
 
-    public func __EXT_SWIFT__apple_iap_init() -> Double
+    public func __EXT_SWIFT__apple_iap_init(_ __arg_buffer: UnsafeMutablePointer<CChar>?, arg1 __arg_buffer_length: Double) -> Double
     {
-        let __result = self.apple_iap_init()
-        return __result ? 1.0 : 0.0
+        do
+        {
+            var __br = BufferReader(base: UnsafeRawPointer(__arg_buffer!), size: Int(__arg_buffer_length))
+
+            // field: callback, type: Function
+            let callback: GMFunction = try __br.readGMFunction(__dispatch_queue)
+
+            let __result = self.apple_iap_init(callback: callback)
+            return __result ? 1.0 : 0.0
+        }
+        catch
+        {
+            os_log("Corrupted buffer when calling 'apple_iap_init'", log: .default, type: .error)
+            return -1
+        }
     }
 
     public func __EXT_SWIFT__apple_iap_products(_ __arg_buffer: UnsafeMutablePointer<CChar>?, arg1 __arg_buffer_length: Double) -> Double
@@ -142,31 +144,6 @@ open class GMAppleIAPsInternalSwift
             os_log("Corrupted buffer when calling 'apple_iap_transaction_finish'", log: .default, type: .error)
             return -1
         }
-    }
-
-    public func __EXT_SWIFT__apple_iap_transactions_updates(_ __arg_buffer: UnsafeMutablePointer<CChar>?, arg1 __arg_buffer_length: Double) -> Double
-    {
-        do
-        {
-            var __br = BufferReader(base: UnsafeRawPointer(__arg_buffer!), size: Int(__arg_buffer_length))
-
-            // field: callback, type: Function
-            let callback: GMFunction = try __br.readGMFunction(__dispatch_queue)
-
-            self.apple_iap_transactions_updates(callback: callback)
-            return 0.0
-        }
-        catch
-        {
-            os_log("Corrupted buffer when calling 'apple_iap_transactions_updates'", log: .default, type: .error)
-            return -1
-        }
-    }
-
-    public func __EXT_SWIFT__apple_iap_transactions_updates_stop() -> Double
-    {
-        let __result = self.apple_iap_transactions_updates_stop()
-        return __result ? 1.0 : 0.0
     }
 
     public func __EXT_SWIFT__apple_iap_transactions_current_entitlement(_ __arg_buffer: UnsafeMutablePointer<CChar>?, arg1 __arg_buffer_length: Double) -> Double

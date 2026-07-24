@@ -15,6 +15,7 @@ public enum AppleIAPPurchaseStatus: Int32
     case ProductNotFound = 4
     case Error = 5
     case Unknown = 6
+    case VerificationFailed = 7
 }
 
 public enum AppleIAPTransactionStatus: Int32
@@ -26,6 +27,7 @@ public enum AppleIAPTransactionStatus: Int32
     case NoCurrentEntitlement = 4
     case NoLatestTransaction = 5
     case Error = 6
+    case VerificationFailed = 7
 }
 
 public enum AppleIAPSyncStatus: Int32
@@ -70,7 +72,7 @@ public enum AppleIAPRevocationReason: Int32
 public struct AppleIAPProduct: ITypedStruct
 {
     public var id: String
-    public var type: Int32
+    public var type: AppleIAPProductType
     public var display_name: String
     public var description: String
     public var display_price: String
@@ -84,72 +86,61 @@ public struct AppleIAPTransaction: ITypedStruct
     public var original_id: String
     public var web_order_line_item_id: String
     public var product_id: String
-    public var product_type: Int32
+    public var product_type: AppleIAPProductType
     public var subscription_group_id: String
     public var purchase_date_ms: Double
     public var original_purchase_date_ms: Double
     public var expiration_date_ms: Double
     public var revocation_date_ms: Double
     public var signed_date_ms: Double
-    public var revocation_reason: Int32
+    public var revocation_reason: AppleIAPRevocationReason
     public var is_upgraded: Bool
-    public var ownership_type: Int32
-    public var environment: Int32
+    public var ownership_type: AppleIAPTransactionOwnershipType
+    public var environment: AppleIAPTransactionEnvironment
     public var app_account_token: String
     public var offer_id: String
+}
+
+public struct AppleIAPProductsResult: ITypedStruct
+{
+    public var success: Bool
+    public var status: AppleIAPProductsStatus
+    public var message: String
+}
+
+public struct AppleIAPPurchaseResult: ITypedStruct
+{
+    public var success: Bool
+    public var status: AppleIAPPurchaseStatus
+    public var message: String
 }
 
 public struct AppleIAPTransactionFinishResult: ITypedStruct
 {
     public var success: Bool
-    public var status: Int32
+    public var status: AppleIAPTransactionStatus
+    public var message: String
+}
+
+public struct AppleIAPTransactionResult: ITypedStruct
+{
+    public var success: Bool
+    public var status: AppleIAPTransactionStatus
+    public var message: String
+}
+
+public struct AppleIAPTransactionsResult: ITypedStruct
+{
+    public var success: Bool
+    public var status: AppleIAPTransactionStatus
     public var message: String
 }
 
 public struct AppleIAPSyncResult: ITypedStruct
 {
     public var success: Bool
-    public var status: Int32
+    public var status: AppleIAPSyncStatus
     public var message: String
-}
-
-public struct AppleIAPProductsResult: ITypedStruct
-{
-    public var success: Bool
-    public var status: Int32
-    public var message: String
-    public var products: [AppleIAPProduct]
-}
-
-public struct AppleIAPVerifiedTransaction: ITypedStruct
-{
-    public var verified: Bool
-    public var transaction: AppleIAPTransaction
-    public var verification_error: String
-}
-
-public struct AppleIAPPurchaseResult: ITypedStruct
-{
-    public var success: Bool
-    public var status: Int32
-    public var message: String
-    public var transaction: AppleIAPVerifiedTransaction
-}
-
-public struct AppleIAPTransactionResult: ITypedStruct
-{
-    public var success: Bool
-    public var status: Int32
-    public var message: String
-    public var transaction: AppleIAPVerifiedTransaction
-}
-
-public struct AppleIAPTransactionsResult: ITypedStruct
-{
-    public var success: Bool
-    public var status: Int32
-    public var message: String
-    public var transactions: [AppleIAPVerifiedTransaction]
 }
 
 extension AppleIAPProduct
@@ -159,7 +150,7 @@ extension AppleIAPProduct
     public init<R: IByteReader>(_ r: inout R) throws
     {
         self.id = try r.readRaw(String.self)
-        self.type = try r.readRaw(Int32.self)
+        self.type = (AppleIAPProductType(rawValue: try r.readRaw(Int32.self))!)
         self.display_name = try r.readRaw(String.self)
         self.description = try r.readRaw(String.self)
         self.display_price = try r.readRaw(String.self)
@@ -170,7 +161,7 @@ extension AppleIAPProduct
     public func encode<W: IByteWriter>(_ w: inout W) throws
     {
         try w.writeRaw(self.id)
-        try w.writeRaw(self.type)
+        try w.writeRaw(self.type.rawValue)
         try w.writeRaw(self.display_name)
         try w.writeRaw(self.description)
         try w.writeRaw(self.display_price)
@@ -189,17 +180,17 @@ extension AppleIAPTransaction
         self.original_id = try r.readRaw(String.self)
         self.web_order_line_item_id = try r.readRaw(String.self)
         self.product_id = try r.readRaw(String.self)
-        self.product_type = try r.readRaw(Int32.self)
+        self.product_type = (AppleIAPProductType(rawValue: try r.readRaw(Int32.self))!)
         self.subscription_group_id = try r.readRaw(String.self)
         self.purchase_date_ms = try r.readRaw(Double.self)
         self.original_purchase_date_ms = try r.readRaw(Double.self)
         self.expiration_date_ms = try r.readRaw(Double.self)
         self.revocation_date_ms = try r.readRaw(Double.self)
         self.signed_date_ms = try r.readRaw(Double.self)
-        self.revocation_reason = try r.readRaw(Int32.self)
+        self.revocation_reason = (AppleIAPRevocationReason(rawValue: try r.readRaw(Int32.self))!)
         self.is_upgraded = try r.readRaw(Bool.self)
-        self.ownership_type = try r.readRaw(Int32.self)
-        self.environment = try r.readRaw(Int32.self)
+        self.ownership_type = (AppleIAPTransactionOwnershipType(rawValue: try r.readRaw(Int32.self))!)
+        self.environment = (AppleIAPTransactionEnvironment(rawValue: try r.readRaw(Int32.self))!)
         self.app_account_token = try r.readRaw(String.self)
         self.offer_id = try r.readRaw(String.self)
     }
@@ -210,160 +201,133 @@ extension AppleIAPTransaction
         try w.writeRaw(self.original_id)
         try w.writeRaw(self.web_order_line_item_id)
         try w.writeRaw(self.product_id)
-        try w.writeRaw(self.product_type)
+        try w.writeRaw(self.product_type.rawValue)
         try w.writeRaw(self.subscription_group_id)
         try w.writeRaw(self.purchase_date_ms)
         try w.writeRaw(self.original_purchase_date_ms)
         try w.writeRaw(self.expiration_date_ms)
         try w.writeRaw(self.revocation_date_ms)
         try w.writeRaw(self.signed_date_ms)
-        try w.writeRaw(self.revocation_reason)
+        try w.writeRaw(self.revocation_reason.rawValue)
         try w.writeRaw(self.is_upgraded)
-        try w.writeRaw(self.ownership_type)
-        try w.writeRaw(self.environment)
+        try w.writeRaw(self.ownership_type.rawValue)
+        try w.writeRaw(self.environment.rawValue)
         try w.writeRaw(self.app_account_token)
         try w.writeRaw(self.offer_id)
     }
 }
 
-extension AppleIAPTransactionFinishResult
+extension AppleIAPProductsResult
 {
     public static let codecID: UInt32 = 2
 
     public init<R: IByteReader>(_ r: inout R) throws
     {
         self.success = try r.readRaw(Bool.self)
-        self.status = try r.readRaw(Int32.self)
+        self.status = (AppleIAPProductsStatus(rawValue: try r.readRaw(Int32.self))!)
         self.message = try r.readRaw(String.self)
     }
 
     public func encode<W: IByteWriter>(_ w: inout W) throws
     {
         try w.writeRaw(self.success)
-        try w.writeRaw(self.status)
+        try w.writeRaw(self.status.rawValue)
         try w.writeRaw(self.message)
     }
 }
 
-extension AppleIAPSyncResult
+extension AppleIAPPurchaseResult
 {
     public static let codecID: UInt32 = 3
 
     public init<R: IByteReader>(_ r: inout R) throws
     {
         self.success = try r.readRaw(Bool.self)
-        self.status = try r.readRaw(Int32.self)
+        self.status = (AppleIAPPurchaseStatus(rawValue: try r.readRaw(Int32.self))!)
         self.message = try r.readRaw(String.self)
     }
 
     public func encode<W: IByteWriter>(_ w: inout W) throws
     {
         try w.writeRaw(self.success)
-        try w.writeRaw(self.status)
+        try w.writeRaw(self.status.rawValue)
         try w.writeRaw(self.message)
     }
 }
 
-extension AppleIAPProductsResult
+extension AppleIAPTransactionFinishResult
 {
     public static let codecID: UInt32 = 4
 
     public init<R: IByteReader>(_ r: inout R) throws
     {
         self.success = try r.readRaw(Bool.self)
-        self.status = try r.readRaw(Int32.self)
+        self.status = (AppleIAPTransactionStatus(rawValue: try r.readRaw(Int32.self))!)
         self.message = try r.readRaw(String.self)
-        self.products = try r.readRaw([AppleIAPProduct].self)
     }
 
     public func encode<W: IByteWriter>(_ w: inout W) throws
     {
         try w.writeRaw(self.success)
-        try w.writeRaw(self.status)
+        try w.writeRaw(self.status.rawValue)
         try w.writeRaw(self.message)
-        try w.writeRawList(self.products)
     }
 }
 
-extension AppleIAPVerifiedTransaction
+extension AppleIAPTransactionResult
 {
     public static let codecID: UInt32 = 5
 
     public init<R: IByteReader>(_ r: inout R) throws
     {
-        self.verified = try r.readRaw(Bool.self)
-        self.transaction = try r.readRaw(AppleIAPTransaction.self)
-        self.verification_error = try r.readRaw(String.self)
+        self.success = try r.readRaw(Bool.self)
+        self.status = (AppleIAPTransactionStatus(rawValue: try r.readRaw(Int32.self))!)
+        self.message = try r.readRaw(String.self)
     }
 
     public func encode<W: IByteWriter>(_ w: inout W) throws
     {
-        try w.writeRaw(self.verified)
-        try w.writeRaw(self.transaction)
-        try w.writeRaw(self.verification_error)
+        try w.writeRaw(self.success)
+        try w.writeRaw(self.status.rawValue)
+        try w.writeRaw(self.message)
     }
 }
 
-extension AppleIAPPurchaseResult
+extension AppleIAPTransactionsResult
 {
     public static let codecID: UInt32 = 6
 
     public init<R: IByteReader>(_ r: inout R) throws
     {
         self.success = try r.readRaw(Bool.self)
-        self.status = try r.readRaw(Int32.self)
+        self.status = (AppleIAPTransactionStatus(rawValue: try r.readRaw(Int32.self))!)
         self.message = try r.readRaw(String.self)
-        self.transaction = try r.readRaw(AppleIAPVerifiedTransaction.self)
     }
 
     public func encode<W: IByteWriter>(_ w: inout W) throws
     {
         try w.writeRaw(self.success)
-        try w.writeRaw(self.status)
+        try w.writeRaw(self.status.rawValue)
         try w.writeRaw(self.message)
-        try w.writeRaw(self.transaction)
     }
 }
 
-extension AppleIAPTransactionResult
+extension AppleIAPSyncResult
 {
     public static let codecID: UInt32 = 7
 
     public init<R: IByteReader>(_ r: inout R) throws
     {
         self.success = try r.readRaw(Bool.self)
-        self.status = try r.readRaw(Int32.self)
+        self.status = (AppleIAPSyncStatus(rawValue: try r.readRaw(Int32.self))!)
         self.message = try r.readRaw(String.self)
-        self.transaction = try r.readRaw(AppleIAPVerifiedTransaction.self)
     }
 
     public func encode<W: IByteWriter>(_ w: inout W) throws
     {
         try w.writeRaw(self.success)
-        try w.writeRaw(self.status)
+        try w.writeRaw(self.status.rawValue)
         try w.writeRaw(self.message)
-        try w.writeRaw(self.transaction)
-    }
-}
-
-extension AppleIAPTransactionsResult
-{
-    public static let codecID: UInt32 = 8
-
-    public init<R: IByteReader>(_ r: inout R) throws
-    {
-        self.success = try r.readRaw(Bool.self)
-        self.status = try r.readRaw(Int32.self)
-        self.message = try r.readRaw(String.self)
-        self.transactions = try r.readRaw([AppleIAPVerifiedTransaction].self)
-    }
-
-    public func encode<W: IByteWriter>(_ w: inout W) throws
-    {
-        try w.writeRaw(self.success)
-        try w.writeRaw(self.status)
-        try w.writeRaw(self.message)
-        try w.writeRawList(self.transactions)
     }
 }
 

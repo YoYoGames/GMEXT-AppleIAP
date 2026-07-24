@@ -111,9 +111,9 @@ static void GMInjectSelectorsIntoSubclass(Class subclass, Class base)
     }
     return self;
 }
-- (double)__EXT_NATIVE__apple_iap_init
+- (double)__EXT_NATIVE__apple_iap_init:(char*)__arg_buffer arg1:(double)__arg_buffer_length
 {
-    double __result = __impl->__EXT_SWIFT__apple_iap_init();
+    double __result = __impl->__EXT_SWIFT__apple_iap_init(__arg_buffer, __arg_buffer_length);
     return __result;
 }
 
@@ -133,18 +133,6 @@ static void GMInjectSelectorsIntoSubclass(Class subclass, Class base)
 {
     __impl->__EXT_SWIFT__apple_iap_transaction_finish(__arg_buffer, __arg_buffer_length);
     return 0;
-}
-
-- (double)__EXT_NATIVE__apple_iap_transactions_updates:(char*)__arg_buffer arg1:(double)__arg_buffer_length
-{
-    __impl->__EXT_SWIFT__apple_iap_transactions_updates(__arg_buffer, __arg_buffer_length);
-    return 0;
-}
-
-- (double)__EXT_NATIVE__apple_iap_transactions_updates_stop
-{
-    double __result = __impl->__EXT_SWIFT__apple_iap_transactions_updates_stop();
-    return __result;
 }
 
 - (double)__EXT_NATIVE__apple_iap_transactions_current_entitlement:(char*)__arg_buffer arg1:(double)__arg_buffer_length
