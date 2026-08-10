@@ -67,9 +67,10 @@ fastlane/test_output
 
 iOSInjectionProject/
 
-source/AppleIAP_gml/options/extensions/
+source/AppleIAPs_gml/options/
 output/
+.DS_Store
+*.user
 
-source/AppleIAP_gml/extensions/AppleIAP/scriptUtils.bat.bak
-
-source/AppleIAP_gml/extensions/AppleIAP/scriptUtils.sh.bak
+source/AppleIAPs_gml/extensions/GMAppleIAPs/scriptUtils.bat.bak
+source/AppleIAPs_gml/extensions/GMAppleIAPs/scriptUtils.sh.bak

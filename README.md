@@ -3,24 +3,16 @@ Repository for GameMaker's AppleIAP Extension
 
 This repository was created with the intent of presenting users with the latest version available of the extension (even previous to marketplace updates) and also provide a way for the community to contribute with bug fixes and feature implementation.
 
-This extension is compatible with both macOS and iOS/tvOS platforms.
+This extension will work on **macOS**, **iOS** and **tvOS**.
 
-IOS SOURCE: `source/AppleIAP_gml/extensions/ios_iaps/iOSSource/`
+* macOS/iOS/tvOS: `source/AppleIAPs_gml/extensions/GMAppleIAPs/source/`
 
-TVOS SOURCE: `source/AppleIAP_gml/extensions/ios_iaps/tvOSSource/`
+## Requirements
 
-MACOS SOURCE: `source/AppleIAP_xcode/`
+This extension wraps Apple's first-party **StoreKit 2** framework — there is no third-party SDK to download or vendor. In-app purchase products must be configured in App Store Connect before they can be queried or purchased.
 
-NODEJS VALIDATION SERVER (EXAMPLE): `source/ValidationServer (NodeJS)/`
-
-
----
-
-## Important
-
-Do not download from the **main branch** this branch is a work in place branch and probably has features that might be broken or not working properly, please download from the releases panel (right side instead).
-
----
+> [!IMPORTANT]
+> Do not download from the **main branch** — this branch is a work-in-progress branch and may contain broken or incomplete features. Please download from the [releases panel](../../releases) instead.
 
 ## Documentation
 
@@ -31,5 +23,3 @@ The online documentation is regularly updated to ensure it contains the most cur
 We encourage users to refer primarily to the GitHub Wiki for the latest information and updates. The HTML version, included with the extension and within the demo project's data files, serves as a secondary, static reference.
 
 Additionally, if you're contributing new features through PR (Pull Requests), we kindly ask that you also provide accompanying documentation for these features, to maintain the comprehensiveness and usefulness of our resources.
-
----

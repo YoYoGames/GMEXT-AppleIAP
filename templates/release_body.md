@@ -20,12 +20,7 @@ Extensions for integrating iOS/tvOS and macOS IAPs into your games.
 
 ## DOCUMENTATION
 
-The full documentation of the API is included in the extension asset (included files).
-Included in the asset are mini-manuals for the two platforms - be aware the code is extremely similar and the two "stores" require almost identical behaviour, but the function names and IAP event cases have different prefixes, etc., so please do pay attention to both manuals.
-
-## NOTES
-
-Note that some functionality for verifying purchases relies on you to have your own custom web server - there are no custom functions in the extension for this, as you should use the existing http_get() functionality to communicate with your server. The mini-manuals link to Apple documentation on what your payment server needs to do.
+The full documentation of the API is included in the extension asset (included files). The GML API is unified across macOS, iOS and tvOS - the same `apple_iap_*` functions work on all three platforms.
 
 ## REFERENCES
 
