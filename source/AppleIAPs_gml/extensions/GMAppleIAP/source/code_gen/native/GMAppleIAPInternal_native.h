@@ -503,7 +503,7 @@ namespace gm::wire::details
 }
 
 bool apple_iap_init(const gm::wire::GMFunction& callback);
-bool apple_iap_can_make_payments(const gm::wire::GMFunction& callback);
+bool apple_iap_can_make_payments();
 void apple_iap_products(const std::vector<std::string_view>& products_id, const gm::wire::GMFunction& callback);
 void apple_iap_product_purchase(std::string_view product_id, const gm::wire::GMFunction& callback, std::optional<std::string_view> app_account_token, std::optional<std::int32_t> quantity);
 void apple_iap_transaction_finish(std::string_view transaction_id, const gm::wire::GMFunction& callback);

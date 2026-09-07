@@ -7,7 +7,6 @@
 
 /**
  * @function_partial apple_iap_can_make_payments
- * @param {Function} callback
  * @returns {Bool}
  * @function_end
  */

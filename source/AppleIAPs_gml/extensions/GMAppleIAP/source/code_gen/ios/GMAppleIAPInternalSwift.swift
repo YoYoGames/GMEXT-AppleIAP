@@ -16,7 +16,7 @@ open class GMAppleIAPInternalSwift
         return false
     }
 
-    open func apple_iap_can_make_payments(callback: GMFunction) -> Bool
+    open func apple_iap_can_make_payments() -> Bool
     {
         // default stub for apple_iap_can_make_payments
         return false
@@ -86,23 +86,10 @@ open class GMAppleIAPInternalSwift
         }
     }
 
-    public func __EXT_SWIFT__apple_iap_can_make_payments(_ __arg_buffer: UnsafeMutablePointer<CChar>?, arg1 __arg_buffer_length: Double) -> Double
+    public func __EXT_SWIFT__apple_iap_can_make_payments() -> Double
     {
-        do
-        {
-            var __br = BufferReader(base: UnsafeRawPointer(__arg_buffer!), size: Int(__arg_buffer_length))
-
-            // field: callback, type: Function
-            let callback: GMFunction = try __br.readGMFunction(__dispatch_queue)
-
-            let __result = self.apple_iap_can_make_payments(callback: callback)
-            return __result ? 1.0 : 0.0
-        }
-        catch
-        {
-            os_log("Corrupted buffer when calling 'apple_iap_can_make_payments'", log: .default, type: .error)
-            return -1
-        }
+        let __result = self.apple_iap_can_make_payments()
+        return __result ? 1.0 : 0.0
     }
 
     public func __EXT_SWIFT__apple_iap_products(_ __arg_buffer: UnsafeMutablePointer<CChar>?, arg1 __arg_buffer_length: Double) -> Double

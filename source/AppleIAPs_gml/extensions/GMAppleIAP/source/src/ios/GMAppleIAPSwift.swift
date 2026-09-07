@@ -89,11 +89,9 @@ public class GMAppleIAPSwift: GMAppleIAPInternalSwift {
         return true
     }
 
-    public override func apple_iap_can_make_payments(callback: GMFunction) -> Bool {
-        let canPay = AppStore.canMakePayments
-        callback.call(canPay)
-        return canPay
-    }
+	public override func apple_iap_can_make_payments() -> Bool {
+		return AppStore.canMakePayments
+	}
 
     // MARK: - Products / purchase
 

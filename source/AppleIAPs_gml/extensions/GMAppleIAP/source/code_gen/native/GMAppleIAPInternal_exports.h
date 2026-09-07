@@ -7,7 +7,7 @@
 GMEXPORT double __EXT_NATIVE__GMAppleIAP_invocation_handler(char* __ret_buffer, double __ret_buffer_length);
 
 GMEXPORT double __EXT_NATIVE__apple_iap_init(char* __arg_buffer, double __arg_buffer_length);
-GMEXPORT double __EXT_NATIVE__apple_iap_can_make_payments(char* __arg_buffer, double __arg_buffer_length);
+GMEXPORT double __EXT_NATIVE__apple_iap_can_make_payments();
 GMEXPORT double __EXT_NATIVE__apple_iap_products(char* __arg_buffer, double __arg_buffer_length);
 GMEXPORT double __EXT_NATIVE__apple_iap_product_purchase(char* __arg_buffer, double __arg_buffer_length);
 GMEXPORT double __EXT_NATIVE__apple_iap_transaction_finish(char* __arg_buffer, double __arg_buffer_length);

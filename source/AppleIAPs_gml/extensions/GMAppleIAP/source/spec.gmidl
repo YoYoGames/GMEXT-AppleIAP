@@ -261,7 +261,7 @@ function apple_iap_init(callback: func): bool;
 /// callback(can_make_payments: bool) is invoked synchronously with the same value
 /// returned by this function.
 [global, bind = typed_gml]
-function apple_iap_can_make_payments(callback: func): bool;
+function apple_iap_can_make_payments(): bool;
 
 // =============================================================================
 // Products / purchase

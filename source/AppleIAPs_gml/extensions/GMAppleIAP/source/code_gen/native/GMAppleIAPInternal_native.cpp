@@ -26,14 +26,9 @@ GMEXPORT double __EXT_NATIVE__apple_iap_init(char* __arg_buffer, double __arg_bu
     return static_cast<double>(__result);
 }
 
-GMEXPORT double __EXT_NATIVE__apple_iap_can_make_payments(char* __arg_buffer, double __arg_buffer_length)
+GMEXPORT double __EXT_NATIVE__apple_iap_can_make_payments()
 {
-    gm::byteio::BufferReader __br{__arg_buffer, static_cast<size_t>(__arg_buffer_length)};
-
-    // field: callback, type: Function
-    gm::wire::GMFunction callback = gm::wire::codec::readFunction(__br, &__dispatch_queue);
-
-    auto&& __result = apple_iap_can_make_payments(callback);
+    auto&& __result = apple_iap_can_make_payments();
     return static_cast<double>(__result);
 }
 

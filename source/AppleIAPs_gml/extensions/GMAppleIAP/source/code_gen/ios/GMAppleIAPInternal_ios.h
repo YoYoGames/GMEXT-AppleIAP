@@ -5,7 +5,7 @@
 
 @interface GMAppleIAPInternal : NSObject
 - (double)__EXT_NATIVE__apple_iap_init:(char*)__arg_buffer arg1:(double)__arg_buffer_length;
-- (double)__EXT_NATIVE__apple_iap_can_make_payments:(char*)__arg_buffer arg1:(double)__arg_buffer_length;
+- (double)__EXT_NATIVE__apple_iap_can_make_payments;
 - (double)__EXT_NATIVE__apple_iap_products:(char*)__arg_buffer arg1:(double)__arg_buffer_length;
 - (double)__EXT_NATIVE__apple_iap_product_purchase:(char*)__arg_buffer arg1:(double)__arg_buffer_length;
 - (double)__EXT_NATIVE__apple_iap_transaction_finish:(char*)__arg_buffer arg1:(double)__arg_buffer_length;

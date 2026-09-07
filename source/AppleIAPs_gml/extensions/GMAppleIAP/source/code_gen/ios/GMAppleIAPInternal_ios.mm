@@ -126,9 +126,9 @@ static void GMInjectSelectorsIntoSubclass(Class subclass, Class base)
     return __result;
 }
 
-- (double)__EXT_NATIVE__apple_iap_can_make_payments:(char*)__arg_buffer arg1:(double)__arg_buffer_length
+- (double)__EXT_NATIVE__apple_iap_can_make_payments
 {
-    double __result = __impl->__EXT_SWIFT__apple_iap_can_make_payments(__arg_buffer, __arg_buffer_length);
+    double __result = __impl->__EXT_SWIFT__apple_iap_can_make_payments();
     return __result;
 }
 
