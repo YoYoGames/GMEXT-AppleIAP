@@ -516,7 +516,7 @@ public class GMAppleIAPSwift: GMAppleIAPInternalSwift {
     }
 }
 
-private extension GMAppleIAPsSwift {
+private extension GMAppleIAPSwift {
 
     // MARK: - StoreKit verification / compatibility
 
