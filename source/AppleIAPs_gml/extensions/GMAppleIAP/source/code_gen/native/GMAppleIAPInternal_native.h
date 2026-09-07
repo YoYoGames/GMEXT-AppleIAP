@@ -133,6 +133,7 @@ namespace gm_structs
 {
     struct AppleIAPProduct;
     struct AppleIAPTransactionOffer;
+    struct AppleIAPPurchaseOptions;
     struct AppleIAPProductsResult;
     struct AppleIAPPurchaseResult;
     struct AppleIAPTransactionFinishResult;
@@ -157,6 +158,12 @@ namespace gm_structs
         std::optional<std::string> id;
         gm_enums::AppleIAPTransactionOfferType type;
         std::optional<gm_enums::AppleIAPTransactionOfferPaymentMode> payment_mode;
+    };
+
+    struct AppleIAPPurchaseOptions
+    {
+        std::optional<std::string> app_account_token;
+        std::optional<std::int32_t> quantity;
     };
 
     struct AppleIAPProductsResult
@@ -270,6 +277,22 @@ namespace gm::wire::codec
         obj.id = gm::wire::codec::readOptional<std::string>(_buf);
         obj.type = gm::wire::codec::readValue<gm_enums::AppleIAPTransactionOfferType>(_buf);
         obj.payment_mode = gm::wire::codec::readOptional<gm_enums::AppleIAPTransactionOfferPaymentMode>(_buf);
+        return obj;
+    }
+
+    template<>
+    inline void writeValue<gm_structs::AppleIAPPurchaseOptions>(gm::byteio::IByteWriter& _buf, const gm_structs::AppleIAPPurchaseOptions& obj)
+    {
+        gm::wire::codec::writeValue(_buf, obj.app_account_token);
+        gm::wire::codec::writeValue(_buf, obj.quantity);
+    }
+
+    template<>
+    inline gm_structs::AppleIAPPurchaseOptions readValue<gm_structs::AppleIAPPurchaseOptions>(gm::byteio::BufferReader& _buf)
+    {
+        gm_structs::AppleIAPPurchaseOptions obj;
+        obj.app_account_token = gm::wire::codec::readOptional<std::string>(_buf);
+        obj.quantity = gm::wire::codec::readOptional<std::int32_t>(_buf);
         return obj;
     }
 
@@ -452,52 +475,59 @@ namespace gm::wire::details
     };
 
     template<>
-    struct gm_struct_traits<gm_structs::AppleIAPProductsResult>
+    struct gm_struct_traits<gm_structs::AppleIAPPurchaseOptions>
     {
         static constexpr bool is_gm_struct = true;
         static constexpr std::uint32_t codec_id = 2;
     };
 
     template<>
-    struct gm_struct_traits<gm_structs::AppleIAPPurchaseResult>
+    struct gm_struct_traits<gm_structs::AppleIAPProductsResult>
     {
         static constexpr bool is_gm_struct = true;
         static constexpr std::uint32_t codec_id = 3;
     };
 
     template<>
-    struct gm_struct_traits<gm_structs::AppleIAPTransactionFinishResult>
+    struct gm_struct_traits<gm_structs::AppleIAPPurchaseResult>
     {
         static constexpr bool is_gm_struct = true;
         static constexpr std::uint32_t codec_id = 4;
     };
 
     template<>
-    struct gm_struct_traits<gm_structs::AppleIAPTransactionResult>
+    struct gm_struct_traits<gm_structs::AppleIAPTransactionFinishResult>
     {
         static constexpr bool is_gm_struct = true;
         static constexpr std::uint32_t codec_id = 5;
     };
 
     template<>
-    struct gm_struct_traits<gm_structs::AppleIAPTransactionsResult>
+    struct gm_struct_traits<gm_structs::AppleIAPTransactionResult>
     {
         static constexpr bool is_gm_struct = true;
         static constexpr std::uint32_t codec_id = 6;
     };
 
     template<>
-    struct gm_struct_traits<gm_structs::AppleIAPSyncResult>
+    struct gm_struct_traits<gm_structs::AppleIAPTransactionsResult>
     {
         static constexpr bool is_gm_struct = true;
         static constexpr std::uint32_t codec_id = 7;
     };
 
     template<>
-    struct gm_struct_traits<gm_structs::AppleIAPTransaction>
+    struct gm_struct_traits<gm_structs::AppleIAPSyncResult>
     {
         static constexpr bool is_gm_struct = true;
         static constexpr std::uint32_t codec_id = 8;
+    };
+
+    template<>
+    struct gm_struct_traits<gm_structs::AppleIAPTransaction>
+    {
+        static constexpr bool is_gm_struct = true;
+        static constexpr std::uint32_t codec_id = 9;
     };
 
 }
@@ -505,7 +535,7 @@ namespace gm::wire::details
 bool apple_iap_init(const gm::wire::GMFunction& callback);
 bool apple_iap_can_make_payments();
 void apple_iap_products(const std::vector<std::string_view>& products_id, const gm::wire::GMFunction& callback);
-void apple_iap_product_purchase(std::string_view product_id, const gm::wire::GMFunction& callback, std::optional<std::string_view> app_account_token, std::optional<std::int32_t> quantity);
+void apple_iap_product_purchase(std::string_view product_id, const std::optional<gm_structs::AppleIAPPurchaseOptions>& options, const gm::wire::GMFunction& callback);
 void apple_iap_transaction_finish(std::string_view transaction_id, const gm::wire::GMFunction& callback);
 void apple_iap_transactions_current_entitlement(std::string_view product_id, const gm::wire::GMFunction& callback);
 void apple_iap_transactions_current_entitlements(const gm::wire::GMFunction& callback);

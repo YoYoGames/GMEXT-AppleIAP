@@ -21,9 +21,8 @@
 /**
  * @function_partial apple_iap_product_purchase
  * @param {String} product_id
+ * @param {Struct.AppleIAPPurchaseOptions} [options]
  * @param {Function} callback
- * @param {String} [app_account_token]
- * @param {Real} [quantity]
  * @function_end
  */
 
@@ -89,6 +88,13 @@
  * @member {String} [id]
  * @member {Enum.AppleIAPTransactionOfferType} type
  * @member {Enum.AppleIAPTransactionOfferPaymentMode} [payment_mode]
+ * @struct_end
+ */
+
+/**
+ * @struct_partial AppleIAPPurchaseOptions
+ * @member {String} [app_account_token]
+ * @member {Real} [quantity]
  * @struct_end
  */
 

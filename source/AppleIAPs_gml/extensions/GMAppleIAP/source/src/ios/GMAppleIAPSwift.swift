@@ -137,9 +137,8 @@ public class GMAppleIAPSwift: GMAppleIAPInternalSwift {
 
     public override func apple_iap_product_purchase(
         product_id: String,
-        callback: GMFunction,
-        app_account_token: String?,
-        quantity: Int32?
+        options: AppleIAPPurchaseOptions?,
+        callback: GMFunction
     ) {
         Task {
             guard let product = await self.productCache.product(for: product_id) else {
@@ -155,10 +154,10 @@ public class GMAppleIAPSwift: GMAppleIAPInternalSwift {
                 return
             }
 
-            var options = Set<Product.PurchaseOption>()
+            var purchaseOptions = Set<Product.PurchaseOption>()
 
-            if let appAccountToken = app_account_token {
-                guard let token = UUID(uuidString: appAccountToken) else {
+            if let appAccountTokenVal = options?.app_account_token, !appAccountTokenVal.isEmpty {
+                guard let token = UUID(uuidString: appAccountTokenVal) else {
                     self.invokeCallback(
                         callback,
                         self.purchaseResult(
@@ -171,15 +170,15 @@ public class GMAppleIAPSwift: GMAppleIAPInternalSwift {
                     )
                     return
                 }
-                options.insert(.appAccountToken(token))
+                purchaseOptions.insert(.appAccountToken(token))
             }
 
-            if let quantity {
-                options.insert(.quantity(Int(quantity)))
+            if let quantityVal = options?.quantity, quantityVal > 0 {
+                purchaseOptions.insert(.quantity(Int(quantityVal)))
             }
 
             do {
-                let purchaseResult = try await product.purchase(options: options)
+                let purchaseResult = try await product.purchase(options: purchaseOptions)
                 switch purchaseResult {
                 case .success(let verificationResult):
                     let transaction = try self.checkVerified(verificationResult)

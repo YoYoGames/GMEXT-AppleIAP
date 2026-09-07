@@ -53,16 +53,13 @@ GMEXPORT double __EXT_NATIVE__apple_iap_product_purchase(char* __arg_buffer, dou
     // field: product_id, type: String
     std::string_view product_id = gm::wire::codec::readValue<std::string_view>(__br);
 
+    // field: options, type: optional<struct AppleIAPPurchaseOptions>
+    std::optional<gm_structs::AppleIAPPurchaseOptions> options = gm::wire::codec::readOptional<gm_structs::AppleIAPPurchaseOptions>(__br);
+
     // field: callback, type: Function
     gm::wire::GMFunction callback = gm::wire::codec::readFunction(__br, &__dispatch_queue);
 
-    // field: app_account_token, type: optional<String>
-    std::optional<std::string_view> app_account_token = gm::wire::codec::readOptional<std::string_view>(__br);
-
-    // field: quantity, type: optional<Int32>
-    std::optional<std::int32_t> quantity = gm::wire::codec::readOptional<std::int32_t>(__br);
-
-    apple_iap_product_purchase(product_id, callback, app_account_token, quantity);
+    apple_iap_product_purchase(product_id, options, callback);
     return 0;
 }
 

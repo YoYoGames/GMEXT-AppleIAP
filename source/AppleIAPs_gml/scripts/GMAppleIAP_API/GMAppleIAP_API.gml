@@ -162,6 +162,22 @@ function AppleIAPTransactionOffer() constructor
 }
 
 /**
+ * @returns {Struct.AppleIAPPurchaseOptions}
+ */
+function AppleIAPPurchaseOptions() constructor
+{
+    /**
+     * Internally generated hash for quick validation
+     * @ignore
+     */
+    static __uid = 1571503314;
+
+    self.app_account_token = undefined;
+    self.quantity = undefined;
+
+}
+
+/**
  * @returns {Struct.AppleIAPProductsResult}
  */
 function AppleIAPProductsResult() constructor
@@ -479,6 +495,87 @@ function __AppleIAPTransactionOffer_decode(_buffer, _offset)
         else
         {
             self.payment_mode = undefined;
+        }
+
+    }
+
+    return _inst;
+}
+
+/**
+ * @func __AppleIAPPurchaseOptions_encode(_inst, _buffer, _offset, _where)
+ * @param {Struct.AppleIAPPurchaseOptions} _inst
+ * @param {Id.Buffer} _buffer
+ * @param {Real} _offset
+ * @param {String} _where
+ * @ignore
+ */
+function __AppleIAPPurchaseOptions_encode(_inst, _buffer, _offset, _where = _GMFUNCTION_)
+{
+    buffer_seek(_buffer, buffer_seek_start, _offset);
+    with (_inst)
+    {
+        // field: app_account_token, type: optional<String>
+        if (is_undefined(self.app_account_token))
+        {
+            buffer_write(_buffer, buffer_bool, false);
+        }
+        else
+        {
+            buffer_write(_buffer, buffer_bool, true);
+            if (!is_string(self.app_account_token)) show_error($"{_where} :: self.app_account_token expected string", true);
+            buffer_write(_buffer, buffer_u32, string_byte_length(self.app_account_token));
+            buffer_write(_buffer, buffer_string, self.app_account_token);
+        }
+
+        // field: quantity, type: optional<Int32>
+        if (is_undefined(self.quantity))
+        {
+            buffer_write(_buffer, buffer_bool, false);
+        }
+        else
+        {
+            buffer_write(_buffer, buffer_bool, true);
+            if (!is_numeric(self.quantity)) show_error($"{_where} :: self.quantity expected number", true);
+            buffer_write(_buffer, buffer_s32, self.quantity);
+        }
+
+    }
+}
+
+/**
+ * @func __AppleIAPPurchaseOptions_decode(_buffer, _offset)
+ * @param {Id.Buffer} _buffer
+ * @param {Real} _offset
+ * @returns {Struct.AppleIAPPurchaseOptions}
+ * @ignore
+ */
+function __AppleIAPPurchaseOptions_decode(_buffer, _offset)
+{
+    buffer_seek(_buffer, buffer_seek_start, _offset);
+
+    _inst = new AppleIAPPurchaseOptions();
+    with (_inst)
+    {
+        // field: app_account_token, type: optional<String>
+        if (buffer_read(_buffer, buffer_bool))
+        {
+            buffer_read(_buffer, buffer_u32);
+            self.app_account_token = buffer_read(_buffer, buffer_string);
+        }
+        else
+        {
+            self.app_account_token = undefined;
+        }
+
+        // field: quantity, type: optional<Int32>
+        if (buffer_read(_buffer, buffer_bool))
+        {
+            self.quantity = buffer_read(_buffer, buffer_s32);
+        }
+        else
+        {
+            self.quantity = undefined;
         }
 
     }
@@ -1115,11 +1212,10 @@ function apple_iap_products(_products_id, _callback)
 
 /**
  * @param {String} _product_id
+ * @param {Struct.AppleIAPPurchaseOptions} _options
  * @param {Function} _callback
- * @param {String} _app_account_token
- * @param {Real} _quantity
  */
-function apple_iap_product_purchase(_product_id, _callback, _app_account_token, _quantity)
+function apple_iap_product_purchase(_product_id, _options, _callback)
 {
     var __available__ = __GMAppleIAP_is_available();
     if (!__available__) return;
@@ -1133,35 +1229,22 @@ function apple_iap_product_purchase(_product_id, _callback, _app_account_token, 
     buffer_write(__args_buffer__, buffer_u32, string_byte_length(_product_id));
     buffer_write(__args_buffer__, buffer_string, _product_id);
 
+    // param: _options, type: optional<struct AppleIAPPurchaseOptions>
+    if (is_undefined(_options))
+    {
+        buffer_write(__args_buffer__, buffer_bool, false);
+    }
+    else
+    {
+        buffer_write(__args_buffer__, buffer_bool, true);
+        if (_options.__uid != 1571503314) show_error($"{_GMFUNCTION_} :: _options expected AppleIAPPurchaseOptions", true);
+        __AppleIAPPurchaseOptions_encode(_options, __args_buffer__, buffer_tell(__args_buffer__), _GMFUNCTION_);
+    }
+
     // param: _callback, type: Function
     if (!is_callable(_callback)) show_error($"{_GMFUNCTION_} :: _callback expected callable type", true);
     var _callback_handle = __ext_core_function_register(_callback, __dispatcher__);
     buffer_write(__args_buffer__, buffer_u64, _callback_handle);
-
-    // param: _app_account_token, type: optional<String>
-    if (is_undefined(_app_account_token))
-    {
-        buffer_write(__args_buffer__, buffer_bool, false);
-    }
-    else
-    {
-        buffer_write(__args_buffer__, buffer_bool, true);
-        if (!is_string(_app_account_token)) show_error($"{_GMFUNCTION_} :: _app_account_token expected string", true);
-        buffer_write(__args_buffer__, buffer_u32, string_byte_length(_app_account_token));
-        buffer_write(__args_buffer__, buffer_string, _app_account_token);
-    }
-
-    // param: _quantity, type: optional<Int32>
-    if (is_undefined(_quantity))
-    {
-        buffer_write(__args_buffer__, buffer_bool, false);
-    }
-    else
-    {
-        buffer_write(__args_buffer__, buffer_bool, true);
-        if (!is_numeric(_quantity)) show_error($"{_GMFUNCTION_} :: _quantity expected number", true);
-        buffer_write(__args_buffer__, buffer_s32, _quantity);
-    }
 
     var __return_value__ = __apple_iap_product_purchase(buffer_get_address(__args_buffer__), buffer_tell(__args_buffer__));
 
@@ -1346,6 +1429,7 @@ function __GMAppleIAP_get_decoders()
     static __decoders__ = [
         __AppleIAPProduct_decode,
         __AppleIAPTransactionOffer_decode,
+        __AppleIAPPurchaseOptions_decode,
         __AppleIAPProductsResult_decode,
         __AppleIAPPurchaseResult_decode,
         __AppleIAPTransactionFinishResult_decode,

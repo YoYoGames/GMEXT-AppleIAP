@@ -27,7 +27,7 @@ open class GMAppleIAPInternalSwift
         // default stub for apple_iap_products
     }
 
-    open func apple_iap_product_purchase(product_id: String, callback: GMFunction, app_account_token: String?, quantity: Int32?)
+    open func apple_iap_product_purchase(product_id: String, options: AppleIAPPurchaseOptions?, callback: GMFunction)
     {
         // default stub for apple_iap_product_purchase
     }
@@ -123,16 +123,13 @@ open class GMAppleIAPInternalSwift
             // field: product_id, type: String
             let product_id: String = try __br.readRaw(String.self)
 
+            // field: options, type: optional<struct AppleIAPPurchaseOptions>
+            let options: AppleIAPPurchaseOptions? = try __br.readRawOptional(AppleIAPPurchaseOptions.self)
+
             // field: callback, type: Function
             let callback: GMFunction = try __br.readGMFunction(__dispatch_queue)
 
-            // field: app_account_token, type: optional<String>
-            let app_account_token: String? = try __br.readRawOptional(String.self)
-
-            // field: quantity, type: optional<Int32>
-            let quantity: Int32? = try __br.readRawOptional(Int32.self)
-
-            self.apple_iap_product_purchase(product_id: product_id, callback: callback, app_account_token: app_account_token, quantity: quantity)
+            self.apple_iap_product_purchase(product_id: product_id, options: options, callback: callback)
             return 0.0
         }
         catch

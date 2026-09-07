@@ -156,6 +156,15 @@ class `[[AppleIAPTransactionOffer]]` prototype Object
 }
 
 [global]
+class `[[AppleIAPPurchaseOptions]]` prototype Object
+{
+    [field, type_hint = `string?`]
+    property app_account_token : gmval { get; set; }
+    [field, type_hint = `int32?`]
+    property quantity : gmval { get; set; }
+}
+
+[global]
 class `[[AppleIAPTransaction]]` prototype Object
 {
     // IDs are strings to avoid UInt64 precision loss in GML.
@@ -278,14 +287,14 @@ function apple_iap_products(
 /// transaction is undefined unless StoreKit returns a verified .success transaction.
 /// result.success is true only when that verified transaction is delivered;
 /// UserCancelled and Pending are non-error statuses with success = false.
-/// app_account_token is optional and must be a UUID string when provided.
-/// quantity is optional; StoreKit uses its default quantity of 1 when omitted.
+/// options is optional; when undefined, default StoreKit options are used.
+/// app_account_token must be a UUID string when provided.
+/// quantity defaults to 1 when omitted.
 [global, bind = typed_gml]
 function apple_iap_product_purchase(
     product_id: string,
-    callback: func,
-    [type_hint = `string?`] app_account_token: gmval,
-    [type_hint = `int32?`] quantity: gmval
+    [type_hint = `AppleIAPPurchaseOptions?`] options: gmval,
+    callback: func
 ): unit;
 // =============================================================================
 // Transactions

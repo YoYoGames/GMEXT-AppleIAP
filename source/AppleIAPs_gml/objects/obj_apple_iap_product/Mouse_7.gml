@@ -1,29 +1,11 @@
-// Optional StoreKit purchase options:
-//
-// var _app_account_token = "UUID-FOR-YOUR-PLAYER-ACCOUNT";
-// var _quantity = 2;
-//
-// apple_iap_product_purchase(
-//     data.id,
-//     function(result, transaction) {
-//         // ...
-//     },
-//     _app_account_token,
-//     _quantity
-// );
-//
-// Or, to demonstrate quantity only:
-//
-// apple_iap_product_purchase(
-//     data.id,
-//     function(result, transaction) {
-//         // ...
-//     },
-//     undefined,
-//     2
-// );
 
-apple_iap_product_purchase(data.id, function(result, transaction) {
+// Optional: purchase with options (app_account_token and/or quantity):
+var _options = new AppleIAPPurchaseOptions()
+// options.app_account_token = "550e8400-e29b-41d4-a716-446655440000",  // player account UUID
+// options.quantity = 2
+
+// Basic purchase without options:
+apple_iap_product_purchase(data.id, _options, function(result, transaction) {
 
 	show_debug_message("apple_iap_product_purchase");
 	show_debug_message("result: " + json_stringify(result));
@@ -138,3 +120,4 @@ apple_iap_product_purchase(data.id, function(result, transaction) {
 			break;
 	}
 });
+

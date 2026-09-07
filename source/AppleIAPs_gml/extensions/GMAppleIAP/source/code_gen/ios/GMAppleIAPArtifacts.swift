@@ -127,6 +127,12 @@ public struct AppleIAPTransactionOffer: ITypedStruct
     public var payment_mode: AppleIAPTransactionOfferPaymentMode?
 }
 
+public struct AppleIAPPurchaseOptions: ITypedStruct
+{
+    public var app_account_token: String?
+    public var quantity: Int32?
+}
+
 public struct AppleIAPProductsResult: ITypedStruct
 {
     public var success: Bool
@@ -239,9 +245,26 @@ extension AppleIAPTransactionOffer
     }
 }
 
-extension AppleIAPProductsResult
+extension AppleIAPPurchaseOptions
 {
     public static let codecID: UInt32 = 2
+
+    public init<R: IByteReader>(_ r: inout R) throws
+    {
+        self.app_account_token = try r.readRawOptional(String.self)
+        self.quantity = try r.readRawOptional(Int32.self)
+    }
+
+    public func encode<W: IByteWriter>(_ w: inout W) throws
+    {
+        try w.writeRaw(self.app_account_token)
+        try w.writeRaw(self.quantity)
+    }
+}
+
+extension AppleIAPProductsResult
+{
+    public static let codecID: UInt32 = 3
 
     public init<R: IByteReader>(_ r: inout R) throws
     {
@@ -262,7 +285,7 @@ extension AppleIAPProductsResult
 
 extension AppleIAPPurchaseResult
 {
-    public static let codecID: UInt32 = 3
+    public static let codecID: UInt32 = 4
 
     public init<R: IByteReader>(_ r: inout R) throws
     {
@@ -283,7 +306,7 @@ extension AppleIAPPurchaseResult
 
 extension AppleIAPTransactionFinishResult
 {
-    public static let codecID: UInt32 = 4
+    public static let codecID: UInt32 = 5
 
     public init<R: IByteReader>(_ r: inout R) throws
     {
@@ -302,7 +325,7 @@ extension AppleIAPTransactionFinishResult
 
 extension AppleIAPTransactionResult
 {
-    public static let codecID: UInt32 = 5
+    public static let codecID: UInt32 = 6
 
     public init<R: IByteReader>(_ r: inout R) throws
     {
@@ -321,7 +344,7 @@ extension AppleIAPTransactionResult
 
 extension AppleIAPTransactionsResult
 {
-    public static let codecID: UInt32 = 6
+    public static let codecID: UInt32 = 7
 
     public init<R: IByteReader>(_ r: inout R) throws
     {
@@ -340,7 +363,7 @@ extension AppleIAPTransactionsResult
 
 extension AppleIAPSyncResult
 {
-    public static let codecID: UInt32 = 7
+    public static let codecID: UInt32 = 8
 
     public init<R: IByteReader>(_ r: inout R) throws
     {
@@ -361,7 +384,7 @@ extension AppleIAPSyncResult
 
 extension AppleIAPTransaction
 {
-    public static let codecID: UInt32 = 8
+    public static let codecID: UInt32 = 9
 
     public init<R: IByteReader>(_ r: inout R) throws
     {
