@@ -1,0 +1,26 @@
+{
+  "$schema": "./extgen.schema.json",
+  "input": "spec.gmidl",
+  "root": "./",
+  "gamemaker": {
+    "wrappers": {
+      "outputFile": "../../../scripts/GMAppleIAP_API/GMAppleIAP_API.gml"
+    },
+    "extension": {
+      "mode": "patch",
+      "outputFile": "../../../extensions/GMAppleIAP/GMAppleIAP.yy"
+    },
+    "injectors": { }
+  },
+  "targets": {
+    "macos":{},
+    "ios":{
+      "mode": "swift"
+    }
+  },
+  "extras": {
+    "docs": { 
+      "outputFile": "../../../../../docs/extgen_docs.js"
+    }
+  }
+}

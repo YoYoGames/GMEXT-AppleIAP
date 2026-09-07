@@ -3,9 +3,9 @@
     {"name":"ExtensionCore","order":1,"path":"folders/ExtensionCore.yy",},
   ],
   "ResourceOrderSettings":[
-    {"name":"GMAppleIAPs","order":2,"path":"extensions/GMAppleIAPs/GMAppleIAPs.yy",},
+    {"name":"GMAppleIAP","order":4,"path":"extensions/GMAppleIAP/GMAppleIAP.yy",},
     {"name":"ExtensionCore_api","order":1,"path":"scripts/ExtensionCore_api/ExtensionCore_api.yy",},
-    {"name":"GMAppleIAPs_API","order":3,"path":"scripts/GMAppleIAPs_API/GMAppleIAPs_API.yy",},
+    {"name":"GMAppleIAP_API","order":5,"path":"scripts/GMAppleIAP_API/GMAppleIAP_API.yy",},
     {"name":"scr_apple_iap_debug_tools","order":1,"path":"scripts/scr_apple_iap_debug_tools/scr_apple_iap_debug_tools.yy",},
   ],
 }

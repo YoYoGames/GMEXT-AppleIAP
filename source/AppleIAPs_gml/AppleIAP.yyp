@@ -29,7 +29,7 @@
   "name":"AppleIAP",
   "resources":[
     {"id":{"name":"ExtensionCore","path":"extensions/ExtensionCore/ExtensionCore.yy",},},
-    {"id":{"name":"GMAppleIAPs","path":"extensions/GMAppleIAPs/GMAppleIAPs.yy",},},
+    {"id":{"name":"GMAppleIAP","path":"extensions/GMAppleIAP/GMAppleIAP.yy",},},
     {"id":{"name":"fnt_gm_15","path":"fonts/fnt_gm_15/fnt_gm_15.yy",},},
     {"id":{"name":"fnt_gm_20","path":"fonts/fnt_gm_20/fnt_gm_20.yy",},},
     {"id":{"name":"fnt_gm_30","path":"fonts/fnt_gm_30/fnt_gm_30.yy",},},
@@ -46,7 +46,7 @@
     {"id":{"name":"obj_gm_textbox","path":"objects/obj_gm_textbox/obj_gm_textbox.yy",},},
     {"id":{"name":"rm_apple_iap","path":"rooms/rm_apple_iap/rm_apple_iap.yy",},},
     {"id":{"name":"ExtensionCore_api","path":"scripts/ExtensionCore_api/ExtensionCore_api.yy",},},
-    {"id":{"name":"GMAppleIAPs_API","path":"scripts/GMAppleIAPs_API/GMAppleIAPs_API.yy",},},
+    {"id":{"name":"GMAppleIAP_API","path":"scripts/GMAppleIAP_API/GMAppleIAP_API.yy",},},
     {"id":{"name":"scr_apple_iap_debug_tools","path":"scripts/scr_apple_iap_debug_tools/scr_apple_iap_debug_tools.yy",},},
     {"id":{"name":"spr_gm_background","path":"sprites/spr_gm_background/spr_gm_background.yy",},},
     {"id":{"name":"spr_gm_button","path":"sprites/spr_gm_button/spr_gm_button.yy",},},

@@ -6,6 +6,13 @@
  */
 
 /**
+ * @function_partial apple_iap_can_make_payments
+ * @param {Function} callback
+ * @returns {Bool}
+ * @function_end
+ */
+
+/**
  * @function_partial apple_iap_products
  * @param {Array[String]} products_id
  * @param {Function} callback
@@ -16,6 +23,8 @@
  * @function_partial apple_iap_product_purchase
  * @param {String} product_id
  * @param {Function} callback
+ * @param {String} [app_account_token]
+ * @param {Real} [quantity]
  * @function_end
  */
 
@@ -77,24 +86,10 @@
  */
 
 /**
- * @struct_partial AppleIAPTransaction
- * @member {String} id
- * @member {String} original_id
- * @member {String} web_order_line_item_id
- * @member {String} product_id
- * @member {Enum.AppleIAPProductType} product_type
- * @member {String} subscription_group_id
- * @member {Real} purchase_date_ms
- * @member {Real} original_purchase_date_ms
- * @member {Real} expiration_date_ms
- * @member {Real} revocation_date_ms
- * @member {Real} signed_date_ms
- * @member {Enum.AppleIAPRevocationReason} revocation_reason
- * @member {Bool} is_upgraded
- * @member {Enum.AppleIAPTransactionOwnershipType} ownership_type
- * @member {Enum.AppleIAPTransactionEnvironment} environment
- * @member {String} app_account_token
- * @member {String} offer_id
+ * @struct_partial AppleIAPTransactionOffer
+ * @member {String} [id]
+ * @member {Enum.AppleIAPTransactionOfferType} type
+ * @member {Enum.AppleIAPTransactionOfferPaymentMode} [payment_mode]
  * @struct_end
  */
 
@@ -102,6 +97,7 @@
  * @struct_partial AppleIAPProductsResult
  * @member {Bool} success
  * @member {Enum.AppleIAPProductsStatus} status
+ * @member {Enum.AppleIAPError} error
  * @member {String} message
  * @struct_end
  */
@@ -110,6 +106,7 @@
  * @struct_partial AppleIAPPurchaseResult
  * @member {Bool} success
  * @member {Enum.AppleIAPPurchaseStatus} status
+ * @member {Enum.AppleIAPError} error
  * @member {String} message
  * @struct_end
  */
@@ -142,7 +139,30 @@
  * @struct_partial AppleIAPSyncResult
  * @member {Bool} success
  * @member {Enum.AppleIAPSyncStatus} status
+ * @member {Enum.AppleIAPError} error
  * @member {String} message
+ * @struct_end
+ */
+
+/**
+ * @struct_partial AppleIAPTransaction
+ * @member {String} id
+ * @member {String} original_id
+ * @member {String} web_order_line_item_id
+ * @member {String} product_id
+ * @member {Enum.AppleIAPProductType} product_type
+ * @member {String} subscription_group_id
+ * @member {Real} purchase_date_ms
+ * @member {Real} original_purchase_date_ms
+ * @member {Real} expiration_date_ms
+ * @member {Real} revocation_date_ms
+ * @member {Real} signed_date_ms
+ * @member {Enum.AppleIAPRevocationReason} revocation_reason
+ * @member {Bool} is_upgraded
+ * @member {Enum.AppleIAPTransactionOwnershipType} ownership_type
+ * @member {Enum.AppleIAPTransactionEnvironment} environment
+ * @member {String} app_account_token
+ * @member {Struct.AppleIAPTransactionOffer} [offer]
  * @struct_end
  */
 
@@ -190,6 +210,29 @@
  */
 
 /**
+ * @enum_partial AppleIAPError
+ * @member None
+ * @member ProductUnavailable
+ * @member PurchaseNotAllowed
+ * @member IneligibleForOffer
+ * @member InvalidOfferPrice
+ * @member InvalidOfferSignature
+ * @member InvalidOfferIdentifier
+ * @member InvalidQuantity
+ * @member MissingOfferParameters
+ * @member PaymentMethodBindingConfigurationRequired
+ * @member NetworkError
+ * @member SystemError
+ * @member StoreUserCancelled
+ * @member NotAvailableInStorefront
+ * @member NotEntitled
+ * @member Unsupported
+ * @member InvalidPresentationContext
+ * @member Unknown
+ * @enum_end
+ */
+
+/**
  * @enum_partial AppleIAPProductType
  * @member Unknown
  * @member Consumable
@@ -221,6 +264,26 @@
  * @member None
  * @member DeveloperIssue
  * @member Other
+ * @member Unknown
+ * @enum_end
+ */
+
+/**
+ * @enum_partial AppleIAPTransactionOfferType
+ * @member Introductory
+ * @member Promotional
+ * @member Code
+ * @member WinBack
+ * @member Unknown
+ * @enum_end
+ */
+
+/**
+ * @enum_partial AppleIAPTransactionOfferPaymentMode
+ * @member FreeTrial
+ * @member PayAsYouGo
+ * @member PayUpFront
+ * @member OneTime
  * @member Unknown
  * @enum_end
  */
