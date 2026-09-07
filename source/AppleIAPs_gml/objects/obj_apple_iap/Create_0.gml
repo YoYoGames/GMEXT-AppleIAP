@@ -1,5 +1,15 @@
 event_inherited();
 
+
+var _can_make_payments = apple_iap_can_make_payments()
+
+if(!_can_make_payments)
+{
+	show_debug_message($"Payments NOT Availables");
+	instance_destroy()
+	exit
+}
+
 // Initialize Apple IAP and listen for transaction updates
 iap_initialized = apple_iap_init(function(result, transaction) {
 
@@ -9,7 +19,8 @@ iap_initialized = apple_iap_init(function(result, transaction) {
 
 	if (!result.success) {
 		show_debug_message("apple_iap_init error:");
-		show_debug_message(result.message);
+		show_debug_message("error: " + string(result.error));
+		show_debug_message("message: " + result.message);
 		return;
 	}
 
@@ -64,7 +75,8 @@ apple_iap_products(_product_ids, function(result, products) {
 
 	if (!result.success) {
 		show_debug_message("apple_iap_products error:");
-		show_debug_message(result.message);
+		show_debug_message("error: " + string(result.error));
+		show_debug_message("message: " + result.message);
 		return;
 	}
 
@@ -108,7 +120,8 @@ apple_iap_transactions_current_entitlements(function(result, transactions) {
 
 	if (!result.success) {
 		show_debug_message("apple_iap_transactions_current_entitlements error:");
-		show_debug_message(result.message);
+		show_debug_message("error: " + string(result.error));
+		show_debug_message("message: " + result.message);
 		return;
 	}
 

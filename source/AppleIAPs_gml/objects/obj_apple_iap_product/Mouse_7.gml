@@ -1,3 +1,28 @@
+// Optional StoreKit purchase options:
+//
+// var _app_account_token = "UUID-FOR-YOUR-PLAYER-ACCOUNT";
+// var _quantity = 2;
+//
+// apple_iap_product_purchase(
+//     data.id,
+//     function(result, transaction) {
+//         // ...
+//     },
+//     _app_account_token,
+//     _quantity
+// );
+//
+// Or, to demonstrate quantity only:
+//
+// apple_iap_product_purchase(
+//     data.id,
+//     function(result, transaction) {
+//         // ...
+//     },
+//     undefined,
+//     2
+// );
+
 apple_iap_product_purchase(data.id, function(result, transaction) {
 
 	show_debug_message("apple_iap_product_purchase");
@@ -6,7 +31,8 @@ apple_iap_product_purchase(data.id, function(result, transaction) {
 
 	if (!result.success) {
 		show_debug_message("Purchase request failed:");
-		show_debug_message(result.message);
+		show_debug_message("error: " + string(result.error));
+		show_debug_message("message: " + result.message);
 		return;
 	}
 
@@ -97,7 +123,7 @@ apple_iap_product_purchase(data.id, function(result, transaction) {
 			break;
 
 		case AppleIAPPurchaseStatus.Error:
-			show_debug_message("Purchase error:");
+			show_debug_message("Purchase error: " + string(result.error));
 			show_debug_message(result.message);
 			break;
 

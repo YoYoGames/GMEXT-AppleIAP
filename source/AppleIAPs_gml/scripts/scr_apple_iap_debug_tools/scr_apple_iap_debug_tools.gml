@@ -38,5 +38,17 @@ function debug_entitlement(transaction, ind = 0)
 		"Environment: " + string(transaction.environment) + "\n" +
 		"OwnershipType: " + string(transaction.ownership_type);
 
+	if (!is_undefined(transaction.offer)) {
+		_str += "\nOfferType: " + string(transaction.offer.type);
+
+		if (!is_undefined(transaction.offer.id)) {
+			_str += "\nOfferID: " + transaction.offer.id;
+		}
+
+		if (!is_undefined(transaction.offer.payment_mode)) {
+			_str += "\nOfferPaymentMode: " + string(transaction.offer.payment_mode);
+		}
+	}
+
 	show_debug_message(_str);
 }
