@@ -566,8 +566,6 @@ private extension GMAppleIAPSwift {
                 return AppleIAPError.NotEntitled
             case .unsupported:
                 return AppleIAPError.Unsupported
-            case .invalidPresentationContext:
-                return AppleIAPError.InvalidPresentationContext
             case .unknown:
                 return AppleIAPError.Unknown
             @unknown default:
