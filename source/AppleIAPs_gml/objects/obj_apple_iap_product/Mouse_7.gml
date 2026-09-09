@@ -66,6 +66,8 @@ apple_iap_product_purchase(data.id, _options, function(result, transaction) {
 			// StoreKit transaction id must stay as a string.
 			// -----------------------------------------------------------------
 
+
+//if you comment out the next block of code of apple_iap_transaction_finish, you will be able of test te demo better, and able of visualizate the transactions buttons on console log
 			apple_iap_transaction_finish(transaction.id, function(finish_result) {
 				show_debug_message("apple_iap_transaction_finish");
 				show_debug_message("result: " + json_stringify(finish_result));
