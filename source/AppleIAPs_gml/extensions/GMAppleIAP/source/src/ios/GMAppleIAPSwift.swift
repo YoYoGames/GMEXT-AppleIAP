@@ -156,7 +156,7 @@ public class GMAppleIAPSwift: GMAppleIAPInternalSwift {
 
             var purchaseOptions = Set<Product.PurchaseOption>()
 
-            if let appAccountTokenVal = options?.app_account_token, !appAccountTokenVal.isEmpty {
+            if let appAccountTokenVal = options?.app_account_token {
                 guard let token = UUID(uuidString: appAccountTokenVal) else {
                     self.invokeCallback(
                         callback,
@@ -173,7 +173,7 @@ public class GMAppleIAPSwift: GMAppleIAPInternalSwift {
                 purchaseOptions.insert(.appAccountToken(token))
             }
 
-            if let quantityVal = options?.quantity, quantityVal > 0 {
+            if let quantityVal = options?.quantity {
                 purchaseOptions.insert(.quantity(Int(quantityVal)))
             }
 
@@ -553,6 +553,14 @@ private extension GMAppleIAPSwift {
         }
 
         if let storeKitError = error as? StoreKitError {
+#if compiler(>=6.4)
+            if #available(iOS 27.0, macOS 27.0, tvOS 27.0, *) {
+                if case .invalidPresentationContext = storeKitError {
+                    return AppleIAPError.InvalidPresentationContext
+                }
+            }
+#endif
+
             switch storeKitError {
             case .networkError(_):
                 return AppleIAPError.NetworkError
