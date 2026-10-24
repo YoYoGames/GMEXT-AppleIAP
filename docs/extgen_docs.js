@@ -168,6 +168,7 @@
  * @member {Enum.AppleIAPTransactionEnvironment} environment
  * @member {String} app_account_token
  * @member {Struct.AppleIAPTransactionOffer} [offer]
+ * @member {String} jws_representation
  * @struct_end
  */
 

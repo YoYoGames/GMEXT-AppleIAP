@@ -61,7 +61,7 @@ public class GMAppleIAPSwift: GMAppleIAPInternalSwift {
                             success: true,
                             status: AppleIAPTransactionStatus.Success
                         ),
-                        self.transactionToRecord(transaction)
+                        self.transactionToRecord(transaction, jws: result.jwsRepresentation)
                     )
                 } catch StoreError.failedVerification {
                     self.invokeCallback(
@@ -188,7 +188,7 @@ public class GMAppleIAPSwift: GMAppleIAPInternalSwift {
                             success: true,
                             status: AppleIAPPurchaseStatus.Success
                         ),
-                        self.transactionToRecord(transaction)
+                        self.transactionToRecord(transaction, jws: verificationResult.jwsRepresentation)
                     )
                 case .userCancelled:
                     self.invokeCallback(
@@ -309,7 +309,7 @@ public class GMAppleIAPSwift: GMAppleIAPInternalSwift {
                                 success: true,
                                 status: AppleIAPTransactionStatus.Success
                             ),
-                            self.transactionToRecord(transaction)
+                            self.transactionToRecord(transaction, jws: result.jwsRepresentation)
                         )
                         return
                     }
@@ -321,7 +321,7 @@ public class GMAppleIAPSwift: GMAppleIAPInternalSwift {
                             success: true,
                             status: AppleIAPTransactionStatus.Success
                         ),
-                        self.transactionToRecord(transaction)
+                        self.transactionToRecord(transaction, jws: result.jwsRepresentation)
                     )
                     return
                 }
@@ -367,7 +367,7 @@ public class GMAppleIAPSwift: GMAppleIAPInternalSwift {
             for await result in Transaction.currentEntitlements {
                 switch result {
                 case .verified(let transaction):
-                    transactions.append(self.transactionToRecord(transaction))
+                    transactions.append(self.transactionToRecord(transaction, jws: result.jwsRepresentation))
                 case .unverified(_, let verificationError):
                     verificationFailureCount += 1
                     if firstVerificationError.isEmpty {
@@ -407,7 +407,7 @@ public class GMAppleIAPSwift: GMAppleIAPInternalSwift {
                         success: true,
                         status: AppleIAPTransactionStatus.Success
                     ),
-                    self.transactionToRecord(transaction)
+                    self.transactionToRecord(transaction, jws: result.jwsRepresentation)
                 )
             } catch StoreError.failedVerification {
                 self.invokeCallback(
@@ -442,7 +442,7 @@ public class GMAppleIAPSwift: GMAppleIAPInternalSwift {
             for await result in Transaction.unfinished {
                 switch result {
                 case .verified(let transaction):
-                    transactions.append(self.transactionToRecord(transaction))
+                    transactions.append(self.transactionToRecord(transaction, jws: result.jwsRepresentation))
                 case .unverified(_, let verificationError):
                     verificationFailureCount += 1
                     if firstVerificationError.isEmpty {
@@ -469,7 +469,7 @@ public class GMAppleIAPSwift: GMAppleIAPInternalSwift {
             for await result in Transaction.all {
                 switch result {
                 case .verified(let transaction):
-                    transactions.append(self.transactionToRecord(transaction))
+                    transactions.append(self.transactionToRecord(transaction, jws: result.jwsRepresentation))
                 case .unverified(_, let verificationError):
                     verificationFailureCount += 1
                     if firstVerificationError.isEmpty {
@@ -763,7 +763,7 @@ private extension GMAppleIAPSwift {
 
     // MARK: - Transaction conversion
 
-    func transactionToRecord(_ transaction: Transaction) -> AppleIAPTransaction {
+    func transactionToRecord(_ transaction: Transaction, jws: String = "") -> AppleIAPTransaction {
         return AppleIAPTransaction(
             id: String(transaction.id),
             original_id: String(transaction.originalID),
@@ -781,7 +781,8 @@ private extension GMAppleIAPSwift {
             ownership_type: ownershipTypeFromStoreKit(transaction.ownershipType),
             environment: environmentFromStoreKit(transaction.environment),
             app_account_token: transaction.appAccountToken?.uuidString ?? "",
-            offer: transactionOfferToRecord(transaction)
+            offer: transactionOfferToRecord(transaction),
+            jws_representation: jws
         )
     }
 

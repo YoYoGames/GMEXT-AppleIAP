@@ -310,6 +310,7 @@ function AppleIAPTransaction() constructor
     self.environment = undefined;
     self.app_account_token = undefined;
     self.offer = undefined;
+    self.jws_representation = undefined;
 
 }
 
@@ -1060,6 +1061,11 @@ function __AppleIAPTransaction_encode(_inst, _buffer, _offset, _where = _GMFUNCT
             __AppleIAPTransactionOffer_encode(self.offer, _buffer, buffer_tell(_buffer), _where);
         }
 
+        // field: jws_representation, type: String
+        if (!is_string(self.jws_representation)) show_error($"{_where} :: self.jws_representation expected string", true);
+        buffer_write(_buffer, buffer_u32, string_byte_length(self.jws_representation));
+        buffer_write(_buffer, buffer_string, self.jws_representation);
+
     }
 }
 
@@ -1140,6 +1146,10 @@ function __AppleIAPTransaction_decode(_buffer, _offset)
         {
             self.offer = undefined;
         }
+
+        // field: jws_representation, type: String
+        buffer_read(_buffer, buffer_u32);
+        self.jws_representation = buffer_read(_buffer, buffer_string);
 
     }
 

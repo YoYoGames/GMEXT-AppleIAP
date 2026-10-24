@@ -197,6 +197,7 @@ public struct AppleIAPTransaction: ITypedStruct
     public var environment: AppleIAPTransactionEnvironment
     public var app_account_token: String
     public var offer: AppleIAPTransactionOffer?
+    public var jws_representation: String
 }
 
 extension AppleIAPProduct
@@ -405,6 +406,7 @@ extension AppleIAPTransaction
         self.environment = (AppleIAPTransactionEnvironment(rawValue: try r.readRaw(Int32.self))!)
         self.app_account_token = try r.readRaw(String.self)
         self.offer = try r.readRawOptional(AppleIAPTransactionOffer.self)
+        self.jws_representation = try r.readRaw(String.self)
     }
 
     public func encode<W: IByteWriter>(_ w: inout W) throws
@@ -426,6 +428,7 @@ extension AppleIAPTransaction
         try w.writeRaw(self.environment.rawValue)
         try w.writeRaw(self.app_account_token)
         try w.writeRaw(self.offer)
+        try w.writeRaw(self.jws_representation)
     }
 }
 

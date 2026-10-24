@@ -230,6 +230,7 @@ namespace gm_structs
         gm_enums::AppleIAPTransactionEnvironment environment;
         std::string app_account_token;
         std::optional<gm_structs::AppleIAPTransactionOffer> offer;
+        std::string jws_representation;
     };
 
 }
@@ -430,6 +431,7 @@ namespace gm::wire::codec
         gm::wire::codec::writeValue(_buf, obj.environment);
         gm::wire::codec::writeValue(_buf, obj.app_account_token);
         gm::wire::codec::writeValue(_buf, obj.offer);
+        gm::wire::codec::writeValue(_buf, obj.jws_representation);
     }
 
     template<>
@@ -453,6 +455,7 @@ namespace gm::wire::codec
         obj.environment = gm::wire::codec::readValue<gm_enums::AppleIAPTransactionEnvironment>(_buf);
         obj.app_account_token = gm::wire::codec::readValue<std::string>(_buf);
         obj.offer = gm::wire::codec::readOptional<gm_structs::AppleIAPTransactionOffer>(_buf);
+        obj.jws_representation = gm::wire::codec::readValue<std::string>(_buf);
         return obj;
     }
 

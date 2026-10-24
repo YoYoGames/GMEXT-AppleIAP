@@ -192,6 +192,9 @@ class `[[AppleIAPTransaction]]` prototype Object
     [field] property app_account_token : string { get; set; }
     [field, type_hint = `AppleIAPTransactionOffer?`]
     property offer : gmval { get; set; }
+    // The transaction as signed by Apple (StoreKit 2 VerificationResult.jwsRepresentation), to send to a server
+    // for validation (App Store Server API, PlayFab...). "" when unavailable.
+    [field] property jws_representation : string { get; set; }
 }
 // =============================================================================
 // Operation result records
