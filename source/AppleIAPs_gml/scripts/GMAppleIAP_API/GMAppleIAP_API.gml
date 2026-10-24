@@ -633,7 +633,7 @@ function __AppleIAPProductsResult_decode(_buffer, _offset)
     with (_inst)
     {
         // field: success, type: Bool
-        self.success = buffer_read(_buffer, buffer_bool);
+        self.success = bool(buffer_read(_buffer, buffer_bool));
 
         // field: status, type: enum AppleIAPProductsStatus
         self.status = buffer_read(_buffer, buffer_s32);
@@ -700,7 +700,7 @@ function __AppleIAPPurchaseResult_decode(_buffer, _offset)
     with (_inst)
     {
         // field: success, type: Bool
-        self.success = buffer_read(_buffer, buffer_bool);
+        self.success = bool(buffer_read(_buffer, buffer_bool));
 
         // field: status, type: enum AppleIAPPurchaseStatus
         self.status = buffer_read(_buffer, buffer_s32);
@@ -762,7 +762,7 @@ function __AppleIAPTransactionFinishResult_decode(_buffer, _offset)
     with (_inst)
     {
         // field: success, type: Bool
-        self.success = buffer_read(_buffer, buffer_bool);
+        self.success = bool(buffer_read(_buffer, buffer_bool));
 
         // field: status, type: enum AppleIAPTransactionStatus
         self.status = buffer_read(_buffer, buffer_s32);
@@ -821,7 +821,7 @@ function __AppleIAPTransactionResult_decode(_buffer, _offset)
     with (_inst)
     {
         // field: success, type: Bool
-        self.success = buffer_read(_buffer, buffer_bool);
+        self.success = bool(buffer_read(_buffer, buffer_bool));
 
         // field: status, type: enum AppleIAPTransactionStatus
         self.status = buffer_read(_buffer, buffer_s32);
@@ -880,7 +880,7 @@ function __AppleIAPTransactionsResult_decode(_buffer, _offset)
     with (_inst)
     {
         // field: success, type: Bool
-        self.success = buffer_read(_buffer, buffer_bool);
+        self.success = bool(buffer_read(_buffer, buffer_bool));
 
         // field: status, type: enum AppleIAPTransactionStatus
         self.status = buffer_read(_buffer, buffer_s32);
@@ -944,7 +944,7 @@ function __AppleIAPSyncResult_decode(_buffer, _offset)
     with (_inst)
     {
         // field: success, type: Bool
-        self.success = buffer_read(_buffer, buffer_bool);
+        self.success = bool(buffer_read(_buffer, buffer_bool));
 
         // field: status, type: enum AppleIAPSyncStatus
         self.status = buffer_read(_buffer, buffer_s32);
@@ -1119,7 +1119,7 @@ function __AppleIAPTransaction_decode(_buffer, _offset)
         self.revocation_reason = buffer_read(_buffer, buffer_s32);
 
         // field: is_upgraded, type: Bool
-        self.is_upgraded = buffer_read(_buffer, buffer_bool);
+        self.is_upgraded = bool(buffer_read(_buffer, buffer_bool));
 
         // field: ownership_type, type: enum AppleIAPTransactionOwnershipType
         self.ownership_type = buffer_read(_buffer, buffer_s32);
@@ -1170,7 +1170,7 @@ function apple_iap_init(_callback)
 
     var __return_value__ = __apple_iap_init(buffer_get_address(__args_buffer__), buffer_tell(__args_buffer__));
 
-    return __return_value__;
+    return bool(__return_value__);
 }
 
 // Skipping function apple_iap_can_make_payments (no wrapper is required)
@@ -1452,3 +1452,8 @@ function __GMAppleIAP_is_available()
     static __available__ = extension_exists("GMAppleIAP");
     return __available__;
 }
+// #####################################################################
+// # Exports
+// #####################################################################
+
+#export AppleIAPProductsStatus, AppleIAPPurchaseStatus, AppleIAPTransactionStatus, AppleIAPSyncStatus, AppleIAPError, AppleIAPProductType, AppleIAPTransactionEnvironment, AppleIAPTransactionOwnershipType, AppleIAPRevocationReason, AppleIAPTransactionOfferType, AppleIAPTransactionOfferPaymentMode, AppleIAPProduct, AppleIAPTransactionOffer, AppleIAPPurchaseOptions, AppleIAPProductsResult, AppleIAPPurchaseResult, AppleIAPTransactionFinishResult, AppleIAPTransactionResult, AppleIAPTransactionsResult, AppleIAPSyncResult, AppleIAPTransaction, apple_iap_init, apple_iap_products, apple_iap_product_purchase, apple_iap_transaction_finish, apple_iap_transactions_current_entitlement, apple_iap_transactions_current_entitlements, apple_iap_transactions_latest, apple_iap_transactions_unfinished, apple_iap_transactions_all, apple_iap_synchronize

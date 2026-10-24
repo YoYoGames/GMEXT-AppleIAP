@@ -272,7 +272,7 @@ public extension IByteWriter {
 
         // A `gmval` return or field hands back a GMValue, so it has to encode as well as decode.
         // The cases below are the whole value space: readGMValue rejects pointer/buffer and the
-        // typed kinds, so nothing else can ever be inside one. `.null` is GML's undefined —
+        // typed kinds, so nothing else can ever be inside one. `.null` is GML's undefined -
         // tag only, no payload, the same encoding the empty-optional branch above produces.
         case let v as GMValue:
             switch v {
@@ -307,7 +307,7 @@ public extension IByteWriter {
             }
 
         // An `object` field decodes to [(String, GMValue)], which Mirror reports as a plain
-        // collection — without this it would go out as an array of tuples instead of an object.
+        // collection - without this it would go out as an array of tuples instead of an object.
         case let pairs as [(String, GMValue)]:
             try write(GMKind.object.rawValue)
             try write(UInt16(pairs.count).littleEndian)
@@ -377,7 +377,7 @@ struct BufferWriter: IByteWriter {
 final class VectorWriter: IByteWriter {
     private(set) var data = Data()
 
-    var remaining: Int { .max }  // “infinite” like a vector, practically
+    var remaining: Int { .max }  // "infinite" like a vector, practically
 
     func writeBytes(_ bytes: UnsafeRawPointer, count: Int) throws {
         let buffer = UnsafeRawBufferPointer(start: bytes, count: count)
@@ -658,11 +658,11 @@ public final class GMDispatchQueue: GMDispatcher {
         
         let bytesNeeded = payload.count
         if bytesNeeded > output.remaining {
-            // Not enough space – keep `packed` so caller can retry with a bigger buffer.
+            // Not enough space - keep `packed` so caller can retry with a bigger buffer.
             return -Double(bytesNeeded)
         }
         
-        // We have room – copy it out.
+        // We have room - copy it out.
         payload.withUnsafeBytes { rawBuf in
             try? output.writeBytes(rawBuf.baseAddress!, count: rawBuf.count)
         }
@@ -694,7 +694,7 @@ public final class GMFunction {
         dispatcher.dispatch(writer.data)
     }
 
-    /// Public entry – an *array argument* stays a single GM argument.
+    /// Public entry - an *array argument* stays a single GM argument.
     func call(_ args: Any...) {
         callImpl(args)
     }
@@ -727,7 +727,7 @@ public final class GMFunction {
 }
 
 /// Thin wrapper around a raw pointer + length.
-/// Does **not** own the memory – caller is responsible for lifetime.
+/// Does **not** own the memory - caller is responsible for lifetime.
 public struct GMBuffer {
     let base: UnsafeMutableRawPointer
     let size: Int
